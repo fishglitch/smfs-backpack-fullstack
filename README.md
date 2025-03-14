@@ -1,32 +1,32 @@
 # digitalArchive
 
-1. Create the directory:
+1. **Create the directory**:  
+   *Keep in mind separation of concerns as a best practice*
 
-Project Structure
-*keep in mind separation of concerns as best practice
+   **Project Directory Structure**  
 
-digitalArchive/
-│                   # npm run start:dev --prefix server, and npm run dev --prefix client
-├── client/         # Frontend code (React, Vue, etc.)
-|                    # npm create vite@latest, npm install, npm run dev
-|
-│   ├── public/     # Static files for the client
-│   ├── src/        # Source code for the client
-|       ├── assets
-|       ├── components
-|       ├── css
-│   └── package.json # check that scripts are up to date
-│
-└── server/         # Backend code (Express, Node.js, etc.)
-                    # npm run start:dev
-    ├── api/        # Define your API routes and handlers
-    ├── config/     # Configuration files like DB connections
-    ├── controllers/ # Logic for handling requests
-    ├── models/     # Database models (if using a DB)
-    ├── middleware/  # Any middleware functions
-    ├── routes/      # Route definitions
-    ├── server.js    # Main server file to start the application
-    └── package.json
+   ```plaintext
+   digitalArchive/
+   │                   # npm run start:dev --prefix server, and npm run dev --prefix client
+   ├── client/         # Frontend code (React, Vue, etc.)
+   │                    # npm create vite@latest, npm install, npm run dev
+   │   ├── public/     # Static files for the client
+   │   ├── src/        # Source code for the client
+   │       ├── assets
+   │       ├── components
+   │       ├── css
+   │   └── package.json # check that scripts are up to date
+   │
+   └── server/         # Backend code (Express, Node.js, etc.)
+   │                    # npm run start:dev
+       ├── api/        # Define your API routes and handlers
+       ├── config/     # Configuration files like DB connections
+       ├── controllers/ # Logic for handling requests
+       ├── models/     # Database models (if using a DB)
+       ├── middleware/  # Any middleware functions
+       ├── routes/      # Route definitions
+       ├── server.js    # Main server file to start the application
+       └── package.json
 
 2. Set up frontend / client with Vite and React
 npm create vite@latest 
