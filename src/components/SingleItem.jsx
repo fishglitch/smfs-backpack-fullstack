@@ -1,0 +1,1 @@
+// opens to individual item details page (if this functionality is desired)
