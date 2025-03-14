@@ -29,42 +29,43 @@
        └── package.json
 
 2. **Set up frontend / client with Vite and React**
-npm create vite@latest 
-*this creates a new folder, "client"
+    npm create vite@latest 
+    *this creates a new folder, "client"*
 
 3. **Within the client, install dependencies**
-npm install
+    npm install
 
 4. **Start the frontend / client developer**
-npm run dev 
-*starts the Vite development server, which should detail running server in terminal
+    npm run dev 
+    *starts the Vite development server, which should detail running server in terminal*
 
 5. **create backend / server with Express**
-*navigate to the project directory and initialize a new Express project file:
-npm init -y (for general) or npm init (for customizable)
-*initializes node application and have package.json
-*add to package.json in scripts, if not available:
+    *navigate to the project directory and initialize a new Express project file:*
+    npm init -y (for general) or npm init (for customizable)
+    *initializes node application and have package.json*
+    *add to package.json in scripts, if not available:*
+```javascript
 {
     "start": "node server",
     "start:dev": "nodemon server"
 }
-
+```
 
 6. **Install Express and other dependencies**
-for example, we've previously used the following:
-npm install --save-dev nodemon
-*adds dependencies
-npm install --save pg
-*talks to postgre database
-npm install --save express
-*handles routing
-npm install --save uuid
-npm install --save bcrypt
+    for example, we've previously used the following:
+   * npm install --save-dev nodemon
+    *adds dependencies*
+    * npm install --save pg
+*talks to postgre database*
+* npm install --save express
+*handles routing*
+* npm install --save uuid
+* npm install --save bcrypt
 
-*note: do I need cors?
+*note: do I need cors?*
 
 7. **Create basic Express server**
-i.e. server.js or index.js
+ i.e. server.js or index.js
 
 # Express Server Setup
 
@@ -95,7 +96,8 @@ app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
 ```
-*console.log in server.js / index.js
+*console.log in server.js / index.js*
+
 8. **npm run start:dev in terminal to check console.log in index.js**
 
 
