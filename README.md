@@ -28,42 +28,53 @@
        ├── server.js    # Main server file to start the application
        └── package.json
 
-2. Set up frontend / client with Vite and React
+2. **Set up frontend / client with Vite and React**
 npm create vite@latest 
-* this creates a new folder, "client"
+*this creates a new folder, "client"
 
-3. Within the client, install dependencies
+3. **Within the client, install dependencies**
 npm install
 
-4. Start the frontend / client developer
+4. **Start the frontend / client developer**
 npm run dev 
-* starts the Vite development server, which should detail running server in terminal
+*starts the Vite development server, which should detail running server in terminal
 
-5. create backend / server with Express
-* navigate to the project directory and initialize a new Express project file:
+5. **create backend / server with Express**
+*navigate to the project directory and initialize a new Express project file:
 npm init -y (for general) or npm init (for customizable)
-* initializes node application and have package.json
-* add to package.json in scripts, if not available:
+*initializes node application and have package.json
+*add to package.json in scripts, if not available:
+{
     "start": "node server",
     "start:dev": "nodemon server"
+}
 
-6. Install Express and other dependencies
+
+6. **Install Express and other dependencies**
 for example, we've previously used the following:
 npm install --save-dev nodemon
-* adds dependencies
+*adds dependencies
 npm install --save pg
-* talks to postgre database
+*talks to postgre database
 npm install --save express
-* handles routing
+*handles routing
 npm install --save uuid
 npm install --save bcrypt
 
-note: do I need cors?
+*note: do I need cors?
 
-7. Create basic Express server
+7. **Create basic Express server**
 i.e. server.js or index.js
 
-should have some code like:
+# Express Server Setup
+
+This document provides a basic setup for an Express server with CORS middleware and a sample route.
+
+## Code Example
+
+You can use the following code to create a simple Express server:
+
+```javascript
 const express = require('express');
 const cors = require('cors');
 
@@ -83,9 +94,9 @@ app.get('/api', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
-
-console.log in server.js / index.js
-8. npm run start:dev in terminal to check console.log in index.js
+```
+*console.log in server.js / index.js
+8. **npm run start:dev in terminal to check console.log in index.js**
 
 
 
