@@ -8,11 +8,9 @@ const {
     updateUser,
     getAllUsers,
     getUserById,
-    createPost,
-    updatePost,
-    getAllPosts,
-    getAllTags,
-    getPostsByTagName
+    createMemory,
+    updateMemory,
+    getAllMemories,
   } = require('./index');
   
   const dropTables = async () => {
