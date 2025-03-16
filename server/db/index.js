@@ -24,7 +24,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "shhh";
 const client = new Client({
   connectionString:
     process.env.DATABASE_URL ||
-    "postgres://localhost:5432/schrodingers-backpack",
+    "postgres://localhost:5432/schrodingers_backpack",
   ssl:
     process.env.NODE_ENV === "production"
       ? { rejectUnauthorized: false }
@@ -36,13 +36,13 @@ const client = new Client({
  */
 
 const createUser = async ({ username, password, dimension }) => {
-  const id = uuid.v4(); // Generate a new UUID for the user
+   const id = uuid.v4(); // Generate a new UUID for the user
   const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
 
   try {
     const res = await client.query(`
-      INSERT INTO users (id, username, password, dimension) 
-      VALUES ($1, $2, $3, $4) RETURNING *`, [id, username, hashedPassword, dimension]);
+      INSERT INTO users (username, password, dimension) 
+      VALUES ($1, $2, $3) RETURNING *`, [username, hashedPassword, dimension]);
 
   return res.rows[0]; // Return the newly created user
   } catch (error) {
@@ -86,64 +86,122 @@ const updateUser = async (userId, { username, password, dimension }) => {
   }
 };
 
-const getAllUsers = async () => {
+const getAllUsers = async (username) => {
   try {
+    const SQL = `SELECT * FROM users`;
+        const response = await client.query(SQL);
+        return response.rows;
+  } catch (error) {
+    console.error("Error retrieving all users:", error);
+    throw error;
+  }
+};
+// i don't have userId, trying out dimension as prop
+const getUserByDimension = async (dimension) => {
+  try {
+    const SQL = `SELECT * FROM users WHERE dimension = $1`;
+        const response = await client.query(SQL, [userId]);
+        return response.rows[0];
+  } catch (error) {
+    console.error("Error retrieving user by dimension:", error);
+    throw error;
+  }
+};
+
+const getUserByUsername = async (username) => {
+  try {
+    const SQL = `SELECT * FROM users WHERE username = $1`;
+    const response = await client.query(SQL, [username]);
+    return response.rows[0];
   } catch (error) {
     console.error();
     throw error;
   }
 };
 
-const getUserById = async () => {
+const createMemory = async ({ title, imageUrl, description, dimension, author_nickname }) => {
   try {
+    const id = uuid.v4(); // Generate a new UUID for the user
+    const SQL = `
+            INSERT INTO memories (id, title, image_url, description, dimension, author_nickname) 
+            VALUES ($1, $2, $3, $4, $5, $6) RETURNING *
+        `;
+        const response = await client.query(SQL, [id, title, imageUrl, description, dimension, author_nickname]);
+        return response.rows[0];
   } catch (error) {
-    console.error();
+    console.error("Error creating memory:", error);
     throw error;
   }
 };
 
-const getUserByUsername = async () => {
+// update
+const updateMemory = async (memoryId, { title, imageUrl, description, dimension }) => {
   try {
-  } catch (error) {
-    console.error();
-    throw error;
-  }
-};
+    const fields = [];
+    const values = [memoryId];
+    let index = 1;
 
-const createMemory = async () => {
-  try {
-  } catch (error) {
-    console.error();
-    throw error;
-  }
-};
+    if (title) {
+      fields.push(`title = $${++index}`);
+      values.push(title);
+    }
+    if (imageUrl) {
+      fields.push(`image_url = $${++index}`);
+      values.push(imageUrl);
+    }
+    if (description) {
+      fields.push(`description = $${++index}`);
+      values.push(description);
+    }
+    if (dimension) {
+      fields.push(`dimension = $${++index}`);
+      values.push(dimension);
+    }
 
-const updateMemory = async () => {
-  try {
+    const SQL = `
+      UPDATE memories
+      SET ${fields.join(', ')}
+      WHERE id = $1
+      RETURNING *;
+    `;
+    
+    const response = await client.query(SQL, values);
+    return response.rows[0]; // Return the updated memory
   } catch (error) {
-    console.error();
+    console.error("Error updating memory!", error);
     throw error;
   }
 };
 
 const getAllMemories = async () => {
   try {
+    const SQL = `SELECT * FROM memories`;
+        const response = await client.query(SQL);
+        return response.rows;
+  } catch (error) {
+    console.error("Error retrieving all memories:", error);
+    throw error;
+  }
+};
+
+const getMemoryById = async (memoryId) => {
+  try {
+    const SQL = `SELECT * FROM memories WHERE id = $1;`;
+    const response = await client.query(SQL, [memoryId]);
+    
+    return response.rows[0]; // Return the memory
   } catch (error) {
     console.error();
     throw error;
   }
 };
 
-const getMemoryById = async () => {
+const getMemoriesByUser = async (userId) => {
   try {
-  } catch (error) {
-    console.error();
-    throw error;
-  }
-};
-
-const getMemoriesByUser = async () => {
-  try {
+    const SQL = `SELECT * FROM memories WHERE author_nickname = (SELECT username FROM users WHERE id = $1);`;
+    const response = await client.query(SQL, [userId]);
+    
+    return response.rows; // Return the list of memories associated with the user
   } catch (error) {
     console.error();
     throw error;
@@ -155,7 +213,7 @@ module.exports = {
   createUser,
   updateUser,
   getAllUsers,
-  getUserById,
+  getUserByDimension,
   getUserByUsername,
   getMemoryById,
   createMemory,

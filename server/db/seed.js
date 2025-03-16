@@ -46,10 +46,10 @@ CREATE TABLE MEMORIES
 */
     await client.query(`
             CREATE TABLE users(
-            id UUID PRIMARY KEY,
-            username VARCHAR (20) UNIQUE NOT NULL,
-            password VARCHAR (20) NOT NULL,
-            dimension VARCHAR(20) NOT NULL
+            id SERIAL PRIMARY KEY,
+            username VARCHAR (150) UNIQUE NOT NULL,
+            password VARCHAR (150) NOT NULL,
+            dimension VARCHAR(150) NOT NULL
             );
 
             CREATE TABLE memories(
@@ -57,19 +57,21 @@ CREATE TABLE MEMORIES
             title VARCHAR(150),
             image_url VARCHAR(255),
             description TEXT,
-            // dimension VARCHAR(20), 
-            author_id UUID REFERENCES users(id)
+            dimension VARCHAR(150),
+            author_nickname VARCHAR(150)
             );
 
             CREATE TABLE favorites(
             id UUID PRIMARY KEY,
-            user_id UUID REFERENCES users(id) NOT NULL,
-            memory_id UUID REFERENCES memories(id) NOT NULL,
+            user_id INTEGER REFERENCES users(id),
+            memory_id UUID REFERENCES memories(id),
             CONSTRAINT unique_user_id_and_memory_id UNIQUE (user_id, memory_id)
             );
 
             `);
     console.log("Finished building tables!");
+
+
   } catch (error) {
     console.error("Error building tables!", error);
     throw error;
@@ -119,33 +121,28 @@ const createInitialMemories = async(users) => {
     try {
         console.log("Starting to retrieve memories...");
 
-        const dimension = 
-
-        await createdMemory({
-            id: uuid.v4(),
+        await createMemory({
             title: 'laptop stand',
             imageUrl: '',
             description: 'I remember he always preferred something packable, lightweight, and versatile',
-            dimension: users.dimension,
-            authorId: authorId
+            dimension: users[0].dimension,
+            author_nickname: 'mortie'
         });
 
         await createMemory({
-            id: uuid.v4(),
             title: '17" Macbook Pro Mid 2012',
             imageUrl: '',
             description: 'SMF appreciated the durability of the older Mac books',
-            dimension: users.dimension,
-            authorId: authorId
+            dimension: users[1].dimension,
+            author_nickname: 'dulce'
         });
 
         await createMemory({
-            id: uuid.v4(),
             title: 'iFixit Repair Business Toolkit',
             imageUrl: '',
             description: 'he was a strong advocate of right to repair, including donating refurbished computers to his alma mater.',
-            dimension: users.dimension,
-            authorId: authorId
+            dimension: users[2].dimension,
+            author_nickname: 'pickle'
         });
 
         console.log("Finished retrieving initial memories!");
