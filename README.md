@@ -133,3 +133,5 @@ app.listen(PORT, () => {
 - **Be Descriptive**: Provide clarity; add more context if needed:
   ```bash
   git commit -m "Add image upload feature" -m "This feature allows users to upload images to their profiles."
+
+schrodingers-backpack-fullstack
