@@ -1,4 +1,4 @@
-# digitalArchive
+# Schrodinger's Backpack Fullstack App
 
 1. **Create the directory**:  
    *Keep in mind separation of concerns as a best practice*
@@ -6,7 +6,7 @@
    **Project Directory Structure**  
 
    ```plaintext
-   digitalArchive/
+   schrodingers_backpack_fullstack/
    │                   # npm run start:dev --prefix server, and npm run dev --prefix client
    ├── client/         # Frontend code (React, Vue, etc.)
    │                    # npm create vite@latest, npm install, npm run dev
