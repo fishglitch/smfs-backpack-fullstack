@@ -96,5 +96,40 @@ app.listen(PORT, () => {
 
 8. **npm run start:dev in terminal to check console.log in index.js**
 
+# Git Commit Message Guidelines
 
+## Common Patterns for Starting Commit Messages
 
+1. **Add/Update/Delete/Remove**:
+   - `git commit -m "Add user authentication"`
+   - `git commit -m "Update README with installation instructions"`
+   - `git commit -m "Remove unused images"`
+
+2. **Fix**:
+   - `git commit -m "Fix bug in user login logic"`
+   - `git commit -m "Fix typo in the homepage header"`
+
+3. **Improve**:
+   - `git commit -m "Improve performance of data fetching function"`
+
+4. **Refactor**:
+   - `git commit -m "Refactor user profile component for better readability"`
+
+5. **Feature/Enhancement**:
+   - `git commit -m "Add search functionality to user profiles"`
+
+6. **Documentation**:
+   - `git commit -m "Document API endpoints in README"`
+
+7. **Chore**:
+   - `git commit -m "Chore: update dependencies"`
+
+8. **Initial Commit**:
+   - `git commit -m "Initial commit"`
+
+## Best Practices for Commit Messages
+
+- **Use Imperative Mood**: Write messages in the imperative (e.g., "Fix bug", "Add feature").
+- **Be Descriptive**: Provide clarity; add more context if needed:
+  ```bash
+  git commit -m "Add image upload feature" -m "This feature allows users to upload images to their profiles."
