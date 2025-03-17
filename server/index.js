@@ -50,7 +50,7 @@ server.use((req, res, next) => {
 });
 
 /* Router setup */
-const apiRouter = require('./api-routes');
+const apiRouter = require('./api.js');
 server.use('/api', apiRouter);
 
 /* db client connection */

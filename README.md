@@ -1,104 +1,110 @@
-# Schrodinger's Backpack Fullstack App
+# Schrodinger's Backpack: A Memory Archive
 
-1. **Create the directory**:  
-   *Keep in mind separation of concerns as a best practice*
+## Overview# Overview: 
 
-   **Project Directory Structure**  
+Schrodinger's Backpack is a full-stack application designed to allow users to submit, store, and reflect upon memories of a deceased loved one through items they might carry in this ancestor's backpack. Inspired by the concept of "what's in my backpack," and the thought experiment "Schrodinger's Cat", this app provides a sentimental space for users to reflect on how those memories exist in a state of uncertainty until actively acknowledged and celebrated.
+
+## Table of Contents
+- [Technologies](#technologies)
+- [Features](#features)
+- [Purpose](#purpose)
+- [Project Directory Structure](#project-directory-structure)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Git Commit Message Guidelines](#git-commit-message-guidelines)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+- [](#)
+
+## Technologies
+- **Frontend**: Vite, React
+- **Backend**: Express.js, PostgreSQL
+
+## Features
+- User authentication with hashed passwords
+- Submit memories with titles, descriptions, images, and context
+- CRUD operations for managing users and memories
+- Intuitive interface for memory browsing
+
+## Purpose
+This app serves as a digital memory box to collectively celebrate the life of a loved one. Inspired by the concept of Schrodinger's Cat, the app prompts users to consider, "What would [this person] carry in their backpack?". In physicist Erwin Schrodinger's famous 1935 thought experiment, a hypothetical cat in a sealed box exists in a mysterious state of being both alive and dead living and death until the box is opened and examined. Just like the cat, or, tiny particles in quantum physics that can be in two states at once until observed, our memories of this late ancestor can feel uncertain until we bring them to light. By sharing and reflecting on these memories through the app, users transform this uncertainty into meaningful, lasting memories that celebrate this loved one's well-lived life.
+
+## Project Directory Structure
+
+*Separation of concerns is observed through this structure*
 
    ```plaintext
-   schrodingers_backpack_fullstack/
-   │                   # npm run start:dev --prefix server, and npm run dev --prefix client
-   ├── client/         # Frontend code (React, Vue, etc.)
-   │                    # npm create vite@latest, npm install, npm run dev
-   │   ├── public/     # Static files for the client
-   │   ├── src/        # Source code for the client
-   │       ├── assets
-   │       ├── components
-   │       ├── css
-   │   └── package.json # check that scripts are up to date
-   │
-   └── server/         # Backend code (Express, Node.js, etc.)
-   │                    # npm run start:dev
-       ├── api/        # Define your API routes and handlers
-       ├── config/     # Configuration files like DB connections
-       ├── controllers/ # Logic for handling requests
-       ├── models/     # Database models (if using a DB)
-       ├── middleware/  # Any middleware functions
-       ├── routes/      # Route definitions
-       ├── server.js    # Main server file to start the application
-       └── package.json
+schrodingers_backpack_fullstack/
+npm run start:dev --prefix server
+npm run dev --prefix client
+├── client/         # Frontend code (React, Vite, etc.)
+|                   # npm run dev
+│   ├── public/     # Static files for the client
+│   ├── src/        # Source code for the client
+│   │   ├── assets/        # Images and other assets
+│   │   ├── components/    # Child components
+│   │   ├── css/          # Styling for the child components
+│   │   └── App.jsx       # Main/parent application file
+│   └── package.json      # Client-side dependencies and scripts
+│                 
+└── server/         # Backend code (Express, Node.js, etc.)
+    |                # npm run start:dev
+    ├── api/        # Define your API routes and handlers
+    ├── config/     # Configuration files like DB connections
+    ├── controllers/ # Logic for handling requests
+    ├── models/     # Database models (if using a DB)
+    ├── middleware/  # Any middleware functions
+    ├── routes/      # Route definitions
+    ├── server.js    # Main server file to start the application
+    └── package.json  # Server-side dependencies and scripts
+```
 
-2. **Set up frontend / client with Vite and React**
-* npm create vite@latest *this creates a new folder, "client"*
+## Installation
 
-3. **Within the client, install dependencies**
-* npm install
+To set up the project, follow these steps:
 
-4. **Start the frontend / client developer**
-* npm run dev *starts the Vite development server, which should detail running server in terminal*
+1. Clone repo
+2. Navigate to project directory
+3. Set up frontend / client with dependencies:
+* 'npm install vite@latest'
+* 'npm install'
+* 'npm run dev' *starts the Vite development server, which should detail running server in terminal*
 
-5. **create backend / server with Express**
-   
-*navigate to the project directory and initialize a new Express project file:*
-
+4. Set up backend / server
 * npm init -y (for general) or npm init (for customizable) *initializes node application and have package.json; add to package.json in scripts, if not available:*
+
+Install Express and other dependencies
+* npm install --save-dev nodemon *adds development dependencies to allow Node.js app to automatically restart for detected directory file change instances*
+* npm install --save express *Node.js web framework handling API routing, middleware, HTTP requests*
+* npm install --save pg *node-postgress pckg to interact with psql database*
+* npm install --save bcrypt *secure password hashing library for user authentication*
+* npm install jsonwebtoken *creation and verification of JWTs for authentication and session management*
+* npm install --save uuid *methods to generate unique identifiers (UUIDs) for database records*
+* npm install morgan *middleware for HTTP requests logging in Express apps; for tracking server activity*
+
+Or, this shortcut:
+* npm install express pg bcrypt jsonwebtoken uuid morgan nodemon
+
+5. Confirm start scripts in package.json
+
 ```javascript
 {
-    "start": "node server",
-    "start:dev": "nodemon server"
+    "scripts": {
+        "start": "node server.js",
+        "start:dev": "nodemon server.js"
+    }
 }
 ```
 
-6. **Install Express and other dependencies**
-for example, we've previously used the following:
-* npm install --save-dev nodemon *adds dependencies*
-* npm install --save pg *talks to postgre database*
-* npm install --save express *handles routing*
-* npm install --save uuid
-* npm install --save bcrypt
+## Usage
+1. After installing, run the server: 'npm run start:dev'
+2. Access the app through browser at http://localhost:3000 (or other specified port in your environment variables)
+3. CTRL + C to quit 
 
-*note: do I need cors?*
-
-7. **Create basic Express server**
-
-i.e. server.js or index.js
-
-# Express Server Setup
-
-This document provides a basic setup for an Express server with CORS middleware and a sample route.
-
-## Code Example
-
-You can use the following code to create a simple Express server:
-
-```javascript
-const express = require('express');
-const cors = require('cors');
-
-const app = express();
-const PORT = process.env.PORT || 5000;
-
-// Middleware
-app.use(cors());
-app.use(express.json());
-
-// Sample route
-app.get('/api', (req, res) => {
-    res.send('Hello from the backend!');
-});
-
-// Start the server
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
-```
-*console.log in server.js / index.js*
-
-8. **npm run start:dev in terminal to check console.log in index.js**
-
-# Git Commit Message Guidelines
-
-## Common Patterns for Starting Commit Messages
+## Git Commit Message Guidelines
 
 1. **Add/Update/Delete/Remove**:
    - `git commit -m "Add user authentication"`
@@ -134,4 +140,3 @@ app.listen(PORT, () => {
   ```bash
   git commit -m "Add image upload feature" -m "This feature allows users to upload images to their profiles."
 
-schrodingers-backpack-fullstack

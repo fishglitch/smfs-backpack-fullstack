@@ -7,7 +7,7 @@ const {
     createUser,
     updateUser,
     getAllUsers,
-    getUserById,
+    getUserByDimension,
     createMemory,
     updateMemory,
     getAllMemories,
