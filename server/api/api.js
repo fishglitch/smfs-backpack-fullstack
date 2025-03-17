@@ -10,7 +10,8 @@ const {
   getAllMemories,
   getMemoryById,
   getMemoriesByUser,
-} = require('./index'); // Adjust the import according to your structure
+} = require('./db/index'); // Adjust the import according to your structure
+const apiRouter = require('schrodingers-backpack-fullstack/server/index.js');
 
 const router = express.Router();
 
@@ -117,4 +118,4 @@ router.get('/users/:userId/memories', async (req, res) => {
 });
 
 // Export the router
-module.exports = router;
+module.exports = apiRouter

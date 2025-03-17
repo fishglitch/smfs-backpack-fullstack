@@ -15,9 +15,10 @@ Schrodinger's Backpack is a full-stack application designed to allow users to su
 - [Branches](#branches)
 - [How to Switch Branches](#switch-branches#)
 - [Roadmap of Features](#roadmap-of-features)
+- [Accessibility Considerations](#accessibility-considerations)
 - [Contributing and Contact Info](#contributing-and-contact-info)
 - [Acknowledgements](#acknowledgements)
-- [](#)
+
 
 ## Technologies
 - **Frontend**: Vite, React
@@ -30,7 +31,7 @@ Schrodinger's Backpack is a full-stack application designed to allow users to su
 - Intuitive interface for memory browsing
 
 ## Purpose
-This app serves as a digital memory box to collectively celebrate the life of a loved one. Inspired by the concept of Schrodinger's Cat, the app prompts users to consider, "What would [this person] carry in their backpack?". In physicist Erwin Schrodinger's famous 1935 thought experiment, a hypothetical cat in a sealed box exists in a mysterious state of being both alive and dead living and death until the box is opened and examined. Just like the cat, or, tiny particles in quantum physics that can be in two states at once until observed, our memories of this late ancestor can feel uncertain until we bring them to light. By sharing and reflecting on these memories through the app, users transform this uncertainty into meaningful, lasting memories that celebrate this loved one's well-lived life.
+This app serves as a digital memory box to collectively celebrate the life of a loved one. Inspired by the concept of Schrodinger's Cat, the app prompts users to consider, "What would [this person] carry in their backpack?". In physicist Erwin Schrodinger's famous 1935 thought experiment, a hypothetical cat in a sealed box exists in a mysterious state of being both alive and dead living and death until the box is opened and examined. Just like the cat, or, tiny particles in quantum physics that can be in two states at once until observed, our memories of this late ancestor can feel uncertain until we bring them to light. By sharing and reflecting on these memories through the app, users transform this uncertainty into meaningful, lasting memories that celebrate this transitioned loved one's well-lived life.
 
 ## Project Directory Structure
 
@@ -81,16 +82,18 @@ npm init -y # for general install,
 npm init # for customizable install
 
 # Install Express and other dependencies
-npm install --save-dev nodemon # adds development dependencies to allow Node.js app to automatically restart for detected directory file change instances
+nnpm install --save-dev nodemon && # nodemon as a development dependency; to allow Node.js app to automatically restart for detected directory file change instances
+# && a shell operator that allows run of multiple commands in sequence. The next command will only run if the previous one is successful
 npm install --save express # Node.js web framework handling API routing, middleware, HTTP requests
-npm install --save pg # node-postgress pckg to interact with psql database
+npm install --save pg # PostgreSQL client for Node.js to interact with psql database
 npm install --save bcrypt # secure password hashing library for user authentication
-npm install jsonwebtoken # creation and verification of JWTs for authentication and session management
-npm install --save uuid # methods to generate unique identifiers (UUIDs) for database record
+npm install jsonwebtoken # creation and verification of JWTs for authentication and session management; Library for creating and verifying JSON Web Tokens (JWT)
+npm install --save uuid # Library for generating unique identifiers (UUIDs) for database record
 npm install morgan # middleware for HTTP requests logging in Express apps; for tracking server activity
+npm install dotenv # module that loads environment variables from a .env file into process.env; to configure  application without hardcoding sensitive data (like API keys, database passwords, etc.) directly into  source code; separation makes it easier to manage configuration settings for different environments (development, testing, production) by changing the .env file instead of modifying code
 
 # Or, this shortcut:
-npm install express pg bcrypt jsonwebtoken uuid morgan nodemon
+npm install --save express pg bcrypt jsonwebtoken uuid morgan dotenv
 ```
 5. Confirm start scripts in package.json
 
@@ -173,7 +176,53 @@ git checkout main
 2. console.log branch has console.logs and other notes.
 ```
 ## Roadmap of Features
-1. TBD
+1. Minimum Viable Product
+2. Tier 2
+3. Tier 3
+
+## Accessibility Considerations
+
+Key practices to follow for designing for accessibility to ensure as many users can effectively interact with the app:
+
+## Accessibility Considerations
+
+To ensure our application is accessible to all users, implement the following directives:
+
+1. **Use Semantic HTML**:
+   - Utilize HTML5 elements like `<header>`, `<nav>`, `<main>`, `<article>`, and `<footer>` to give structure and meaning to your content.
+
+2. **Implement ARIA Roles**:
+   - Use ARIA attributes where necessary:
+     - Assign `role` attributes such as `role="button"` for non-button elements that act like buttons.
+     - Use `aria-label` to provide descriptions where the visual presentation does not convey meaning.
+
+3. **Ensure High Text Contrast**:
+   - Check color contrast ratios to ensure text is readable. Aim for a contrast ratio of at least 4.5:1 for normal text and 3:1 for large text.
+
+4. **Keyboard Navigation**:
+   - Ensure all interactive elements (buttons, links, form inputs) are focusable and usable via keyboard actions (`Tab`, `Enter`, `Space`).
+   - Use `tabindex` to control the tab order of elements when necessary.
+
+5. **Forms and Labels**:
+   - Ensure each form input has a corresponding `<label>` element.
+   - Implement accessible error handling: Use `aria-live` to announce validation messages to assistive technologies.
+
+6. **Add Alt Text to Images**:
+   - Provide meaningful alternative text (`alt` attribute) that describes the image’s content or function.
+   - Avoid using phrases like "image of" or "picture of"; just describe what it is.
+
+7. **Responsive and Accessible Design**:
+   - Use media queries in your CSS to ensure layouts work well on various screen sizes.
+   - Make sure modal dialogs can be navigated with the keyboard and can be closed using the `Esc` key.
+
+8. **Use Accessibility Testing Tools**:
+   - Run accessibility checks using tools like [Axe](https://www.deque.com/axe/) or [Wave](https://wave.webaim.org/) to identify issues.
+   - Test your application with screen readers (like NVDA for Windows or VoiceOver for macOS) to ensure content is read correctly.
+
+9. **Get User Feedback**:
+   - Involve users with disabilities in testing to gather feedback on usability and accessibility issues.
+
+Implementing these features will help create a more inclusive user experience and ensure that everyone can access and enjoy our application.
 
 ## Contributing and Contact Info
 
