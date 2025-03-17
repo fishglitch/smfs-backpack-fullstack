@@ -12,11 +12,11 @@ Schrodinger's Backpack is a full-stack application designed to allow users to su
 - [Installation](#installation)
 - [Usage](#usage)
 - [Git Commit Message Guidelines](#git-commit-message-guidelines)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
-- [](#)
+- [Branches](#branches)
+- [How to Switch Branches](#switch-branches#)
+- [Roadmap of Features](#roadmap-of-features)
+- [Contributing and Contact Info](#contributing-and-contact-info)
+- [Acknowledgements](#acknowledgements)
 - [](#)
 
 ## Technologies
@@ -69,25 +69,29 @@ To set up the project, follow these steps:
 1. Clone repo
 2. Navigate to project directory
 3. Set up frontend / client with dependencies:
-* 'npm install vite@latest'
-* 'npm install'
-* 'npm run dev' *starts the Vite development server, which should detail running server in terminal*
-
+```bash
+npm install vite@latest
+npm install # Install all dependencies listed in package.json
+npm run dev # starts Vite development server, which should detail running the server in terminal
+```
 4. Set up backend / server
-* npm init -y (for general) or npm init (for customizable) *initializes node application and have package.json; add to package.json in scripts, if not available:*
+```bash
+# initializes node application
+npm init -y # for general install, 
+npm init # for customizable install
 
-Install Express and other dependencies
-* npm install --save-dev nodemon *adds development dependencies to allow Node.js app to automatically restart for detected directory file change instances*
-* npm install --save express *Node.js web framework handling API routing, middleware, HTTP requests*
-* npm install --save pg *node-postgress pckg to interact with psql database*
-* npm install --save bcrypt *secure password hashing library for user authentication*
-* npm install jsonwebtoken *creation and verification of JWTs for authentication and session management*
-* npm install --save uuid *methods to generate unique identifiers (UUIDs) for database records*
-* npm install morgan *middleware for HTTP requests logging in Express apps; for tracking server activity*
+# Install Express and other dependencies
+npm install --save-dev nodemon # adds development dependencies to allow Node.js app to automatically restart for detected directory file change instances
+npm install --save express # Node.js web framework handling API routing, middleware, HTTP requests
+npm install --save pg # node-postgress pckg to interact with psql database
+npm install --save bcrypt # secure password hashing library for user authentication
+npm install jsonwebtoken # creation and verification of JWTs for authentication and session management
+npm install --save uuid # methods to generate unique identifiers (UUIDs) for database record
+npm install morgan # middleware for HTTP requests logging in Express apps; for tracking server activity
 
-Or, this shortcut:
-* npm install express pg bcrypt jsonwebtoken uuid morgan nodemon
-
+# Or, this shortcut:
+npm install express pg bcrypt jsonwebtoken uuid morgan nodemon
+```
 5. Confirm start scripts in package.json
 
 ```javascript
@@ -100,9 +104,13 @@ Or, this shortcut:
 ```
 
 ## Usage
-1. After installing, run the server: 'npm run start:dev'
-2. Access the app through browser at http://localhost:3000 (or other specified port in your environment variables)
-3. CTRL + C to quit 
+1. After installing, run the server: 
+```bash 
+npm run start:dev
+
+# Access the app through browser at http://localhost:3000 (or other specified port in your environment variables)
+# CTRL + C to quit 
+```
 
 ## Git Commit Message Guidelines
 
@@ -133,10 +141,45 @@ Or, this shortcut:
 8. **Initial Commit**:
    - `git commit -m "Initial commit"`
 
-## Best Practices for Commit Messages
+# Best Practices for Commit Messages
 
 - **Use Imperative Mood**: Write messages in the imperative (e.g., "Fix bug", "Add feature").
 - **Be Descriptive**: Provide clarity; add more context if needed:
   ```bash
   git commit -m "Add image upload feature" -m "This feature allows users to upload images to their profiles."
 
+## Branches
+This repository contains two primary branches:
+
+### `main`
+- **Purpose**: This branch represents the stable production-ready version of the application. Changes that have been thoroughly tested and are ready for deployment are merged into this branch.
+- **Usage**: Use this branch if you want to run or deploy the application in a production environment.
+
+### `feature`
+- **Purpose**: This branch serves as the development branch where new features, bug fixes, and other changes are integrated and tested before they are merged into the `main` branch.
+- **Usage**: You can check out this branch to explore the latest features, contribute code, or help with testing.
+
+## How to Switch Branches
+
+To switch between branches, use the following Git commands:
+
+```bash
+# To switch to the feature branch
+git checkout feature
+
+# To switch back to the main branch
+git checkout main
+1. Main branch has clean code
+2. console.log branch has console.logs and other notes.
+```
+## Roadmap of Features
+1. TBD
+
+## Contributing and Contact Info
+
+If you have any questions or suggestions, or have submitted pull requests, feel free to reach out to me:
+- GitHub: [fishglitch](https://github.com/fishglitch)
+
+## Acknowledgements
+
+Thank you Grace Hopper Program!
