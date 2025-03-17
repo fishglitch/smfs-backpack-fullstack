@@ -1,6 +1,6 @@
 # Schrodinger's Backpack: A Memory Archive
 
-## Overview# Overview: 
+## Overview
 
 Schrodinger's Backpack is a full-stack application designed to allow users to submit, store, and reflect upon memories of a deceased loved one through items they might carry in this ancestor's backpack. Inspired by the concept of "what's in my backpack," and the thought experiment "Schrodinger's Cat", this app provides a sentimental space for users to reflect on how those memories exist in a state of uncertainty until actively acknowledged and celebrated.
 
