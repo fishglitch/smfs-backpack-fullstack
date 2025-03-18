@@ -1,25 +1,19 @@
-/*
-Purpose: This file primarily serves as a module containing 
-methods that handle database operations such as creating, 
-reading, updating, and deleting users, posts, and tags.
-
-Functionality:
-- establishes a connection to PostgreSQL database via pg module.
-- defines various functions to interact with the users, posts, and tags tables.
-- functions and methods for managing tags.
-- exports client & functions for use in other app parts incl. seed.js file.
-
-index.js: encapsulates all database operations, acts as a reusable module for core database interaction functions, for data logic maintenance and management.
-seed.js: initialization and setup aspect; prepares db by creating schema + seeding it with initial data for functional and integration tests
+/* module contains CRUD mthds for db ops+ data management.
+- Establishes a connection to the PostgreSQL database via pg module.
+- Defines functions to interact with users and memories tables.
+- Includes methods for managing favorites and tags.
+- Exports db client and fn for use in seed.js, etc.
 */
 
-require("dotenv").config();
-const { Client } = require("pg"); // imports the pg module
-const bcrypt = require("bcrypt");
-const uuid = require("uuid");
-const jwt = require("jsonwebtoken"); // for creating or managing tokens related to user actions.
-
-const JWT_SECRET = process.env.JWT_SECRET || "shhh";
+/* client setup, pg module using ES6 module syntax
+- contains Client constructor
+- connection string config'd to use env var for db URL w/ fallback string if the var is NULL/not defined
+- ssl config that alters based on app's env (production vs dev) to show secure connection dynamic handling
+*/
+import { Client } from "pg"; // imports the pg module
+import { hash } from "bcrypt";
+import { v4 } from "uuid";
+import jwt from "jsonwebtoken"; // for creating or managing tokens related to user actions.
 
 const client = new Client({
   connectionString:
@@ -31,30 +25,14 @@ const client = new Client({
       : undefined,
 });
 
-/* USER METHODS */
 
-// Create User: Inserts a new user into the database with their information.
-const createUser = async ({ username, password, name, dimension }) => {
-  const id = uuid.v4(); // Generate a new UUID for the user
-  const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
+const JWT_SECRET = process.env.JWT_SECRET || "shhh";
 
-  try {
-    const res = await client.query(
-      `
-      INSERT INTO users (username, password, name, dimension) 
-      VALUES ($1, $2, $3, $4) 
-      ON CONFLICT (username) DO NOTHING
-      RETURNING *
-      `,
-      [username, await bcrypt.hash(password, 10), name, dimension]
-    );
+// DEFINED CRUD FUNCTIONS BELOW!! //
 
-    return res.rows[0]; // Return the newly created user
-  } catch (error) {
-    console.error("Error creating user:", error);
-    throw error;
-  }
-};
+/* USER METHODS
+on frontend: be explicit regarding what personal data you are collecting
+ */
 
 // Get All Users: Retrieves all users from the database.
 const getAllUsers = async () => {
@@ -75,196 +53,71 @@ const getUserById = async (id) => {
     const response = await client.query(SQL, [id]);
     return response.rows[0];
   } catch (error) {
-    console.error("Error retrieving user by dimension:", error);
+    console.error("Error retrieving user by id:", error);
     throw error;
   }
 };
 
-// Update User: Updates user information based on the ID.
-// const updateUser = async (userId, { username, password, name, dimension }) => {
-//   try {
-//     const fields = [];
-//     const values = [userId];
-//     let index = 1;
+// Create User: Inserts a new user into the database with their information.
+const createUser = async ({ username, password, name, dimension, email }) => {
+  const id = v4(); // Generate a new UUID for the user
+  const hashedPassword = await hash(password, 10); // Hash the password
 
-//     if (username) {
-//       fields.push(`username = $${++index}`);
-//       values.push(username);
-//     }
-//     if (password) {
-//       const hashedPassword = await bcrypt.hash(password, 10); // Hash the new password
-//       fields.push(`password = $${++index}`);
-//       values.push(hashedPassword);
-//     }
+  try {
+    const res = await client.query(
+      `
+      INSERT INTO users (username, password, name, dimension, email) 
+      VALUES ($1, $2, $3, $4, $5) 
+      ON CONFLICT (username) DO NOTHING
+      RETURNING *
+      `,
+      [username, await hash(password, 10), name, dimension, email]
+    );
 
-//     if (name) {
-//       fields.push(`dimension = $${++index}`);
-//       values.push(name);
-//     }
+    return res.rows[0]; // Return the newly created user
+  } catch (error) {
+    console.error("Error creating user:", error);
+    throw error;
+  }
+};
 
-//     if (dimension) {
-//       fields.push(`dimension = $${++index}`);
-//       values.push(dimension);
-//     }
-
-//     const SQL = `
-//       UPDATE users
-//       SET ${fields.join(", ")}
-//       WHERE id = $1
-//       RETURNING *;
-//     `;
-//     const response = await client.query(SQL, values);
-//     return response.rows[0]; // Return the updated user
-//   } catch (error) {
-//     console.error("Error updating user!", error);
-//     throw error;
-//   }
-// };
-
+// update User
 const updateUser = async (id, fields) => {
-  const setString = Object.keys(fields).map((key, index) => {
-    return `"${key}"=$${index + 1}`;
-  }).join(", ");
+  const setString = Object.keys(fields)
+    .map((key, index) => {
+      return `"${key}"=$${index + 1}`;
+    })
+    .join(", ");
 
-  const { rows: [user] } = await client.query(`
+  const {
+    rows: [user],
+  } = await client.query(
+    `
     UPDATE users
     SET ${setString}
     WHERE id=$${Object.keys(fields).length + 1}
     RETURNING *;
-  `, [...Object.values(fields), id]);
+  `,
+    [...Object.values(fields), id]
+  );
 
   return user;
 };
 
 // Delete User: Removes a user from the database.
-
 const deleteUser = async (id) => {
-  await client.query(`
+  await client.query(
+    `
     DELETE FROM users
     WHERE id = $1;
-  `, [id]);
+  `,
+    [id]
+  );
 };
-
 
 /*  MEMORY METHODS */
 
-const createMemory = async ({
-  title,
-  imageUrl,
-  description,
-  dimension,
-  visibility,
-  author_nickname,
-  tags,
-}) => {
-  try {
-    const id = uuid.v4(); // Generate a new UUID for the user
-    const SQL = `
-            INSERT INTO memories (id, title, image_url, description, dimension, visibility, author_nickname, tags) 
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *
-        `;
-    const response = await client.query(SQL, [
-      id,
-      title,
-      imageUrl,
-      description,
-      dimension,
-      visibility,
-      author_nickname,
-      tags
-    ]);
-    return response.rows[0];
-  } catch (error) {
-    console.error("Error creating memory:", error);
-    throw error;
-  }
-};
-
-// update
-// const updateMemory = async (
-//   memoryId,
-//   { title, imageUrl, description, dimension }
-// ) => {
-//   try {
-//     const fields = [];
-//     const values = [memoryId];
-//     let index = 1;
-
-//     if (title) {
-//       fields.push(`title = $${++index}`);
-//       values.push(title);
-//     }
-//     if (imageUrl) {
-//       fields.push(`image_url = $${++index}`);
-//       values.push(imageUrl);
-//     }
-//     if (description) {
-//       fields.push(`description = $${++index}`);
-//       values.push(description);
-//     }
-//     if (dimension) {
-//       fields.push(`dimension = $${++index}`);
-//       values.push(dimension);
-//     }
-
-//     const SQL = `
-//       UPDATE memories
-//       SET ${fields.join(", ")}
-//       WHERE id = $1
-//       RETURNING *;
-//     `;
-
-//     const response = await client.query(SQL, values);
-//     return response.rows[0]; // Return the updated memory
-//   } catch (error) {
-//     console.error("Error updating memory!", error);
-//     throw error;
-//   }
-// };
-
-const updateMemory = async (memoryId, updates) => {
-  try {
-    const fields = [];
-    const values = [memoryId];
-    let index = 1;
-
-    if (updates.title) {
-      fields.push(`title = $${++index}`);
-      values.push(updates.title);
-    }
-    if (updates.imageUrl) {
-      fields.push(`image_url = $${++index}`);
-      values.push(updates.imageUrl);
-    }
-    if (updates.description) {
-      fields.push(`description = $${++index}`);
-      values.push(updates.description);
-    }
-    if (updates.dimension) {
-      fields.push(`dimension = $${++index}`);
-      values.push(updates.dimension);
-    }
-
-    // Execute the memory update if there are fields to update
-    if (fields.length > 0) {
-      const SQL = `
-        UPDATE memories
-        SET ${fields.join(", ")}
-        WHERE id = $1
-        RETURNING *;
-      `;
-      const response = await client.query(SQL, values);
-      return response.rows[0]; // Return the updated memory
-    }
-
-    // If only tags are provided, return a specific message or handle separately
-    return null; // Or an appropriate object or message if no fields were updated
-  } catch (error) {
-    console.error("Error updating memory!", error);
-    throw error;
-  }
-};
-
+// get all exisiting memories 
 const getAllMemories = async () => {
   try {
     const SQL = `SELECT * FROM memories`;
@@ -276,6 +129,7 @@ const getAllMemories = async () => {
   }
 };
 
+// get memory by id
 const getMemoryById = async (memoryId) => {
   try {
     const SQL = `SELECT * FROM memories WHERE id = $1;`;
@@ -288,6 +142,7 @@ const getMemoryById = async (memoryId) => {
   }
 };
 
+// get memories by User
 const getMemoriesByUser = async (userId) => {
   try {
     const SQL = `SELECT * FROM memories WHERE author_nickname = (SELECT username FROM users WHERE id = $1);`;
@@ -300,17 +155,124 @@ const getMemoriesByUser = async (userId) => {
   }
 };
 
-module.exports = {
+// it is redundant to pass 'id' as a prop bc we generate it w/in func using uuid
+const createMemory = async ({
+  title, imageUrl, description, dimension, visibility, author_nickname, tags
+}) => {
+  try {
+    const id = v4(); // Generate a new UUID for the user
+    const SQL = `
+            INSERT INTO memories (id, title, image_url, description, dimension, visibility, author_nickname, tags) 
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8) 
+            RETURNING *
+        `;
+    const response = await client.query(SQL, [
+      id, title, imageUrl, description, dimension, visibility, author_nickname, tags
+    ]);
+    return response.rows[0];
+  } catch (error) {
+    console.error("Error creating memory:", error);
+    throw error;
+  }
+};
+
+/* updates existing memory in db,
+modifies fields based on CREATE TABLE memories
+- memoryId, a unique idenitfier/ db row where update will take place
+- updates, an obj containing new values updated from CREATE TABLE memories
+*/
+
+const updateMemory = async (memoryId, updates) => {
+  try {
+    const {
+      title, imageUrl, description, dimension, visibility, author_nickname, tags,
+    } = updates;
+    const fields = [];
+    const values = [memoryId];
+    let index = 1;
+
+    // build the fields array only if updates are provided
+    if (title) {
+      fields.push(`title = $${++index}`);
+      values.push(title);
+    }
+    if (imageUrl) {
+      fields.push(`image_url = $${++index}`);
+      values.push(imageUrl);
+    }
+    if (description) {
+      fields.push(`description = $${++index}`);
+      values.push(description);
+    }
+    if (dimension) {
+      fields.push(`dimension = $${++index}`);
+      values.push(dimension);
+    }
+    if (visibility) {
+      fields.push(`visibility = $${++index}`);
+      values.push(visibility);
+    }
+    if (author_nickname) {
+      fields.push(`author_nickname = $${++index}`);
+      values.push(author_nickname);
+    }
+    if (tags) {
+      fields.push(`tags = $${++index}`);
+      values.push(tags);
+    }
+
+    // check if fields are up to date
+    if (fields.length === 0) {
+      return "No data was updated", null;
+    }
+
+    // Construct and Execute the memory update via SQL if there are fields to update
+    const SQL = `
+        UPDATE memories
+        SET ${fields.join(", ")}
+        WHERE id = $1
+        RETURNING *;
+      `;
+    const response = await client.query(SQL, values);
+    return response.rows[0]; // Return the updated memory
+  } catch (error) {
+    console.error("Error updating memory!", error);
+    throw error("Could not update memory");
+  }
+};
+
+// Delete Memory: Removes a memory from the database.
+const deleteMemory = async (id) => {
+  try {
+    const result = await client.query(
+    `
+    DELETE FROM memories
+    WHERE id = $1;
+  `,
+    [id]
+  );
+  if (result.rowCount === 0) {
+    throw new Error(`Memory with ID ${id} does not exist.`);
+  }
+} catch (error) {
+  console.error("Error deleting memory:", error);
+  throw error; // Allow caller to handle it appropriately
+};
+}
+
+
+export {
   client,
-  createUser,
-  updateUser,
   getAllUsers,
   getUserById,
+  createUser,
+  updateUser,
   deleteUser,
 
+  getAllMemories,
   getMemoryById,
+  getMemoriesByUser,
   createMemory,
   updateMemory,
-  getAllMemories,
-  getMemoriesByUser,
+  deleteMemory
 };

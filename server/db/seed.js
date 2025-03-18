@@ -1,35 +1,38 @@
-/* this is where you will seed starter data
- use arrow functions (see 4.36 for the structure)
-
+/* seed.js: initialization and setup aspect; prepares db by creating schema + seeding it with initial data for functional and integration tests
 3.17 
 1. testDb() is commented out
 Errors:
 1. seed.js is clean exit, however: 'tag' column in 'memories' table NULL, hence 'tag' and 'memory_tag' tables empty
-
 */
-const {
+
+// imports multiple exports from module from ./db/index.js
+import {
   client,
-  createUser,
-  updateUser,
   getAllUsers,
   getUserById,
+  createUser,
+  updateUser,
   deleteUser,
-  
+
+  getAllMemories,
+  getMemoryById,
+  getMemoriesByUser,
   createMemory,
   updateMemory,
-  getAllMemories,
-} = require("./index");
+  deleteMemory,
+} from "../../index.js";
 
 const dropTables = async () => {
   try {
     console.log("Starting to drop tables...");
 
     await client.query(`
+            DROP TABLE IF EXISTS email_verifications;
             DROP TABLE IF EXISTS memory_tags;
             DROP TABLE IF EXISTS tags;
             DROP TABLE IF EXISTS favorites;
             DROP TABLE IF EXISTS memories;
-            DROP TABLE IF EXISTS users;   
+            DROP TABLE IF EXISTS users; 
             `);
 
     console.log("Finished dropping tables!");
@@ -71,7 +74,8 @@ const createTables = async () => {
       username VARCHAR (150) UNIQUE NOT NULL,
       password VARCHAR (150) NOT NULL,
       name varchar(255) NOT NULL,
-      dimension VARCHAR(150) NOT NULL
+      dimension VARCHAR(150) NOT NULL,
+      email VARCHAR(255) UNIQUE
       );
 
       CREATE TABLE memories(
@@ -103,6 +107,15 @@ const createTables = async () => {
       tag_id UUID REFERENCES tags(id),
       CONSTRAINT unique_memory_id_and_tag_id UNIQUE (memory_id, tag_id)
       );
+
+      CREATE TABLE email_verifications (
+      id SERIAL PRIMARY KEY,
+      user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,  -- Link back to users
+      token VARCHAR(255) NOT NULL,  -- The unique verification token
+      is_verified BOOLEAN DEFAULT FALSE,  -- Status of the verification
+        created_at TIMESTAMP DEFAULT NOW(),
+        expires_at TIMESTAMP  -- Optional: token expiration
+);
       `
     );
     console.log("Finished building tables!");
@@ -120,26 +133,26 @@ const createInitialUsers = async () => {
       await createUser({
         username: "grannyfrumps",
         password: "soup143",
-        email: "grannyfrumps@frumps.com",
         name: "granny frumps",
         dimension: "UTC-7",
+        email: "grannyfrumps@frumps.com",
       }),
 
       await createUser({
         username: "grumpycat",
         password: "bagelseasoning83",
-        email: "grumpy@cat.com",
         name: "grumpy cat",
         dimension: "∞",
+        email: "grumpy@cat.com",
       }),
 
       await createUser({
         username: "euclid",
         password: "m1llert1me",
-        email: "euclid@me.com",
         name: "euclid",
-        dimension: "∞"
-      })
+        dimension: "∞",
+        email: "euclid@me.com",
+      }),
     ]);
 
     console.log("Finished creating users!");
@@ -153,15 +166,7 @@ const createInitialUsers = async () => {
 const createInitialMemories = async (users) => {
   try {
     console.log("Starting to retrieve memories...");
-    /* CREATE TABLE MEMORIES
-    id 
-    title         -- For the item/place/event
-    image_url
-    description   -- detailed memory description
-    dimension     -- "location"; not a foreign key]
-    visibility ENUM('public', 'private') DEFAULT 'public', --hether a post can be viewed publicly or privately 
-    author_id     -- unlinked to the registered user submitting this memory; proper foreign key referenc
-    tags          -- user generated tags?*/
+
     await createMemory({
       title: "laptop stand",
       imageUrl:
@@ -229,68 +234,82 @@ const rebuildDB = async () => {
     console.log("Error during rebuildDB");
     throw error;
   }
-
 };
 
-
-/*
-const {
-  client,
-  createUser,
-  getAllUsers,
-  updateUser,
-  getUserById,
-  deleteUser,
-  
-  getAllMemories,
-  createMemory,
-  updateMemory,
-
-} = require("./index");
-*/
+/* this function focuses on Creation and Retrieval, hence no delete functions */
 async function testDB() {
   try {
     console.log("Starting to test database...");
 
+    // USER METHODS
+    // test db get All Users
     console.log("Calling getAllUsers");
     const users = await getAllUsers();
     console.log("Result:", users);
+    if (users.length === 0) {
+      throw new Error("No users found. Seeding may have failed.");
+    }
 
+    // test db get User By Id
+    console.log("Calling getUserById with users[0].id");
+    const userDetail = await getUserById(users[0].id);
+    console.log("Result:", userDetail);
 
+    // createUser already used in createInitialUsers()
+
+    // test db update User
     console.log("Calling updateUser on users[0]");
     const updateUserResult = await updateUser(users[0].id, {
-      name: "Newname Sogood",
-      dimension: "Lesterville, KY"
+      name: "Schrodinger's Cat",
+      dimension: "fifth dimension",
     });
     console.log("Result:", updateUserResult);
 
-    console.log("Calling getUserById with 1");
-    const albert = await getUserById(1);
-    console.log("Result:", albert);
+    // MEMORY METHODS
 
-
+    // test db get All Memories
     console.log("Calling getAllMemories");
     const memories = await getAllMemories();
     console.log("Result:", memories);
+    if (memories.length === 0) {
+      throw new Error("No memories found. Seeding may have failed.");
+    }
 
+    // test db get memory By Id
+    console.log("Calling getMemoryById with memories[0].id");
+    const memoryDetail = await getMemoryById(memories[0].id);
+    console.log("Result:", memoryDetail);
+
+    // test db get memory By User
+    console.log("Calling getMemoryByUser with users[0].id");
+    const memoryDetailByUser = await getMemoriesByUser(users[0].id);
+    console.log("Result:", memoryDetailByUser);
+
+    // createMemory already used in createInitialMemories()
+
+    // test db update Memory
     console.log("Calling updateMemory on memories[0]");
     const updateMemoryResult = await updateMemory(memories[0].id, {
       title: "New Title",
-      content: "Updated Content"
+      description: "Updated Content",
+      dimension: "Updated dimension",
     });
     console.log("Result:", updateMemoryResult);
 
+    // test db  update memory tags
     console.log("Calling updateMemory on memories[1], only updating tags");
     const updateMemoryTagsResult = await updateMemory(memories[1].id, {
-      tags: ["#youcandoanything", "#redfish", "#bluefish"]
+      tags: ["#remember", "#tender", "#nostalgia"],
     });
     console.log("Result:", updateMemoryTagsResult);
 
-
-
+    // invoke only when implementing tags feature
     console.log("Calling getAllTags");
     const allTags = await getAllTags();
     console.log("Result:", allTags);
+    if (allTags.length === 0)
+      throw new Error("No tags found. Seeding may have failed.");
+    console.log("Result:", tags);
 
     console.log("Calling getPostsByTagName with #happy");
     const postsWithHappy = await getPostsByTagName("#happy");
