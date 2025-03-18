@@ -3,6 +3,7 @@
 - Defines functions to interact with users and memories tables.
 - Includes methods for managing favorites and tags.
 - Exports db client and fn for use in seed.js, etc.
+- configured for ES6 module syntax!!
 */
 
 /* client setup, pg module using ES6 module syntax
@@ -10,12 +11,14 @@
 - connection string config'd to use env var for db URL w/ fallback string if the var is NULL/not defined
 - ssl config that alters based on app's env (production vs dev) to show secure connection dynamic handling
 */
-import { Client } from "pg"; // imports the pg module
+import pg from "pg"; // imports the pg module
 import { hash } from "bcrypt";
 import { v4 } from "uuid";
 import jwt from "jsonwebtoken"; // for creating or managing tokens related to user actions.
+const JWT_SECRET = process.env.JWT_SECRET || "shhh";
 
-const client = new Client({
+
+const client = new pg({
   connectionString:
     process.env.DATABASE_URL ||
     "postgres://ealejo@localhost:5432/schrodingers_backpack",
@@ -24,9 +27,6 @@ const client = new Client({
       ? { rejectUnauthorized: false }
       : undefined,
 });
-
-
-const JWT_SECRET = process.env.JWT_SECRET || "shhh";
 
 // DEFINED CRUD FUNCTIONS BELOW!! //
 

@@ -1,19 +1,8 @@
-const express = require('express');
-const {
-  createUser,
-  updateUser,
-  getAllUsers,
-  getUserByDimension,
-  getUserByUsername,
-  createMemory,
-  updateMemory,
-  getAllMemories,
-  getMemoryById,
-  getMemoriesByUser,
-} = require('../db/index'); // Adjust the import according to your structure
-const apiRouter = require('schrodingers-backpack-fullstack/server/index.js');
+import { Router } from 'express';
+import { createUser, updateUser, getAllUsers, getUserByDimension, getUserByUsername, createMemory, updateMemory, getAllMemories, getMemoryById, getMemoriesByUser } from '../db/index'; // Adjust the import according to your structure
+import {apiRouter} from 'schrodingers-backpack-fullstack/server/index.js';
 
-const router = express.Router();
+const router = Router();
 
 // User Routes
 router.post('/users', async (req, res) => {
@@ -118,4 +107,4 @@ router.get('/users/:userId/memories', async (req, res) => {
 });
 
 // Export the router
-module.exports = apiRouter
+export default apiRouter

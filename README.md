@@ -91,9 +91,10 @@ npm install jsonwebtoken # creation and verification of JWTs for authentication 
 npm install --save uuid # Library for generating unique identifiers (UUIDs) for database record
 npm install morgan # middleware for HTTP requests logging in Express apps; for tracking server activity
 npm install dotenv # module that loads environment variables from a .env file into process.env; to configure  application without hardcoding sensitive data (like API keys, database passwords, etc.) directly into  source code; separation makes it easier to manage configuration settings for different environments (development, testing, production) by changing the .env file instead of modifying code
+npm install cors # security feature for web applications to facilitate safe API sharing
 
 # Or, this shortcut:
-npm install --save express pg bcrypt jsonwebtoken uuid morgan dotenv
+npm install --save express pg bcrypt jsonwebtoken uuid morgan dotenv cors
 ```
 5. Confirm start scripts in package.json
 
