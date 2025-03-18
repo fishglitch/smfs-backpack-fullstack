@@ -1,5 +1,23 @@
 {
+  "name": "schrodingers_backpack_fullstack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "seed:dev": "nodemon ./server/db/seed.js",
+    "seed": "node ./server/db/seed.js",
+    "start": "node index.js",
+    "start:dev": "nodemon index.js"
+  },
   "devDependencies": {
     "nodemon": "^3.1.9"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "pg": "^8.14.1",
+    "uuid": "^11.1.0"
   }
 }
