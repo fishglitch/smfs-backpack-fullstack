@@ -3,32 +3,26 @@
 
 // Load environment variables from .env file
 import { config } from "dotenv"; // Ensure environment variables are loaded
-config();
+config(); // Load environment variables
 
 // Import dependencies
 import express from "express"; 
 import morgan from "morgan"; 
 import cors from "cors"; 
 import { client } from "./server/db/index.js";  // Import the database client
+import apiRouter from "./server/api/index.js"; // Router setup
 
-// Set up Express app
-const server = express();
-
-// Middleware to handle JSON requests
-server.use(express.json());
-
-// Logging middleware to track requests in the console
-server.use(morgan("dev"));
-
-// CORS middleware to allow cross-origin requests
-server.use(
+// Middleware setup
+const server = express(); // Initialize Express app
+server.use(express.json()); // handle JSON requests
+server.use(morgan("dev")); // Logging middleware to track requests in the console
+server.use( // CORS middleware to allow cross-origin requests
   cors({
     origin: ["http://localhost:5173"],
     methods: "GET, POST, PUT, PATCH, DELETE",
     allowedHeaders: "Content-Type, Authorization",
   })
 );
-
 // Custom middleware for logging the body of incoming requests to the console
 server.use((req, res, next) => {
   console.log("<____Body Logger START____>");
@@ -37,8 +31,7 @@ server.use((req, res, next) => {
   next();
 });
 
-// Router setup
-import apiRouter from "./server/api/index.js"; 
+// Setup API routes
 server.use("/api", apiRouter); // Mount the API router
 
 // Connect to the database

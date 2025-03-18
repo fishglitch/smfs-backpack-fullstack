@@ -11,14 +11,15 @@
 - connection string config'd to use env var for db URL w/ fallback string if the var is NULL/not defined
 - ssl config that alters based on app's env (production vs dev) to show secure connection dynamic handling
 */
-import pg from "pg"; // imports the pg module
+import pkg from "pg"; // Import the entire pg module
+const { Client } = pkg; // Extract the Client constructor
 import { hash } from "bcrypt";
 import { v4 } from "uuid";
 import jwt from "jsonwebtoken"; // for creating or managing tokens related to user actions.
 const JWT_SECRET = process.env.JWT_SECRET || "shhh";
 
 
-const client = new pg({
+const client = new Client({
   connectionString:
     process.env.DATABASE_URL ||
     "postgres://ealejo@localhost:5432/schrodingers_backpack",

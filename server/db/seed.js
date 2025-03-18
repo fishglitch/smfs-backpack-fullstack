@@ -20,7 +20,7 @@ import {
   createMemory,
   updateMemory,
   deleteMemory,
-} from "../../index.js";
+} from "../db/index.js";
 
 const dropTables = async () => {
   try {
@@ -223,7 +223,6 @@ const createInitialMemories = async (users) => {
 
 const rebuildDB = async () => {
   try {
-    await client.connect();
 
     await dropTables();
     await createTables();
@@ -303,7 +302,7 @@ async function testDB() {
     });
     console.log("Result:", updateMemoryTagsResult);
 
-    // invoke only when implementing tags feature
+    /* invoke only when implementing tags feature
     console.log("Calling getAllTags");
     const allTags = await getAllTags();
     console.log("Result:", allTags);
@@ -314,18 +313,24 @@ async function testDB() {
     console.log("Calling getPostsByTagName with #happy");
     const postsWithHappy = await getPostsByTagName("#happy");
     console.log("Result:", postsWithHappy);
-
+  */
+ 
     console.log("Finished database tests!");
   } catch (error) {
     console.log("Error during testDB");
     throw error;
   }
+
 }
 
 const runSeedAndTest = async () => {
   try {
-    await rebuildDB();
-    await testDB();
+    // Connect to the client only once
+    await client.connect(); // Connect to the database first
+
+    await rebuildDB(); // Call to drop, create tables and seed initial data
+    await testDB(); // Call to run tests against the seeded database
+
   } catch (error) {
     console.error("Error during seed and test:", error);
   } finally {

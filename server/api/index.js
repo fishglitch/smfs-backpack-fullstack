@@ -1,110 +1,76 @@
-import { Router } from 'express';
-import { createUser, updateUser, getAllUsers, getUserByDimension, getUserByUsername, createMemory, updateMemory, getAllMemories, getMemoryById, getMemoriesByUser } from '../db/index'; // Adjust the import according to your structure
-import {apiRouter} from 'schrodingers-backpack-fullstack/server/index.js';
+/*
+define apiRouter in server/api/index.js and then import in root index.js. 
+This setup creates a clean separation of concerns
+handle the CRUD logic inside the individual route files
+*/
 
-const router = Router();
+// api/index.js
+import express from 'express';
 
-// User Routes
-router.post('/users', async (req, res) => {
-  const { username, password, dimension } = req.body;
-  try {
-    const user = await createUser({ username, password, dimension });
-    res.status(201).json(user);
-  } catch (error) {
-    res.status(500).json({ error: 'Error creating user' });
+import pkg from 'jsonwebtoken'; // Import the entire jsonwebtoken module
+const { verify } = pkg; // Destructure to use the verify function
+
+import { getUserById } from '../db/index.js';
+
+const apiRouter = express.Router();
+const { JWT_SECRET } = process.env;
+
+// Routes for api requests with paths for each file
+// Import the individual route modules
+import usersRouter from './users.js';
+import memoriesRouter from './memories.js';
+import favoritesRouter from './favorites.js';
+import tagsRouter from './tags.js';
+
+// Middleware for token verification via authenticate and set req.user based on JWT
+apiRouter.use(async (req, res, next) => {
+  const prefix = 'Bearer ';
+  const auth = req.header('Authorization');
+
+  if (!auth) {
+    // If there's no auth header, proceed to the next middleware
+    next();
+  } else if (auth.startsWith(prefix)) {
+    const token = auth.slice(prefix.length); // Extract the token
+
+    try {
+      const { id } = verify(token, JWT_SECRET);
+
+      if (id) {
+        req.user = await getUserById(id);
+        next();
+      } else {
+        next({
+          name: 'AuthorizationHeaderError',
+          message: 'Authorization token malformed',
+        });
+      }
+    } catch ({ name, message }) {
+      next({ name, message });
+    }
+  } else {
+    next({
+      name: 'AuthorizationHeaderError',
+      message: `Authorization token must start with ${prefix}`,
+    });
   }
 });
 
-router.put('/users/:userId', async (req, res) => {
-  const { userId } = req.params;
-  const { username, password, dimension } = req.body;
-  try {
-    const user = await updateUser(userId, { username, password, dimension });
-    res.json(user);
-  } catch (error) {
-    res.status(500).json({ error: 'Error updating user' });
+// Log user if set
+apiRouter.use((req, res, next) => {
+  if (req.user) {
+    console.log('User is set:', req.user);
   }
+
+  next(); // Move to the next middleware
 });
 
-router.get('/users', async (req, res) => {
-  try {
-    const users = await getAllUsers();
-    res.json(users);
-  } catch (error) {
-    res.status(500).json({ error: 'Error retrieving users' });
-  }
-});
 
-router.get('/users/dimension/:dimension', async (req, res) => {
-  const { dimension } = req.params;
-  try {
-    const user = await getUserByDimension(dimension);
-    res.json(user);
-  } catch (error) {
-    res.status(500).json({ error: 'Error retrieving user by dimension' });
-  }
-});
+// Set up the routes
+apiRouter.use('/users', usersRouter);
+apiRouter.use('/memories', memoriesRouter);
+apiRouter.use('/favorites', favoritesRouter);
+apiRouter.use('/tags', tagsRouter);
 
-router.get('/users/username/:username', async (req, res) => {
-  const { username } = req.params;
-  try {
-    const user = await getUserByUsername(username);
-    res.json(user);
-  } catch (error) {
-    res.status(500).json({ error: 'Error retrieving user by username' });
-  }
-});
-
-// Memory Routes
-router.post('/memories', async (req, res) => {
-  const { title, imageUrl, description, dimension, author_nickname } = req.body;
-  try {
-    const memory = await createMemory({ title, imageUrl, description, dimension, author_nickname });
-    res.status(201).json(memory);
-  } catch (error) {
-    res.status(500).json({ error: 'Error creating memory' });
-  }
-});
-
-router.put('/memories/:memoryId', async (req, res) => {
-  const { memoryId } = req.params;
-  const { title, imageUrl, description, dimension } = req.body;
-  try {
-    const memory = await updateMemory(memoryId, { title, imageUrl, description, dimension });
-    res.json(memory);
-  } catch (error) {
-    res.status(500).json({ error: 'Error updating memory' });
-  }
-});
-
-router.get('/memories', async (req, res) => {
-  try {
-    const memories = await getAllMemories();
-    res.json(memories);
-  } catch (error) {
-    res.status(500).json({ error: 'Error retrieving all memories' });
-  }
-});
-
-router.get('/memories/:memoryId', async (req, res) => {
-  const { memoryId } = req.params;
-  try {
-    const memory = await getMemoryById(memoryId);
-    res.json(memory);
-  } catch (error) {
-    res.status(500).json({ error: 'Error retrieving memory by ID' });
-  }
-});
-
-router.get('/users/:userId/memories', async (req, res) => {
-  const { userId } = req.params;
-  try {
-    const memories = await getMemoriesByUser(userId);
-    res.json(memories);
-  } catch (error) {
-    res.status(500).json({ error: 'Error retrieving memories by user' });
-  }
-});
-
-// Export the router
-export default apiRouter
+// Export the apiRouter for use in main server file
+export default apiRouter;
