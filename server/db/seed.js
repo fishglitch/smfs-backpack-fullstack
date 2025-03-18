@@ -1,12 +1,20 @@
-// this is where you will seed starter data
-// use arrow functions (see 4.36 for the structure)
+/* this is where you will seed starter data
+ use arrow functions (see 4.36 for the structure)
 
+3.17 
+1. testDb() is commented out
+Errors:
+1. seed.js is clean exit, however: 'tag' column in 'memories' table NULL, hence 'tag' and 'memory_tag' tables empty
+
+*/
 const {
   client,
   createUser,
   updateUser,
   getAllUsers,
-  getUserByDimension,
+  getUserById,
+  deleteUser,
+  
   createMemory,
   updateMemory,
   getAllMemories,
@@ -62,6 +70,7 @@ const createTables = async () => {
       id SERIAL PRIMARY KEY,
       username VARCHAR (150) UNIQUE NOT NULL,
       password VARCHAR (150) NOT NULL,
+      name varchar(255) NOT NULL,
       dimension VARCHAR(150) NOT NULL
       );
 
@@ -73,7 +82,7 @@ const createTables = async () => {
       dimension VARCHAR(150),
       visibility visibility_enum DEFAULT 'public',
       author_nickname VARCHAR(150),
-      tags varchar(255)
+      tags varchar(255)[]
       );
 
       CREATE TABLE favorites(
@@ -112,6 +121,7 @@ const createInitialUsers = async () => {
         username: "grannyfrumps",
         password: "soup143",
         email: "grannyfrumps@frumps.com",
+        name: "granny frumps",
         dimension: "UTC-7",
       }),
 
@@ -119,6 +129,7 @@ const createInitialUsers = async () => {
         username: "grumpycat",
         password: "bagelseasoning83",
         email: "grumpy@cat.com",
+        name: "grumpy cat",
         dimension: "∞",
       }),
 
@@ -126,8 +137,9 @@ const createInitialUsers = async () => {
         username: "euclid",
         password: "m1llert1me",
         email: "euclid@me.com",
-        dimension: "∞",
-      }),
+        name: "euclid",
+        dimension: "∞"
+      })
     ]);
 
     console.log("Finished creating users!");
@@ -216,9 +228,90 @@ const rebuildDB = async () => {
   } catch (error) {
     console.log("Error during rebuildDB");
     throw error;
+  }
+
+};
+
+
+/*
+const {
+  client,
+  createUser,
+  getAllUsers,
+  updateUser,
+  getUserById,
+  deleteUser,
+  
+  getAllMemories,
+  createMemory,
+  updateMemory,
+
+} = require("./index");
+*/
+async function testDB() {
+  try {
+    console.log("Starting to test database...");
+
+    console.log("Calling getAllUsers");
+    const users = await getAllUsers();
+    console.log("Result:", users);
+
+
+    console.log("Calling updateUser on users[0]");
+    const updateUserResult = await updateUser(users[0].id, {
+      name: "Newname Sogood",
+      dimension: "Lesterville, KY"
+    });
+    console.log("Result:", updateUserResult);
+
+    console.log("Calling getUserById with 1");
+    const albert = await getUserById(1);
+    console.log("Result:", albert);
+
+
+    console.log("Calling getAllMemories");
+    const memories = await getAllMemories();
+    console.log("Result:", memories);
+
+    console.log("Calling updateMemory on memories[0]");
+    const updateMemoryResult = await updateMemory(memories[0].id, {
+      title: "New Title",
+      content: "Updated Content"
+    });
+    console.log("Result:", updateMemoryResult);
+
+    console.log("Calling updateMemory on memories[1], only updating tags");
+    const updateMemoryTagsResult = await updateMemory(memories[1].id, {
+      tags: ["#youcandoanything", "#redfish", "#bluefish"]
+    });
+    console.log("Result:", updateMemoryTagsResult);
+
+
+
+    console.log("Calling getAllTags");
+    const allTags = await getAllTags();
+    console.log("Result:", allTags);
+
+    console.log("Calling getPostsByTagName with #happy");
+    const postsWithHappy = await getPostsByTagName("#happy");
+    console.log("Result:", postsWithHappy);
+
+    console.log("Finished database tests!");
+  } catch (error) {
+    console.log("Error during testDB");
+    throw error;
+  }
+}
+
+const runSeedAndTest = async () => {
+  try {
+    await rebuildDB();
+    await testDB();
+  } catch (error) {
+    console.error("Error during seed and test:", error);
   } finally {
-    await client.end(); // close connection
+    await client.end(); // Close connection after everything is done
   }
 };
 
-rebuildDB();
+runSeedAndTest();

@@ -49,12 +49,12 @@ server.use((req, res, next) => {
   next();
 });
 
-/* Router setup */
-const apiRouter = require('api.js');
-server.use('api.js', apiRouter);
+/* Router setup  this is a URL*/
+const apiRouter = require('../index.js');
+server.use('/api', apiRouter);
 
 /* db client connection */
-const { client } = require('./db');
+const { client } = require('./db/index.js');
 client.connect();
 
 /* server listening */

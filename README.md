@@ -82,7 +82,7 @@ npm init -y # for general install,
 npm init # for customizable install
 
 # Install Express and other dependencies
-nnpm install --save-dev nodemon && # nodemon as a development dependency; to allow Node.js app to automatically restart for detected directory file change instances
+npm install --save-dev nodemon && # nodemon as a development dependency; to allow Node.js app to automatically restart for detected directory file change instances
 # && a shell operator that allows run of multiple commands in sequence. The next command will only run if the previous one is successful
 npm install --save express # Node.js web framework handling API routing, middleware, HTTP requests
 npm install --save pg # PostgreSQL client for Node.js to interact with psql database
@@ -232,3 +232,6 @@ If you have any questions or suggestions, or have submitted pull requests, feel 
 ## Acknowledgements
 
 Thank you Grace Hopper Program!
+
+## Errors:
+1. seed.js is clean exit, however: 'tag' column in 'memories' table NULL, hence 'tag' and 'memory_tag' tables empty
