@@ -14,8 +14,6 @@ import {
   deleteMemory,
 } from "../db/index.js"; // Change to ES Module import
 
-
-
 // Define your routes here, for example:
 
 export default memoriesRouter; // Export

@@ -61,6 +61,17 @@ const getUserById = async (id) => {
   }
 };
 
+const getUserByUsername = async (username) => {
+  try {
+    const SQL =` SELECT * FROM users WHERE username = $1`;
+    const response = await client.query(SQL, [username]); // Pass the username as an argument
+    return response.rows[0];
+  } catch (error) {
+    console.error("Error retrieving user by username:", error);
+    throw error;
+  }
+};
+
 // Create User: Inserts a new user into the database with their information.
 const createUser = async ({ username, password, name, dimension, email }) => {
   const id = v4(); // Generate a new UUID for the user
@@ -268,6 +279,7 @@ export {
   client,
   getAllUsers,
   getUserById,
+  getUserByUsername,
   createUser,
   updateUser,
   deleteUser,
