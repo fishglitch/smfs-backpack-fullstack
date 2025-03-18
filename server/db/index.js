@@ -29,7 +29,9 @@ const client = new Client({
       : undefined,
 });
 
-// DEFINED CRUD FUNCTIONS BELOW!! //
+/*DEFINED CRUD FUNCTIONS BELOW!! 
+- user, memory, favorites, tags
+*/
 
 /* USER METHODS
 on frontend: be explicit regarding what personal data you are collecting

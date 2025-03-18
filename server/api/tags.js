@@ -1,1 +1,1 @@
-export default tags;
+export default tagsRouter;

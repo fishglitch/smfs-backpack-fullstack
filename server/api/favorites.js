@@ -1,1 +1,1 @@
-export default favorites;
+export default favoritesRouter;

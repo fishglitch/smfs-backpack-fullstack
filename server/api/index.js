@@ -19,8 +19,8 @@ const { JWT_SECRET } = process.env;
 // Import the individual route modules
 import usersRouter from './users.js';
 import memoriesRouter from './memories.js';
-import favoritesRouter from './favorites.js';
-import tagsRouter from './tags.js';
+// import favoritesRouter from './favorites.js';
+// import tagsRouter from './tags.js';
 
 // Middleware for token verification via authenticate and set req.user based on JWT
 apiRouter.use(async (req, res, next) => {
@@ -69,8 +69,8 @@ apiRouter.use((req, res, next) => {
 // Set up the routes
 apiRouter.use('/users', usersRouter);
 apiRouter.use('/memories', memoriesRouter);
-apiRouter.use('/favorites', favoritesRouter);
-apiRouter.use('/tags', tagsRouter);
+// apiRouter.use('/favorites', favoritesRouter);
+// apiRouter.use('/tags', tagsRouter);
 
 // Export the apiRouter for use in main server file
 export default apiRouter;
