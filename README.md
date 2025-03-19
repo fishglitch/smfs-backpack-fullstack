@@ -73,15 +73,7 @@ To set up the project, follow these steps:
 
 1. Clone repo
 2. Navigate to project directory
-3. Set up frontend / client with dependencies:
-
-```bash
-npm install vite@latest
-npm install # Install all dependencies listed in package.json
-npm run dev # starts Vite development server, which should detail running the server in terminal
-```
-
-4. Set up backend / server
+3. Set up backend / server
 
 ```bash
 # initializes node application
@@ -103,8 +95,7 @@ npm install cors # security feature for web applications to facilitate safe API 
 # Or, this shortcut:
 npm install --save express pg bcrypt jsonwebtoken uuid morgan dotenv cors
 ```
-
-5. Confirm start scripts in package.json
+4. Confirm start scripts in package.json
 
 ```javascript
 {
@@ -114,18 +105,35 @@ npm install --save express pg bcrypt jsonwebtoken uuid morgan dotenv cors
     }
 }
 ```
+5. Set up frontend / client with dependencies:
+
+```bash
+npm install vite@latest
+npm install # Install all dependencies listed in package.json
+npm run dev # starts Vite development server, which should detail running the server in terminal
+
+# install dependencies
+npm install react-router-dom
+```
 
 ## Usage
 
-1. After installing, run the server:
+1. After installing, run the server in a terminal:
 
 ```bash
-npm run start:dev
+npm run start:dev 
+# at http://localhost:3000 (or other specified port in your environment variables)
+# CTRL + C to quit
 
-# Access the app through browser at http://localhost:3000 (or other specified port in your environment variables)
+```
+2. To run client and access app through browser 
+```bash
+# open a second terminal
+cd client
+npm run dev 
+# at http://localhost:5173
 # CTRL + C to quit
 ```
-
 ## Git Commit Message Guidelines
 
 1. **Add/Update/Delete/Remove**:
