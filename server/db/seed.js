@@ -26,11 +26,13 @@ const dropTables = async () => {
   try {
     console.log("Starting to drop tables...");
 
-    await client.query(`
-            DROP TABLE IF EXISTS email_verifications;
+    /*
+               DROP TABLE IF EXISTS email_verifications;
             DROP TABLE IF EXISTS memory_tags;
             DROP TABLE IF EXISTS tags;
             DROP TABLE IF EXISTS favorites;
+    */
+    await client.query(`
             DROP TABLE IF EXISTS memories;
             DROP TABLE IF EXISTS users; 
             `);
@@ -87,7 +89,7 @@ const createTables = async () => {
       title VARCHAR(150),
       image_url VARCHAR(255),
       description TEXT,
-      display_name varchar(255),
+      user_id INT REFERENCES users(id) ON DELETE CASCADE,
       dimension VARCHAR(150)
       );
       `
@@ -171,47 +173,51 @@ const createInitialMemories = async (users) => {
     console.log("Starting to retrieve memories...");
 
     await createMemory({
+      userId: 1,
       title: "laptop stand",
       imageUrl:
         "https://drive.google.com/file/d/1_w2HGpeGcKu1pKKZ65d9gtlfvQUi_q2u/",
       description:
         "I remember he always preferred something packable, lightweight, and versatile",
-      display_name: users[0].display_name,
+      // display_name: users[0].display_name,
       dimension: users[0].dimension,
       // visibility: "public",
       // tags: ["#gadget", "#technology"],
     });
 
     await createMemory({
+      userId: 1,
       title: '17" Macbook Pro Mid 2012',
       imageUrl:
         "https://drive.google.com/file/d/19dH18llxKaqsMnF0xi1T9qWUGI4DbB_E/",
       description: "SMF appreciated the durability of the older Mac books",
-      display_name: users[1].display_name,
+      // display_name: users[1].display_name,
       dimension: users[1].dimension,
       // visibility: "public",
       // tags: ["#gadget", "#technology"],
     });
 
     await createMemory({
+      userId: 2,
       title: "iFixit Repair Business Toolkit",
       imageUrl:
         "https://drive.google.com/file/d/1q5yAY9tDdy8f8MjaAM0PwQpwMpOeoewA/",
       description:
         "he was a strong advocate of right to repair, including donating refurbished computers to his alma mater.",
-      display_name: users[2].display_name,
+      // display_name: users[2].display_name,
       dimension: users[2].dimension,
       // visibility: "public",
       // tags: ["#gadget", "#technology", "right-to-repair"],
     });
 
     await createMemory({
+      userId: 2,
       title: "eagle scout",
       imageUrl:
         "https://drive.google.com/file/d/1q5yAY9tDdy8f8MjaAM0PwQpwMpOeoewA/",
       description:
         "his eagle scout training showed in his passion for camping, including setting up guylines.",
-      display_name: users[2].display_name,
+      // display_name: users[2].display_name,
       dimension: users[2].dimension,
       // visibility: "public",
       // tags: ["#camping", "#technology", "#childhood"],

@@ -1,7 +1,7 @@
 import express from "express"; // import "dotenv/config";
 
 import { config } from 'dotenv';
-config({ path: '../.env' });
+config({ path: '../../.env' });
 console.log('JWT_SECRET: located in memories.js', process.env.JWT_SECRET);
 
 import jwt from "jsonwebtoken"; // Change to ES Module import
@@ -67,6 +67,7 @@ memoriesRouter.get("/memories/users/:usersId/memories", async (req, res, next)=>
 
 memoriesRouter.get("/users/:userId/memories", async (req, res, next) => {
   const {userId} = req.params;
+  console.log("userid", userId)
   try {
     const memories = await getMemoriesByUser(userId);
 

@@ -161,11 +161,9 @@ const getMemoriesByUser = async (userId) => {
   try {
     const SQL = `
     SELECT * FROM memories 
-    WHERE display_name = (
-      SELECT display_name 
-      FROM users 
-      WHERE id = $1 
-    );`;
+    WHERE user_id = $1;`;
+    // users ID is the foreign key
+    // get users Id from user table and match it to 
     const response = await client.query(SQL, [userId]);
 
     return response.rows; // Return the list of memories associated with the user
@@ -179,17 +177,17 @@ const getMemoriesByUser = async (userId) => {
 const createMemory = async ({
 
   // removed visibility,
-  title, imageUrl, description, display_name, dimension
+  title, imageUrl, description, dimension, userId
 }) => {
   try {
     const id = v4(); // Generate a new UUID for the user
     const SQL = `
-            INSERT INTO memories (id, title, image_url, description, display_name, dimension) 
+            INSERT INTO memories (id, title, image_url, description, dimension, user_id) 
             VALUES ($1, $2, $3, $4, $5, $6) 
             RETURNING *;
         `;
     const response = await client.query(SQL, [
-      id, title, imageUrl, description, display_name, dimension
+      id, title, imageUrl, description, dimension, userId
     ]);
     return response.rows[0];
   } catch (error) {

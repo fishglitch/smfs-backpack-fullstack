@@ -6,7 +6,7 @@ config(); // Load environment variables
 // import "dotenv/config";
 
 import { config } from 'dotenv';
-config({ path: '../.env' });
+config({ path: '../../.env' });
 
 import jwt from "jsonwebtoken"; // Change to ES Module import
 import bcrypt from 'bcrypt';
