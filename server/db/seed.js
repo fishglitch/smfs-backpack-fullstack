@@ -46,7 +46,7 @@ const createTables = async () => {
   try {
     console.log("Starting to build tables...");
 
-    // Drop the visibility_enum type if it already exists
+    /* Drop the visibility_enum type if it already exists
     // ENUM--whether a post can be viewed publicly or privately
     await client.query(`
           DO $$ BEGIN
@@ -55,6 +55,7 @@ const createTables = async () => {
             END IF;
           END $$;
         `);
+        */
 
     /* CREATE TABLE MEMORIES
     id 
@@ -68,7 +69,7 @@ const createTables = async () => {
 
     // CREATE TYPE visibility_enum AS ENUM ('public', 'private');
     // visibility visibility_enum DEFAULT 'public',
-    //       
+    //
     // tags varchar(255)[]
     await client.query(
       `
@@ -76,7 +77,7 @@ const createTables = async () => {
       id SERIAL PRIMARY KEY,
       username VARCHAR (150) UNIQUE NOT NULL,
       password VARCHAR (150) NOT NULL,
-      name varchar(255) NOT NULL,
+      display_name varchar(255) NOT NULL,
       dimension VARCHAR(150) NOT NULL,
       email VARCHAR(255) UNIQUE
       );
@@ -86,7 +87,7 @@ const createTables = async () => {
       title VARCHAR(150),
       image_url VARCHAR(255),
       description TEXT,
-      author_nickname VARCHAR(150),
+      display_name varchar(255),
       dimension VARCHAR(150)
       );
       `
@@ -133,9 +134,9 @@ const createInitialUsers = async () => {
 
     const users = await Promise.all([
       await createUser({
-        username: "grannyfrumps",
+        username: "frumps",
         password: "soup143",
-        name: "granny frumps",
+        display_name: "grannyfrumps",
         dimension: "UTC-7",
         email: "grannyfrumps@frumps.com",
       }),
@@ -143,7 +144,7 @@ const createInitialUsers = async () => {
       await createUser({
         username: "grumpycat",
         password: "bagelseasoning83",
-        name: "grumpy cat",
+        display_name: "grumpy",
         dimension: "∞",
         email: "grumpy@cat.com",
       }),
@@ -151,7 +152,7 @@ const createInitialUsers = async () => {
       await createUser({
         username: "euclid",
         password: "m1llert1me",
-        name: "euclid",
+        display_name: "euclid",
         dimension: "∞",
         email: "euclid@me.com",
       }),
@@ -175,9 +176,9 @@ const createInitialMemories = async (users) => {
         "https://drive.google.com/file/d/1_w2HGpeGcKu1pKKZ65d9gtlfvQUi_q2u/",
       description:
         "I remember he always preferred something packable, lightweight, and versatile",
+      display_name: users[0].display_name,
       dimension: users[0].dimension,
       // visibility: "public",
-      author_nickname: "mortie",
       // tags: ["#gadget", "#technology"],
     });
 
@@ -186,9 +187,9 @@ const createInitialMemories = async (users) => {
       imageUrl:
         "https://drive.google.com/file/d/19dH18llxKaqsMnF0xi1T9qWUGI4DbB_E/",
       description: "SMF appreciated the durability of the older Mac books",
+      display_name: users[1].display_name,
       dimension: users[1].dimension,
       // visibility: "public",
-      author_nickname: "dulce",
       // tags: ["#gadget", "#technology"],
     });
 
@@ -198,9 +199,9 @@ const createInitialMemories = async (users) => {
         "https://drive.google.com/file/d/1q5yAY9tDdy8f8MjaAM0PwQpwMpOeoewA/",
       description:
         "he was a strong advocate of right to repair, including donating refurbished computers to his alma mater.",
+      display_name: users[2].display_name,
       dimension: users[2].dimension,
       // visibility: "public",
-      author_nickname: "link",
       // tags: ["#gadget", "#technology", "right-to-repair"],
     });
 
@@ -210,9 +211,9 @@ const createInitialMemories = async (users) => {
         "https://drive.google.com/file/d/1q5yAY9tDdy8f8MjaAM0PwQpwMpOeoewA/",
       description:
         "his eagle scout training showed in his passion for camping, including setting up guylines.",
+      display_name: users[2].display_name,
       dimension: users[2].dimension,
       // visibility: "public",
-      author_nickname: "scout",
       // tags: ["#camping", "#technology", "#childhood"],
     });
 

@@ -239,6 +239,8 @@ Ask at OSH
 1. POST memories not working
 2. DELETE user and DELETE memory missing
 3. frontend TBD
+4. GET getMemoriesByUser not working: 
+- update the createInitialMemories function to correctly associate memories with users by their user IDs
 
  # API testing
  - GET routes except getMemoriesByUser are functional-- might be an issue with JOINING in db SQL

@@ -73,19 +73,19 @@ const getUserByUsername = async (username) => {
 };
 
 // Create User: Inserts a new user into the database with their information.
-const createUser = async ({ username, password, name, dimension, email }) => {
+const createUser = async ({ username, password, display_name, dimension, email }) => {
   const id = v4(); // Generate a new UUID for the user
   const hashedPassword = await hash(password, 10); // Hash the password
 
   try {
     const res = await client.query(
       `
-      INSERT INTO users (username, password, name, dimension, email) 
+      INSERT INTO users (username, password, display_name, dimension, email) 
       VALUES ($1, $2, $3, $4, $5) 
       ON CONFLICT (username) DO NOTHING
       RETURNING *
       `,
-      [username, await hash(password, 10), name, dimension, email]
+      [username, await hash(password, 10), display_name, dimension, email]
     );
 
     return res.rows[0]; // Return the newly created user
@@ -162,8 +162,8 @@ const getMemoriesByUser = async (userId) => {
   try {
     const SQL = `
     SELECT * FROM memories 
-    WHERE author_nickname = (
-      SELECT username 
+    WHERE display_name = (
+      SELECT display_name 
       FROM users 
       WHERE id = $1 
     );`;
@@ -180,17 +180,17 @@ const getMemoriesByUser = async (userId) => {
 const createMemory = async ({
 
   // removed visibility,
-  title, imageUrl, description, dimension,  author_nickname
+  title, imageUrl, description, display_name, dimension
 }) => {
   try {
     const id = v4(); // Generate a new UUID for the user
     const SQL = `
-            INSERT INTO memories (id, title, image_url, description, dimension,  author_nickname) 
+            INSERT INTO memories (id, title, image_url, description, display_name, dimension) 
             VALUES ($1, $2, $3, $4, $5, $6) 
             RETURNING *;
         `;
     const response = await client.query(SQL, [
-      id, title, imageUrl, description, dimension,  author_nickname
+      id, title, imageUrl, description, display_name, dimension
     ]);
     return response.rows[0];
   } catch (error) {
