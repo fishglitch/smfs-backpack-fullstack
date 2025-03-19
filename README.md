@@ -278,15 +278,14 @@ Thank you Grace Hopper Program!
 1. GET getMemoriesByUser 404 Error:
    <pre>Cannot GET /api/users/1/memories</pre>
 
-   might be related to how JWT_SECRET is undefined?
 
-2. POST memories 500 server error:
+2. # RESOLVED POST memories 500 server error:
    to run this API test, first obtain a token from a loggedIn User at POST users/login.
    Getting the error even after passing Bearer Token in Auth:
    {
    "message": "secret or public key must be provided"
    }
-   might be related to how JWT_SECRET is undefined?
+   it was related to how JWT_SECRET is undefined, we changed the .env file location to root and path to api routes as "../../.env"
 
 3. frontend TBD
 
