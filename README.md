@@ -266,8 +266,7 @@ Thank you Grace Hopper Program!
 
 ## Debugging:
 
-Ask at OSH
-
+# Ask at OSH
 1. GET getMemoriesByUser 404 Error:
    <pre>Cannot GET /api/users/1/memories</pre>
 
