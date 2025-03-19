@@ -14,7 +14,6 @@ import {
   createUser,
   // updateUser,
   deleteUser,
-
   getAllMemories,
   getMemoryById,
   getMemoriesByUser,
@@ -66,10 +65,13 @@ const createTables = async () => {
     visibility ENUM('public', 'private') DEFAULT 'public' 
     author_nickname     -- unlinked to the registered user submitting this memory; proper foreign key referenc
     tags          -- user generated tags?*/
+
+    // CREATE TYPE visibility_enum AS ENUM ('public', 'private');
+    // visibility visibility_enum DEFAULT 'public',
+    //       
+    // tags varchar(255)[]
     await client.query(
       `
-      CREATE TYPE visibility_enum AS ENUM ('public', 'private');
-
       CREATE TABLE users(
       id SERIAL PRIMARY KEY,
       username VARCHAR (150) UNIQUE NOT NULL,
@@ -84,13 +86,12 @@ const createTables = async () => {
       title VARCHAR(150),
       image_url VARCHAR(255),
       description TEXT,
-      dimension VARCHAR(150),
-      visibility visibility_enum DEFAULT 'public',
       author_nickname VARCHAR(150),
-      tags varchar(255)[]
+      dimension VARCHAR(150)
       );
-
-      CREATE TABLE favorites(
+      `
+      /*
+          CREATE TABLE favorites(
       id UUID PRIMARY KEY,
       user_id INTEGER REFERENCES users(id),
       memory_id UUID REFERENCES memories(id),
@@ -117,7 +118,7 @@ const createTables = async () => {
         created_at TIMESTAMP DEFAULT NOW(),
         expires_at TIMESTAMP  -- Optional: token expiration
 );
-      `
+    */
     );
     console.log("Finished building tables!");
   } catch (error) {
@@ -175,7 +176,7 @@ const createInitialMemories = async (users) => {
       description:
         "I remember he always preferred something packable, lightweight, and versatile",
       dimension: users[0].dimension,
-      visibility: "public",
+      // visibility: "public",
       author_nickname: "mortie",
       // tags: ["#gadget", "#technology"],
     });
@@ -186,7 +187,7 @@ const createInitialMemories = async (users) => {
         "https://drive.google.com/file/d/19dH18llxKaqsMnF0xi1T9qWUGI4DbB_E/",
       description: "SMF appreciated the durability of the older Mac books",
       dimension: users[1].dimension,
-      visibility: "public",
+      // visibility: "public",
       author_nickname: "dulce",
       // tags: ["#gadget", "#technology"],
     });
@@ -198,7 +199,7 @@ const createInitialMemories = async (users) => {
       description:
         "he was a strong advocate of right to repair, including donating refurbished computers to his alma mater.",
       dimension: users[2].dimension,
-      visibility: "public",
+      // visibility: "public",
       author_nickname: "link",
       // tags: ["#gadget", "#technology", "right-to-repair"],
     });
@@ -210,7 +211,7 @@ const createInitialMemories = async (users) => {
       description:
         "his eagle scout training showed in his passion for camping, including setting up guylines.",
       dimension: users[2].dimension,
-      visibility: "public",
+      // visibility: "public",
       author_nickname: "scout",
       // tags: ["#camping", "#technology", "#childhood"],
     });
@@ -224,7 +225,6 @@ const createInitialMemories = async (users) => {
 
 const rebuildDB = async () => {
   try {
-
     await dropTables();
     await createTables();
 
@@ -323,13 +323,12 @@ async function testDB() {
     const postsWithHappy = await getPostsByTagName("#happy");
     console.log("Result:", postsWithHappy);
     */
- 
+
     console.log("Finished database tests!");
   } catch (error) {
     console.log("Error during testDB");
     throw error;
   }
-
 }
 
 const runSeedAndTest = async () => {
@@ -339,7 +338,6 @@ const runSeedAndTest = async () => {
 
     await rebuildDB(); // Call to drop, create tables and seed initial data
     await testDB(); // Call to run tests against the seeded database
-
   } catch (error) {
     console.error("Error during seed and test:", error);
   } finally {

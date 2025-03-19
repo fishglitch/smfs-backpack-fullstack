@@ -36,6 +36,12 @@ server.use((req, res, next) => {
 // Setup API routes
 server.use("/api", apiRouter); // Mount the API router
 
+// Error handling middleware (must come after route definitions)
+server.use((err, req, res, next) => {
+  console.error(err); // Log the error
+  res.status(err.status || 500).json({ message: err.message || 'Internal Server Error' });
+});
+
 // Connect to the database
 const connectToDatabase = async () => {
   try {

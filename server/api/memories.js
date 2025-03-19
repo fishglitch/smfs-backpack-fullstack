@@ -64,8 +64,24 @@ memoriesRouter.get("/memories/users/:usersId/memories", async (req, res, next)=>
 });
 */
 
+memoriesRouter.get("/users/:userId/memories", async (req, res, next) => {
+  const {userId} = req.params;
+  try {
+    const memories = await getMemoriesByUser(userId);
+
+    if (memories.length === 0){
+      return res.status(404).json({message: 'No memories found for this user'})
+    }
+    res.send({memories});
+  } catch({ex}){
+    next({ex});
+  }
+});
+
 // POST MEMORY (CREATE MEMORY) http://localhost:3000/api/memories
-memoriesRouter.post("/", requireUser, async (req, res, next) => {
+memoriesRouter.post("/", async (req, res, next) => { // requireUser,
+  console.log("req.body", req.body);
+  
   const {
     title,
     imageUrl,
@@ -89,14 +105,16 @@ memoriesRouter.post("/", requireUser, async (req, res, next) => {
     }
 
     // Populate memoryData object with relevant information
-    memoryData.authorId = req.user.id; // Assuming req.user has been populated by requireUser
+    // memoryData.authorId = req.user.id; // Assuming req.user has been populated by requireUser
     memoryData.title = title;
     memoryData.imageUrl = imageUrl;
     memoryData.description = description;
     memoryData.dimension = dimension;
     memoryData.visibility = visibility;
-    memoryData.author_nickname = author_nickname || req.user.username; // Optional
+    memoryData.author_nickname = author_nickname
     // memoryData.tags = tags;
+
+    console.log("memory data", memoryData);
 
     // Create the memory
     const memory = await createMemory(memoryData);

@@ -18,6 +18,7 @@ Schrodinger's Backpack is a full-stack application designed to allow users to su
 - [Accessibility Considerations](#accessibility-considerations)
 - [Contributing and Contact Info](#contributing-and-contact-info)
 - [Acknowledgements](#acknowledgements)
+- [Debugging](#debugging)
 
 
 ## Technologies
@@ -31,7 +32,7 @@ Schrodinger's Backpack is a full-stack application designed to allow users to su
 - Intuitive interface for memory browsing
 
 ## Purpose
-This app serves as a digital memory box to collectively celebrate the life of a loved one. Inspired by the concept of Schrodinger's Cat, the app prompts users to consider, "What would [this person] carry in their backpack?". In physicist Erwin Schrodinger's famous 1935 thought experiment, a hypothetical cat in a sealed box exists in a mysterious state of being both alive and dead living and death until the box is opened and examined. Just like the cat, or, tiny particles in quantum physics that can be in two states at once until observed, our memories of this late ancestor can feel uncertain until we bring them to light. By sharing and reflecting on these memories through the app, users transform this uncertainty into meaningful, lasting memories that celebrate this transitioned loved one's well-lived life.
+**As of March 2025: a Minimum Viable Product** This app serves as a digital memory box to collectively celebrate the life of a loved one. Inspired by the concept of Schrodinger's Cat, the app prompts users to consider, "What would [this person] carry in their backpack?". In physicist Erwin Schrodinger's famous 1935 thought experiment, a hypothetical cat in a sealed box exists in a mysterious state of being both alive and dead living and death until the box is opened and examined. Just like the cat, or, tiny particles in quantum physics that can be in two states at once until observed, our memories of this late ancestor can feel uncertain until we bring them to light. By sharing and reflecting on these memories through the app, users transform this uncertainty into meaningful, lasting memories that celebrate this transitioned loved one's well-lived life.
 
 ## Project Directory Structure
 
@@ -177,15 +178,13 @@ git checkout main
 2. console.log branch has console.logs and other notes.
 ```
 ## Roadmap of Features
-1. Minimum Viable Product
-2. Tier 2
-3. Tier 3
+1. Minimum Viable Product (March 2025)
+2. Tier 2 (TBD)
+3. Tier 3 (TBD) including accessbility considerations
 
-## Accessibility Considerations
+## Accessibility Considerations (Tier 3)
 
 Key practices to follow for designing for accessibility to ensure as many users can effectively interact with the app:
-
-## Accessibility Considerations
 
 To ensure our application is accessible to all users, implement the following directives:
 
@@ -234,5 +233,16 @@ If you have any questions or suggestions, or have submitted pull requests, feel 
 
 Thank you Grace Hopper Program!
 
-## Errors:
-1. seed.js is clean exit, however: 'tag' column in 'memories' table NULL, hence 'tag' and 'memory_tag' tables empty
+## Debugging:
+
+Ask at OSH
+1. POST memories not working
+2. DELETE user and DELETE memory missing
+3. frontend TBD
+
+ # API testing
+ - GET routes except getMemoriesByUser are functional-- might be an issue with JOINING in db SQL
+ - POST users/login provides token for any other routes that requireUser Auth i.e., POST createMemory
+
+# Notes
+  - Features for TAGS and FAVORITES are disabled for further development and testing

@@ -178,17 +178,19 @@ const getMemoriesByUser = async (userId) => {
 
 // it is redundant to pass 'id' as a prop bc we generate it w/in func using uuid
 const createMemory = async ({
-  title, imageUrl, description, dimension, visibility, author_nickname
+
+  // removed visibility,
+  title, imageUrl, description, dimension,  author_nickname
 }) => {
   try {
     const id = v4(); // Generate a new UUID for the user
     const SQL = `
-            INSERT INTO memories (title, image_url, description, dimension, visibility, author_nickname) 
+            INSERT INTO memories (id, title, image_url, description, dimension,  author_nickname) 
             VALUES ($1, $2, $3, $4, $5, $6) 
             RETURNING *;
         `;
     const response = await client.query(SQL, [
-      title, imageUrl, description, dimension, visibility, author_nickname
+      id, title, imageUrl, description, dimension,  author_nickname
     ]);
     return response.rows[0];
   } catch (error) {

@@ -25,7 +25,7 @@ const requireUser = (req, res, next) => {
   console.log("Extracted token:", token); // Log extracted token
 
   // Verify the token
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+  jwt.verify(token, process.env.JWT_SECRET || "secret", (err, user) => {
     if (err) {
       console.error("Token verification error:", err);
       return res.status(403).json({ message: "Invalid token" });
