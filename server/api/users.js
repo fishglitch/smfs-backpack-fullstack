@@ -139,15 +139,15 @@ usersRouter.post("/login", async (req, res, next) => {
 
 // POST USER (CREATE USER) http://localhost:3000/api/users/register
 usersRouter.post("/register", async (req, res, next) => {
-  const { username, password, name, dimension, email } = req.body;
+  const { username, password, display_name, dimension, email } = req.body;
 
   // Validate user input
-  if (!username || !password || !name || !dimension || !email) {
+  if (!username || !password || !display_name || !dimension || !email) {
     return res.status(400).json({
       // changed send to json to see if server can return JSON response, not HTML content type
-      name: "MissingFieldsError",
+      name: "Missing Fields Error",
       message:
-        "Please provide all required fields: username, password, name, dimension, email",
+        "Please provide all required fields: username, password, display_name, dimension, email",
     });
   }
 
@@ -157,16 +157,17 @@ usersRouter.post("/register", async (req, res, next) => {
 
     if (existingUser) {
       return res.status(409).json({
-        name: "UserExistsError",
+        name: "User Exists Error",
         message: "A user by that username already exists",
       });
     }
 
     // create new user
-    const user = await createUser({
+    const user = await createUser(
+      {
       username,
       password, // check if hased the pw in createUser
-      name,
+      display_name,
       dimension,
       email,
     });

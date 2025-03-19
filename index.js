@@ -1,11 +1,16 @@
-/* This file is the "entry point" for the backend for this Express.js application.
-*/
+/* Backend "entry point" Express.js app with middleware and listening functionality */
 
 // Load environment variables from .env file
-import { config } from "dotenv"; // Ensure environment variables are loaded
-config(); // Load environment variables
+// currently having JWT_SECRET error as undefined!
+import { config } from 'dotenv';
+config({ path: '../.env' });
 
-console.log("JWT_SECRET:", process.env.JWT_SECRET);
+// Verify that JWT_SECRET is set
+const JWT_SECRET = process.env.JWT_SECRET || "secret";
+if (!process.env.JWT_SECRET) {
+  console.warn('JWT_SECRET is not defined, using fallback value.');
+}
+console.log('JWT_SECRET: located in root index.js', process.env.JWT_SECRET);
 
 // Import dependencies
 import express from "express"; 

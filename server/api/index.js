@@ -14,6 +14,7 @@ import { getUserById } from '../db/index.js';
 
 const apiRouter = express.Router();
 const { JWT_SECRET } = process.env;
+// const JWT_SECRET = process.env.JWT_SECRET || "shhh";
 
 // Routes for api requests with paths for each file
 // Import the individual route modules

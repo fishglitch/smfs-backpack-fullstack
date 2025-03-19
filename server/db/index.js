@@ -18,7 +18,6 @@ import { v4 } from "uuid";
 import jwt from "jsonwebtoken"; // for creating or managing tokens related to user actions.
 const JWT_SECRET = process.env.JWT_SECRET || "shhh";
 
-
 const client = new Client({
   connectionString:
     process.env.DATABASE_URL ||

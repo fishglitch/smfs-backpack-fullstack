@@ -1,7 +1,8 @@
 import express from "express"; // import "dotenv/config";
 
-import { config } from "dotenv"; // Ensure environment variables are loaded
-config(); // Load environment variables
+import { config } from 'dotenv';
+config({ path: '../.env' });
+console.log('JWT_SECRET: located in memories.js', process.env.JWT_SECRET);
 
 import jwt from "jsonwebtoken"; // Change to ES Module import
 
@@ -86,9 +87,9 @@ memoriesRouter.post("/", async (req, res, next) => { // requireUser,
     title,
     imageUrl,
     description,
+    display_name,
     dimension,
-    visibility,
-    author_nickname,
+    // visibility,
     // tags,
   } = req.body;
 
@@ -109,9 +110,9 @@ memoriesRouter.post("/", async (req, res, next) => { // requireUser,
     memoryData.title = title;
     memoryData.imageUrl = imageUrl;
     memoryData.description = description;
+    memoryData.display_name = display_name;
     memoryData.dimension = dimension;
-    memoryData.visibility = visibility;
-    memoryData.author_nickname = author_nickname
+    // memoryData.visibility = visibility;
     // memoryData.tags = tags;
 
     console.log("memory data", memoryData);
