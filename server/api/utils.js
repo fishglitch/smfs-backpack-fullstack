@@ -2,20 +2,41 @@
 utility module in an Express.js application
 provides a middleware function for user authentication
 */
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
+import jwt from "jsonwebtoken"; // Import JWT library
 
-dotenv.config();
+import { config } from "dotenv"; // Load environment variables
+// Ensure environment variables are loaded
+config();
 
-async function requireUser(req, res, next) {
-  try {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader.split(' ')[1];
-    const verify = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = verify;
-    next();
+const requireUser = (req, res, next) => {
+  // Get the authorization header
+  const authHeader = req.headers["authorization"];
+
+  // Log incoming auth header
+  console.log("Authorization header:", authHeader);
+
+  // Check if the authorization header is present
+  if (!authHeader) {
+    return res.status(401).json({ message: "Unauthorized access" });
   }
-  catch(ex){
-    next(ex);
-}}
-export default requireUser; // Use named exports
+
+  // Extract the token from the authorization header
+  const token = authHeader.split(" ")[1];
+  console.log("Extracted token:", token); // Log extracted token
+
+  // Verify the token
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) {
+      console.error("Token verification error:", err);
+      return res.status(403).json({ message: "Invalid token" });
+    }
+
+    // Attach the verified user to the request object
+    req.user = user;
+
+    // Proceed to the next middleware or route handler
+    next();
+  });
+};
+
+export default requireUser; // Export the middleware function

@@ -5,6 +5,8 @@
 import { config } from "dotenv"; // Ensure environment variables are loaded
 config(); // Load environment variables
 
+console.log("JWT_SECRET:", process.env.JWT_SECRET);
+
 // Import dependencies
 import express from "express"; 
 import morgan from "morgan"; 

@@ -95,7 +95,7 @@ const createUser = async ({ username, password, name, dimension, email }) => {
   }
 };
 
-// update User
+/* update User
 const updateUser = async (id, fields) => {
   const setString = Object.keys(fields)
     .map((key, index) => {
@@ -117,6 +117,7 @@ const updateUser = async (id, fields) => {
 
   return user;
 };
+*/
 
 // Delete User: Removes a user from the database.
 const deleteUser = async (id) => {
@@ -159,29 +160,35 @@ const getMemoryById = async (memoryId) => {
 // get memories by User
 const getMemoriesByUser = async (userId) => {
   try {
-    const SQL = `SELECT * FROM memories WHERE author_nickname = (SELECT username FROM users WHERE id = $1);`;
+    const SQL = `
+    SELECT * FROM memories 
+    WHERE author_nickname = (
+      SELECT username 
+      FROM users 
+      WHERE id = $1 
+    );`;
     const response = await client.query(SQL, [userId]);
 
     return response.rows; // Return the list of memories associated with the user
   } catch (error) {
-    console.error();
+    console.error("Error retrieving memories by user:", error);
     throw error;
   }
 };
 
 // it is redundant to pass 'id' as a prop bc we generate it w/in func using uuid
 const createMemory = async ({
-  title, imageUrl, description, dimension, visibility, author_nickname, tags
+  title, imageUrl, description, dimension, visibility, author_nickname
 }) => {
   try {
     const id = v4(); // Generate a new UUID for the user
     const SQL = `
-            INSERT INTO memories (id, title, image_url, description, dimension, visibility, author_nickname, tags) 
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8) 
-            RETURNING *
+            INSERT INTO memories (title, image_url, description, dimension, visibility, author_nickname) 
+            VALUES ($1, $2, $3, $4, $5, $6) 
+            RETURNING *;
         `;
     const response = await client.query(SQL, [
-      id, title, imageUrl, description, dimension, visibility, author_nickname, tags
+      title, imageUrl, description, dimension, visibility, author_nickname
     ]);
     return response.rows[0];
   } catch (error) {
@@ -194,7 +201,7 @@ const createMemory = async ({
 modifies fields based on CREATE TABLE memories
 - memoryId, a unique idenitfier/ db row where update will take place
 - updates, an obj containing new values updated from CREATE TABLE memories
-*/
+
 
 const updateMemory = async (memoryId, updates) => {
   try {
@@ -254,6 +261,7 @@ const updateMemory = async (memoryId, updates) => {
     throw error("Could not update memory");
   }
 };
+*/
 
 // Delete Memory: Removes a memory from the database.
 const deleteMemory = async (id) => {
@@ -281,13 +289,13 @@ export {
   getUserById,
   getUserByUsername,
   createUser,
-  updateUser,
+  // updateUser,
   deleteUser,
 
   getAllMemories,
   getMemoryById,
   getMemoriesByUser,
   createMemory,
-  updateMemory,
+  // updateMemory,
   deleteMemory
 };

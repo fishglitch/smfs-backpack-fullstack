@@ -1,8 +1,15 @@
-import express from "express";
-// import "dotenv/config"; 
-import { config } from "dotenv"; // Ensure environment variables are loaded
+import express from "express"; // import "dotenv/config";
+
+/* import { config } from "dotenv"; // Ensure environment variables are loaded
 config(); // Load environment variables
+*/
+// import "dotenv/config";
+
+import { config } from 'dotenv';
+config({ path: '../.env' });
+
 import jwt from "jsonwebtoken"; // Change to ES Module import
+import bcrypt from 'bcrypt';
 
 const usersRouter = express.Router();
 usersRouter.use(express.json());
@@ -12,13 +19,11 @@ import {
   getUserById,
   getUserByUsername,
   createUser,
-  updateUser,
+  // updateUser,
   deleteUser,
 } from "../db/index.js"; // Change to ES Module import
 
-// Define your routes here, for example:
-
-// GET http://localhost:3000/api/users/
+// GET ALL USERS http://localhost:3000/api/users/
 usersRouter.get("/", async (req, res, next) => {
   try {
     const users = await getAllUsers();
@@ -31,7 +36,7 @@ usersRouter.get("/", async (req, res, next) => {
   }
 });
 
-// GET http://localhost:3000/api/users/:userId
+// GET USER BY ID http://localhost:3000/api/users/:userId
 usersRouter.get("/:userId", async (req, res, next) => {
   const { userId } = req.params; //access userId from req.params
 
@@ -46,13 +51,100 @@ usersRouter.get("/:userId", async (req, res, next) => {
   }
 });
 
-// POST http://localhost:3000/api/users/register
+// POST http://localhost:3000/api/users/login tested using {"username": "albert","password": "bertie99"}
+usersRouter.post("/login", async (req, res, next) => {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+      return res.status(400).json({
+          name: "MissingCredentialsError",
+          message: "Please supply both a username and password",
+      });
+  }
+
+  try {
+      const user = await getUserByUsername(username);
+
+      if (user && (await bcrypt.compare(password, user.password))) {
+          // Check if JWT_SECRET is defined
+          // if (!process.env.JWT_SECRET) {
+          //     return res.status(500).json({ message: 'Server configuration error: Missing JWT_SECRET.' });
+          // }
+          
+          const token = jwt.sign(
+              { id: user.id, username },
+              process.env.JWT_SECRET || "secret",
+              { expiresIn: '1w' }
+          );
+
+          res.send({
+              message: "You're logged in!",
+              token,
+          });
+      } else {
+          return res.status(401).json({
+              name: "IncorrectCredentialsError",
+              message: "Username or password is incorrect",
+          });
+      }
+  } catch (error) {
+      console.log(error);
+      next(error);
+  }
+});
+
+/*
+usersRouter.post("/login", async (req, res, next) => {
+  const { username, password } = req.body;
+
+  // request must have both
+  if (!username || !password) {
+    return res.status(400).json({
+      name: "MissingCredentialsError",
+      message: "Please supply both a username and password",
+    });
+  }
+
+  try {
+    const user = await getUserByUsername(username);
+
+    if (user && (await bcrypt.compare(password, user.password)) == true) {
+      const token = jwt.sign(
+        {
+          id: user.id,
+          username,
+        },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "1w",
+        }
+      );
+
+      res.send({
+        message: "you're logged in!",
+        token,
+      });
+    } else {
+      return res.status(401).json({
+        name: "IncorrectCredentialsError",
+        message: "Username or password is incorrect",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
+*/
+
+// POST USER (CREATE USER) http://localhost:3000/api/users/register
 usersRouter.post("/register", async (req, res, next) => {
   const { username, password, name, dimension, email } = req.body;
 
   // Validate user input
   if (!username || !password || !name || !dimension || !email) {
-    return res.status(400).json({ // changed send to json to see if server can return JSON response, not HTML content type
+    return res.status(400).json({
+      // changed send to json to see if server can return JSON response, not HTML content type
       name: "MissingFieldsError",
       message:
         "Please provide all required fields: username, password, name, dimension, email",
@@ -76,7 +168,7 @@ usersRouter.post("/register", async (req, res, next) => {
       password, // check if hased the pw in createUser
       name,
       dimension,
-      email
+      email,
     });
 
     // generate token
@@ -85,7 +177,7 @@ usersRouter.post("/register", async (req, res, next) => {
         id: user.id,
         username,
         dimension,
-        email
+        email,
       },
       process.env.JWT_SECRET || "shhh",
       {
@@ -95,13 +187,14 @@ usersRouter.post("/register", async (req, res, next) => {
 
     res.status(201).json({
       message: "Thank you for signing up",
-      token
+      token,
     });
   } catch (error) {
     console.error(error); // logging error for debugging
-    res.status(500).json({ // Ensure any error returns JSON
-        name: error.name || 'Internal Error',
-        message: error.message || 'An unexpected error occurred' 
+    res.status(500).json({
+      // Ensure any error returns JSON
+      name: error.name || "Internal Error",
+      message: error.message || "An unexpected error occurred",
     }); // improve error handling
   }
 });
