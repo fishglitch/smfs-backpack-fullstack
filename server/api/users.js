@@ -185,4 +185,34 @@ usersRouter.post("/register", async (req, res, next) => {
   }
 });
 
+/*Route to delete a user by ID using DELETE HTTP method
+To include a return body for the deleteUser function, you can modify it so that it checks whether any rows were actually affected by the deletion operation. In PostgreSQL (which your SQL syntax suggests you're using), the DELETE command will not return information about the deleted user directly, but it will return a count of how many rows were deleted.
+
+
+*/
+usersRouter.delete("/:userId", requireUser, async (req, res, next) => {
+  const { userId } = req.params;
+
+  try {
+    // Optional: Check that the authenticated user is allowed to delete the respective user
+    // if (req.user.id !== userId && !req.user.isAdmin) {
+    //   return res.status(403).send({ error: 'You do not have permission to delete this user.' });
+    // }
+
+    const deletionCount = await deleteUser(userId);
+    
+    if (deletionCount === 0) {
+      return res.status(404).send({ error: 'User not found' });
+    }
+
+    // User deleted successfully
+    res.status(204).send(); // No Content - Successfully deleted
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    // You might want to handle specific error messages here,
+    // but generally, the error should be logged and a generic message sent back.
+    res.status(500).send({ error: 'Failed to delete user' });
+  }
+});
+
 export default usersRouter; // Export the usersRouter

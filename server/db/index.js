@@ -119,15 +119,18 @@ const updateUser = async (id, fields) => {
 };
 */
 
-// Delete User: Removes a user from the database.
+// Delete User: Removes a user from the database and returns the number of deleted rows.
 const deleteUser = async (id) => {
-  await client.query(
+  const result = await client.query(
     `
     DELETE FROM users
     WHERE id = $1;
   `,
     [id]
   );
+
+  // Return the number of deleted rows.
+  return result.rowCount; // This will be 1 if the user was deleted, 0 if not found.
 };
 
 /*  MEMORY METHODS */
