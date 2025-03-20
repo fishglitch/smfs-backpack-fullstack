@@ -123,16 +123,17 @@ usersRouter.get("/auth/me", requireUser, async (req, res, next) => {
 
 
 // POST USER (CREATE USER) http://localhost:3000/api/users/register
+// removed display_name,email
 usersRouter.post("/register", async (req, res, next) => {
-  const { username, password, display_name, dimension, email } = req.body;
+  const { username, password,  dimension,  } = req.body;
 
   // Validate user input
-  if (!username || !password || !display_name || !dimension || !email) {
+  if (!username || !password || !dimension) {
     return res.status(400).json({
       // changed send to json to see if server can return JSON response, not HTML content type
       name: "Missing Fields Error",
       message:
-        "Please provide all required fields: username, password, display_name, dimension, email",
+        "Please provide all required fields: username, password, dimension",
     });
   }
 
@@ -148,13 +149,13 @@ usersRouter.post("/register", async (req, res, next) => {
     }
 
     // create new user
+    //removed display_name, email
     const user = await createUser(
       {
       username,
       password, // check if hased the pw in createUser
-      display_name,
-      dimension,
-      email,
+      dimension
+
     });
 
     // generate token
@@ -162,8 +163,7 @@ usersRouter.post("/register", async (req, res, next) => {
       {
         id: user.id,
         username,
-        dimension,
-        email,
+        dimension
       },
       process.env.JWT_SECRET || "shhh",
       {

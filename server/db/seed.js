@@ -22,27 +22,27 @@ import {
   deleteMemory,
 } from "../db/index.js";
 
-// const dropTables = async () => {
-//   try {
-//     console.log("Starting to drop tables...");
+const dropTables = async () => {
+  try {
+    console.log("Starting to drop tables...");
 
-//     /*
-//                DROP TABLE IF EXISTS email_verifications;
-//             DROP TABLE IF EXISTS memory_tags;
-//             DROP TABLE IF EXISTS tags;
-//             DROP TABLE IF EXISTS favorites;
-//     */
-//     await client.query(`
-//             DROP TABLE IF EXISTS memories;
-//             DROP TABLE IF EXISTS users; 
-//             `);
+    /*
+               DROP TABLE IF EXISTS email_verifications;
+            DROP TABLE IF EXISTS memory_tags;
+            DROP TABLE IF EXISTS tags;
+            DROP TABLE IF EXISTS favorites;
+    */
+    await client.query(`
+            DROP TABLE IF EXISTS memories;
+            DROP TABLE IF EXISTS users; 
+            `);
 
-//     console.log("Finished dropping tables!");
-//   } catch (error) {
-//     console.error("Error dropping tables!");
-//     throw error;
-//   }
-// };
+    console.log("Finished dropping tables!");
+  } catch (error) {
+    console.error("Error dropping tables!");
+    throw error;
+  }
+};
 
 const createTables = async () => {
   try {
@@ -73,15 +73,14 @@ const createTables = async () => {
     // visibility visibility_enum DEFAULT 'public',
     //
     // tags varchar(255)[]
+          // removed from users(display_name varchar(255) NOT NULL, email VARCHAR(255) UNIQUE )
     await client.query(
       `
       CREATE TABLE users(
       id SERIAL PRIMARY KEY,
       username VARCHAR (150) UNIQUE NOT NULL,
       password VARCHAR (150) NOT NULL,
-      display_name varchar(255) NOT NULL,
-      dimension VARCHAR(150) NOT NULL,
-      email VARCHAR(255) UNIQUE
+      dimension VARCHAR(150) NOT NULL
       );
 
       CREATE TABLE memories(
@@ -138,25 +137,25 @@ const createInitialUsers = async () => {
       await createUser({
         username: "granny",
         password: "soup143",
-        display_name: "grannyfrumps",
+        // display_name: "grannyfrumps",
         dimension: "UTC-7",
-        email: "granny@frumps.com",
+        // email: "granny@frumps.com",
       }),
 
       await createUser({
         username: "grumpycat",
         password: "bagelseasoning83",
-        display_name: "grumpy",
+        // display_name: "grumpy",
         dimension: "∞",
-        email: "grumpy@cat.com",
+        // email: "grumpy@cat.com",
       }),
 
       await createUser({
         username: "euclid",
         password: "m1llert1me",
-        display_name: "euclid",
+        // display_name: "euclid",
         dimension: "∞",
-        email: "euclid@me.com",
+        // email: "euclid@me.com",
       }),
     ]);
 
@@ -267,7 +266,7 @@ const createInitialMemories = async (users) => {
 
 const rebuildDB = async () => {
   try {
-   //  await dropTables();
+    await dropTables();
     await createTables();
 
     const users = await createInitialUsers();

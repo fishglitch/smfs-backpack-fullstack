@@ -72,19 +72,20 @@ const getUserByUsername = async (username) => {
 };
 
 // Create User: Inserts a new user into the database with their information.
-const createUser = async ({ username, password, display_name, dimension, email }) => {
+// removed email, display_name
+const createUser = async ({ username, password, dimension }) => {
   const id = v4(); // Generate a new UUID for the user
   const hashedPassword = await hash(password, 10); // Hash the password
 
   try {
     const res = await client.query(
       `
-      INSERT INTO users (username, password, display_name, dimension, email) 
-      VALUES ($1, $2, $3, $4, $5) 
+      INSERT INTO users (username, password, dimension) 
+      VALUES ($1, $2, $3) 
       ON CONFLICT (username) DO NOTHING
       RETURNING *
       `,
-      [username, await hash(password, 10), display_name, dimension, email]
+      [username, await hash(password, 10), dimension]
     );
 
     return res.rows[0]; // Return the newly created user
