@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../App";
 import "../css/Login.css";
@@ -28,36 +27,34 @@ const Login = ({ token, setToken, setUser }) => {
   };
   return (
     <div>
-        <h2>Login</h2>
-        <form onSubmit={handleLogin}>
-            <div>
-                <label>
-                    Email:
-                    <input 
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </label>
-            </div>
-            <div>
-                <label>
-                    Password:
-                    <input 
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </label>
-            </div>
-            <button type="submit">Login</button>
-            {error && <p style={{ color: "red" }}>{error}</p>} {/* Display error */}
-        </form>
+      <h2>Login</h2>
+      <form onSubmit={handleLogin}>
+        <div>
+          <label>
+            Email:
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Password:
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
+        </div>
+        <button type="submit">Login</button>
+        {error && <p style={{ color: "red" }}>{error}</p>} {/* Display error */}
+      </form>
     </div>
-);
-
-
+  );
 };
 export default Login;

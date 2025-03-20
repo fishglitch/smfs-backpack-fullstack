@@ -176,7 +176,7 @@ const createInitialMemories = async (users) => {
       userId: 1,
       title: "laptop stand",
       imageUrl:
-        "https://drive.google.com/file/d/1_w2HGpeGcKu1pKKZ65d9gtlfvQUi_q2u/",
+        "https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/9e9962e8-db12-4dd5-ac2b-cdf408dc6bf1/roost-laptop-stand.png?content-type=image%2Fpng",
       description:
         "I remember he always preferred something packable, lightweight, and versatile",
       // display_name: users[0].display_name,
@@ -189,7 +189,7 @@ const createInitialMemories = async (users) => {
       userId: 1,
       title: '17" Macbook Pro Mid 2012',
       imageUrl:
-        "https://drive.google.com/file/d/19dH18llxKaqsMnF0xi1T9qWUGI4DbB_E/",
+        "https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/96bf2e18-67a5-4372-849c-ea912cc80f11/macbook-pro-mid-2012.png?content-type=image%2Fpng",
       description: "SMF appreciated the durability of the older Mac books",
       // display_name: users[1].display_name,
       dimension: users[1].dimension,
@@ -200,8 +200,7 @@ const createInitialMemories = async (users) => {
     await createMemory({
       userId: 2,
       title: "iFixit Repair Business Toolkit",
-      imageUrl:
-        "https://drive.google.com/file/d/1q5yAY9tDdy8f8MjaAM0PwQpwMpOeoewA/",
+      imageUrl: "https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/ec3d2ce3-ab4a-4a91-921a-ea05f6dde318/ifixit-repair-business-toolkit.png?content-type=image%2Fpng",
       description:
         "he was a strong advocate of right to repair, including donating refurbished computers to his alma mater.",
       // display_name: users[2].display_name,
@@ -213,8 +212,7 @@ const createInitialMemories = async (users) => {
     await createMemory({
       userId: 2,
       title: "eagle scout",
-      imageUrl:
-        "https://drive.google.com/file/d/1q5yAY9tDdy8f8MjaAM0PwQpwMpOeoewA/",
+      imageUrl:"",
       description:
         "his eagle scout training showed in his passion for camping, including setting up guylines.",
       // display_name: users[2].display_name,

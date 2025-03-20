@@ -20,7 +20,8 @@ import {
   deleteMemory,
 } from "../db/index.js"; // Change to ES Module import
 
-// GET ALL MEMORIES http://localhost:3000/api/memories/
+// GET ALL MEMORIES /api/memories/
+// in the back
 memoriesRouter.get("/", async (req, res, next) => {
   try {
     const memories = await getAllMemories();

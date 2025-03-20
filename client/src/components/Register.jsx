@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { API_URL } from "../App";
-import "../css/Memory.css";
+import "../css/Register.css";
 
-const Memory = () => {
+const Register = () => {
 
 }
-export default Memory;
+export default Register;

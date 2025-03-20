@@ -1,0 +1,37 @@
+.memories-container {
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow items to wrap */
+    gap: 10px; /* Space between memory items */
+    justify-content: space-around; /* Align items nicely */
+}
+
+.memory-item {
+    border: 1px solid #ccc;  /* Border around each memory */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px; /* Padding inside each memory item */
+    width: 200px; /* Fixed width for each memory item */
+    text-align: center; /* Center content */
+    cursor: pointer; /* Cursor change on hover */
+    transition: transform 0.2s; /* Transition for hover effect */
+}
+
+.memory-item:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.memory-title {
+    font-weight: bold; /* Title should be bold */
+}
+
+.memory-author {
+    color: gray; /* Subtitle color for user ID */
+    font-size: 12px; /* Smaller font for author */
+}
+
+/* New styles to limit image size */
+.memory-item img {
+    width: 100%; /* Make image take full width of the parent */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 150px; /* Set a maximum height for the image */
+    object-fit: cover; /* Cover will ensure image fills the area without distortion */
+}
