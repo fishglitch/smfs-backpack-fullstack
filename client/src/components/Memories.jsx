@@ -4,15 +4,12 @@ import { useNavigate } from "react-router-dom";
 import "../css/Memories.css"; // Import CSS for the Memories component
 
 // API Link
-import { API_URL } from "../App";
+import { API_URL, defaultImage } from "../App";
 
 const Memories = () => {
   const navigate = useNavigate();
   const [availableMemories, setAvailableMemories] = useState([]);
   const [error, setError] = useState(null);
-
-  // Default image URL that will be displayed if no image is provided
-  const defaultImage = 'https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/83514450-1942-4e9a-ba36-67754e5c3418/asset-rick-morty-portal-v1.png?content-type=image%2Fpng'; // Change this to your actual default image URL
 
   const getAllMemories = async () => {
     try {
