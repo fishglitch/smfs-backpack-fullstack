@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { resolvePath, useNavigate } from "react-router-dom";
 import { API_URL } from "../App";
 import "../css/Login.css";
 
@@ -13,12 +13,15 @@ const Login = ({ token, setToken, setUser }) => {
     event.preventDefault();
 
     try {
-      const result = await loginUser(email, password);
+      const response = await fetch(`${API_URL}/users/login/`);
+      const loggedInData = await response.json();
+      console.log("POST users/login!", loggedInData);
+
       // Save token to local storage
-      localStorage.setItem("token", result.token);
+      localStorage.setItem("token", response.token);
 
       // If login is successful, set the token and user
-      setToken(result.token);
+      setToken(response.token);
 
       navigate("/account");
     } catch (error) {

@@ -136,11 +136,11 @@ const createInitialUsers = async () => {
 
     const users = await Promise.all([
       await createUser({
-        username: "frumps",
+        username: "granny",
         password: "soup143",
         display_name: "grannyfrumps",
         dimension: "UTC-7",
-        email: "grannyfrumps@frumps.com",
+        email: "granny@frumps.com",
       }),
 
       await createUser({
