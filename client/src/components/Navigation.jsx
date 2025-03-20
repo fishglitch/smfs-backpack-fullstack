@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { API_URL } from "../App";
-import "../css/Memories.css";
+import "../css/Navigation.css";
 
-const Memories = () => {
+const Navigation = () => {
 
 }
-export default Memories;
+export default Navigation;
