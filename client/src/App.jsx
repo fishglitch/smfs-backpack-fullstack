@@ -2,14 +2,14 @@
 
 // import { Account } from "./components/Account";
 // import { Login } from "./components/Login";
-// import { Memories } from "./components/Memories";
+
 // import { Memory } from "./components/Memory";
 // import { Navigation } from "./components/Navigation";
 // import { Register } from "./components/Register";
 
 // App.jsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import backpack from "./assets/asset-nomatic-backpack.png";
+// import backpack from "./assets/asset-nomatic-backpack.png";
 import "./App.css";
 import Memories from './components/Memories'; // Import the Memories component
 

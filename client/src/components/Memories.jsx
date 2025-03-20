@@ -47,8 +47,8 @@ const Memories = () => {
               src={memory.image_url || defaultImage} // Use default image if no image provided
               alt={`${memory.title} item of memory`} 
             />
-            <span className="memory-title">{memory.title}</span>
-            <span className="memory-desc">{memory.description}</span>
+            <div className="memory-title">{memory.title}</div>
+            <div className="memory-desc">"{memory.description}"</div>
           </div>
         ))
       ) : (
