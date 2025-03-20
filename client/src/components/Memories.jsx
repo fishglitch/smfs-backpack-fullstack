@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../css/Memories.css"; // Import CSS for the Memories component
 
 // API Link
-const API_URL = `http://localhost:3000/api`;
+import { API_URL } from "../App";
 
 const Memories = () => {
   const navigate = useNavigate();

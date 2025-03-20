@@ -6,12 +6,15 @@
 // import { Memory } from "./components/Memory";
 // import { Navigation } from "./components/Navigation";
 // import { Register } from "./components/Register";
-
-// App.jsx
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import backpack from "./assets/asset-nomatic-backpack.png";
+// App.jsx
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Memories from './components/Memories'; // Import the Memories component
+
+/** API Link */
+export const API_URL = `http://localhost:3000/api`;
 
 function App() {
 
