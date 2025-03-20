@@ -14,7 +14,7 @@ memoriesRouter.use(express.json());
 import {
   getAllMemories,
   getMemoryById,
-  // getMemoriesByUser,
+  getMemoriesByUser,
   createMemory,
   // updateMemory,
   deleteMemory,

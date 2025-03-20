@@ -11,7 +11,6 @@ h1 {
 #logo-image {
   max-width: 50%; /* Make the logo responsive */
   height: auto; /* Maintain aspect ratio */
-  display: flex; /* Use flexbox for layout */
 }
 
 .logo-container {
