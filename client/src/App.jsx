@@ -1,5 +1,5 @@
-// import { Account } from "./components/Account";
-// import { Register } from "./components/Register";
+import Account from "./components/Account";
+import Register from "./components/Register";
 // import backpack from "./assets/asset-nomatic-backpack.png";
 import Navigation from "./components/Navigation";
 import Login from "./components/Login";
@@ -35,6 +35,10 @@ function App() {
         // setFilteredBooks={setFilteredBooks}
       />
       <Routes>
+      <Route
+          path="/register"
+          element={<Register token={token} setToken={setToken} />}
+        />
         <Route
           path="/login"
           element={<Login token={token} setToken={setToken} />}
@@ -42,6 +46,7 @@ function App() {
         <Route path="/" element={<Memories />} />{" "}
         {/* The Memories component now handles its own fetching */}
         <Route path="/memory/:id" element={<Memory />} />
+        <Route path="/account" element={<Account />} />
       </Routes>
     </div>
   );

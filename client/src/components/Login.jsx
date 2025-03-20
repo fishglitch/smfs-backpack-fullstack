@@ -1,63 +1,92 @@
-import React, { useEffect, useState } from "react";
-import { resolvePath, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { API_URL } from "../App";
 import "../css/Login.css";
 
 const Login = ({ token, setToken, setUser }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
+    // Define initial state values
+    const initialState = {
+        username: "",
+        password: ""
+    };
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
+    const [username, setUsername] = useState(initialState.username);
+    const [password, setPassword] = useState(initialState.password);
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
-    try {
-      const response = await fetch(`${API_URL}/users/login/`);
-      const loggedInData = await response.json();
-      console.log("POST users/login!", loggedInData);
+    const handleLogin = async (event) => {
+        event.preventDefault();
 
-      // Save token to local storage
-      localStorage.setItem("token", response.token);
+        try {
+            const response = await fetch(`${API_URL}/users/login/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }) // Send username and password
+            });
+            const loggedInData = await response.json();
+            console.log("POST users/login!", loggedInData);
 
-      // If login is successful, set the token and user
-      setToken(response.token);
+            if (loggedInData.token) {
+                // Save token to local storage
+                localStorage.setItem("token", loggedInData.token);
+                
+                // If login is successful, set the token and navigate
+                setToken(loggedInData.token);
+                navigate("/account");
+            } else {
+                throw new Error(loggedInData.message || 'Login failed');
+            }
+        } catch (error) {
+            setError(error.message);
+        }
+    };
 
-      navigate("/account");
-    } catch (error) {
-      setError(error.message);
-    }
-  };
-  return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
+    // Reset function to clear all fields
+    const resetState = () => {
+        setUsername(initialState.username);
+        setPassword(initialState.password);
+        setError(null); // Clear any existing errors when resetting
+    };
+
+    return (
         <div>
-          <label>
-            Email:
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </label>
+            <h2>Login</h2>
+            <form onSubmit={handleLogin}>
+                <div>
+                    <label>
+                        Username:
+                        <input
+                            type="text"
+                            id="username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                        />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Password:
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </label>
+                </div>
+                <button type="submit">Login</button>
+                {/* Reset Button */}
+                <button type="button" onClick={resetState}>
+                    Reset
+                </button>
+                {error && <p style={{ color: "red" }}>{error}</p>} {/* Display error */}
+            </form>
         </div>
-        <div>
-          <label>
-            Password:
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </label>
-        </div>
-        <button type="submit">Login</button>
-        {error && <p style={{ color: "red" }}>{error}</p>} {/* Display error */}
-      </form>
-    </div>
-  );
+    );
 };
+
 export default Login;
