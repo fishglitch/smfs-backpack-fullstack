@@ -47,12 +47,12 @@ const Memory = () => {
     <div className="memories-container">
       {memory ? ( // Check if singleMemory is not null
         <div className="memory-item">
+          <div className="memory-title">{memory.memory.title}</div>
+          <div className="memory-desc">"{memory.memory.description}"</div>
           <img
             src={memory.image_url || defaultImage}
             alt={`${memory.title} item of memory`}
           />
-          <div className="memory-title">{memory.title}</div>
-          <div className="memory-desc">"{memory.description}"</div>
         </div>
       ) : (
         <p>Can't remember!</p>
