@@ -50,7 +50,7 @@ const Account = () => {
             try {
                 const userDetails = await fetchUserDetails(token);
                 setUserLogin(userDetails);
-                setMemories(userDetails.memories || []); // Assuming userDetails has a reservations array
+               // setMemories(userDetails.memories || []); // Assuming userDetails has a reservations array
             } catch (error) {
                 console.error("Can't fetch logged in user!", error);
                 setError(error);

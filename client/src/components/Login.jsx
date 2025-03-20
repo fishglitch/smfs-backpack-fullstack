@@ -4,14 +4,10 @@ import { API_URL } from "../App";
 import "../css/Login.css";
 
 const Login = ({ token, setToken, setUser }) => {
-    // Define initial state values
-    const initialState = {
-        username: "",
-        password: ""
-    };
 
-    const [username, setUsername] = useState(initialState.username);
-    const [password, setPassword] = useState(initialState.password);
+
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
@@ -44,12 +40,7 @@ const Login = ({ token, setToken, setUser }) => {
         }
     };
 
-    // Reset function to clear all fields
-    const resetState = () => {
-        setUsername(initialState.username);
-        setPassword(initialState.password);
-        setError(null); // Clear any existing errors when resetting
-    };
+
 
     return (
         <div>
@@ -79,10 +70,7 @@ const Login = ({ token, setToken, setUser }) => {
                     </label>
                 </div>
                 <button type="submit">Login</button>
-                {/* Reset Button */}
-                <button type="button" onClick={resetState}>
-                    Reset
-                </button>
+
                 {error && <p style={{ color: "red" }}>{error}</p>} {/* Display error */}
             </form>
         </div>

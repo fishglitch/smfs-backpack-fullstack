@@ -7,16 +7,12 @@ const Register = ({ setToken }) => {
     // Define initial state values
     const initialState = {
         username: "",
-        displayName: "",
-        email: "",
         password: "",
         dimension: ""
     };
 
     // Use state hooks for individual fields, you might also consider using a single state for all fields as shown below.
     const [username, setUsername] = useState("");
-    const [displayName, setDisplayName] = useState("");
-    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [dimension, setDimension] = useState("");
     const [error, setError] = useState(null);
@@ -25,7 +21,7 @@ const Register = ({ setToken }) => {
     const handleRegistration = async (event) => {
         event.preventDefault();
 
-        const body = { username, display_name: displayName, email, password, dimension }; // Prepare your body.
+        const body = { username, password, dimension }; // Prepare your body.
 
         try {
             const result = await fetch(`${API_URL}/users/register`, {
@@ -67,29 +63,7 @@ const Register = ({ setToken }) => {
                             />
                         </label>
                     </div>
-                    <div>
-                        <label>
-                            Display Name:
-                            <input
-                                type="text"
-                                id="displayName"
-                                value={displayName}
-                                onChange={(e) => setDisplayName(e.target.value)}
-                                required
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Email:
-                            <input
-                                type="email"
-                                id="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                        </label>
-                    </div>
+                    
                     <div>
                         <label>
                             Password:
