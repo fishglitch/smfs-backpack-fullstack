@@ -35,7 +35,7 @@ const Login = ({ token, setToken, setUser }) => {
                 
                 // If login is successful, set the token and navigate
                 setToken(loggedInData.token);
-                navigate("/account");
+                navigate("/"); // account, previously; testing. 
             } else {
                 throw new Error(loggedInData.message || 'Login failed');
             }

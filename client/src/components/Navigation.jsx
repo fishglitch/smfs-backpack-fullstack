@@ -22,10 +22,19 @@ const Navigation = ({ token, setToken, getAllUsers, getAllMemories }) => {
         }
   
         try {
-          const userData = await fetch(`${API_URL}/users`, storedToken);
-          setUserLogin(userData); // set user login info
-
-
+          const response = await fetch(`${API_URL}/users/me`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${storedToken}`, // Add the token in headers
+            },
+          });
+          if (!response.ok) {
+            throw new Error("Failed to fetch user details");
+          }
+          const userData = await response.json();
+          setUserLogin(userData); // Set user login info
+          console.log("logged in", userData);
         } catch (error) {
           console.error("Failed to fetch user details", error);
           setUserLogin(null); // If fetching fails, treat user as not logged in

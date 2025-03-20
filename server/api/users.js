@@ -1,12 +1,8 @@
-import express from "express"; // import "dotenv/config";
+import express from "express"; 
+import { config } from 'dotenv'; // Ensure environment variables are loaded
+config({ path: '../../.env' }); // Load environment variables
 
-/* import { config } from "dotenv"; // Ensure environment variables are loaded
-config(); // Load environment variables
-*/
-// import "dotenv/config";
-
-import { config } from 'dotenv';
-config({ path: '../../.env' });
+import requireUser from "./utils.js"; 
 
 import jwt from "jsonwebtoken"; // Change to ES Module import
 import bcrypt from 'bcrypt';
@@ -93,49 +89,19 @@ usersRouter.post("/login", async (req, res, next) => {
   }
 });
 
-/*
-usersRouter.post("/login", async (req, res, next) => {
-  const { username, password } = req.body;
 
-  // request must have both
-  if (!username || !password) {
-    return res.status(400).json({
-      name: "MissingCredentialsError",
-      message: "Please supply both a username and password",
-    });
-  }
-
+// GET USER via auth (through token)
+usersRouter.get("/auth/me", requireUser, async (req, res, next) => {
   try {
-    const user = await getUserByUsername(username);
-
-    if (user && (await bcrypt.compare(password, user.password)) == true) {
-      const token = jwt.sign(
-        {
-          id: user.id,
-          username,
-        },
-        process.env.JWT_SECRET,
-        {
-          expiresIn: "1w",
-        }
-      );
-
-      res.send({
-        message: "you're logged in!",
-        token,
-      });
-    } else {
-      return res.status(401).json({
-        name: "IncorrectCredentialsError",
-        message: "Username or password is incorrect",
-      });
-    }
-  } catch (error) {
-    console.log(error);
-    next(error);
+      const user = await getUserById(req.user.id); // Use the user ID from the decoded token
+      if (!user) {
+          return res.status(404).send({ message: "User not found" });
+      }
+      res.send({ user }); // Send user data back
+  } catch (ex) {
+      next(ex); // Handle error
   }
 });
-*/
 
 // POST USER (CREATE USER) http://localhost:3000/api/users/register
 usersRouter.post("/register", async (req, res, next) => {
