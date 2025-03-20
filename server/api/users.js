@@ -90,7 +90,7 @@ usersRouter.post("/login", async (req, res, next) => {
 });
 
 
-// GET USER via auth (through token)
+// functional!! yay!! GET USER via auth (through token)
 usersRouter.get("/auth/me", requireUser, async (req, res, next) => {
   try {
       const user = await getUserById(req.user.id); // Use the user ID from the decoded token
