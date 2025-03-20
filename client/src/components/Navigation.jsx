@@ -10,7 +10,6 @@ const Navigation = ({ token, setToken, getAllUsers, getAllMemories }) => {
   
     // moved from Memories component
     // const [availableMemories, setAvailableMemories] = useState([]);
-  
     // const [searchTerm, setSearchTerm] = useState("");
   
     useEffect(() => {

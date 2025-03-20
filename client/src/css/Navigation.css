@@ -1,0 +1,35 @@
+/* Navigation.css */
+.navigation {
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center children horizontally */
+    align-items: center; /* Center children vertically */
+    background-color: black; /* Set background to black */
+    padding: 10px 20px; /* Padding around the nav items */
+}
+
+.navigation a,
+.navigation button {
+    text-decoration: none; /* Remove underline from links */
+    color: white; /* White text color */
+    margin: 0 15px; /* Horizontal space between items */
+    padding: 10px 15px; /* Padding inside the buttons */
+    border: none; /* Remove border for buttons */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Change cursor to pointer */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for hover effects */
+}
+
+.navigation a:hover,
+.navigation button:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Light background on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Optional Styles */
+.navigation button {
+    background-color: transparent; /* Make button background transparent */
+}
+
+.navigation button:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Same hover effect for buttons */
+}

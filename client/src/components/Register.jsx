@@ -14,11 +14,11 @@ const Register = ({ setToken }) => {
     };
 
     // Use state hooks for individual fields, you might also consider using a single state for all fields as shown below.
-    const [username, setUsername] = useState(initialState.username);
-    const [displayName, setDisplayName] = useState(initialState.displayName);
-    const [email, setEmail] = useState(initialState.email);
-    const [password, setPassword] = useState(initialState.password);
-    const [dimension, setDimension] = useState(initialState.dimension);
+    const [username, setUsername] = useState("");
+    const [displayName, setDisplayName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [dimension, setDimension] = useState("");
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
@@ -49,15 +49,6 @@ const Register = ({ setToken }) => {
         }
     };
 
-    // Reset function to clear all fields
-    const resetState = () => {
-        setUsername(initialState.username);
-        setDisplayName(initialState.displayName);
-        setEmail(initialState.email);
-        setPassword(initialState.password);
-        setDimension(initialState.dimension);
-        setError(null); // Optional: Clear any existing errors
-    };
 
     return (
         <>
@@ -121,13 +112,9 @@ const Register = ({ setToken }) => {
                                 onChange={(e) => setDimension(e.target.value)}
                             />
                         </label>
-                    </div>
+                    </div> s
                     <button className="submit-button" type="submit">
                         Submit
-                    </button>
-                    {/* Reset Button */}
-                    <button type="button" onClick={resetState}>
-                        Reset
                     </button>
                 </form>
                 {error && <p style={{ color: "red" }}>{error}</p>}

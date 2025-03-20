@@ -1,39 +1,15 @@
-/* Memory.css */
-
+/* Memories.css */
 .memories-container {
-    display: flex; /* Use flexbox for layout */
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally */
-    padding: 20px; /* Add padding around the container */
-}
-
-.memory-item {
-    border: 1px solid #011f14;  /* Border around each memory item */
-    border-radius: 8px; /* Rounded corners */
-    padding: 15px; /* Padding inside each memory item */
-    text-align: center; /* Center text within memory item */
-    background-color: #07061d; /* Light background color for contrast */
-    margin-bottom: 20px; /* Space between memory items */
-    width: 300px; /* Fixed width for memory item */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
-}
-
-.memory-item img {
-    width: 100%; /* Make image responsive to parent width */
-    height: auto; /* Maintain aspect ratio */
-    max-height: 200px; /* Optional: set a maximum height */
-    object-fit: cover; /* Ensure the image covers the area */
-    border-radius: 4px; /* Optional: rounded corners for the image */
+    width: 100%; /* Full width */
+    max-width: 800px; /* Max width for the container */
 }
 
 .memory-title {
-    font-weight: bold; /* Bold title text */
-    font-size: 1.2em; /* Slightly larger font for title */
-    margin: 10px 0; /* Space around title */
+    font-weight: bold; /* Make title bold */
+    margin-top: 10px; /* Space above title */
 }
 
 .memory-desc {
-    font-style: italic; /* Make description italic */
-    color: #555; /* Dark gray color for text */
-    font-size: 1em; /* Set font size for description */
+    color: grey; /* Different color for description */
+    font-style: italic; /* Italic style for description */
 }

@@ -32,6 +32,23 @@ usersRouter.get("/", async (req, res, next) => {
   }
 });
 
+// GET USER DETAILS /users/me
+usersRouter.get("/me", requireUser, async (req, res, next) => {
+  try {
+    const userId = req.user.id; // Get user ID from the decoded token in req.user
+    const user = await getUserById(userId); // Fetch user details from DB
+
+    if (!user) {
+      return res.status(404).send({ message: "User not found" }); // Handle case where user does not exist
+    }
+
+    res.send({ user }); // Send the user data back as a response
+  } catch (error) {
+    console.error("Error occurred while fetching user details:", error);
+    next(error); // Pass any errors to the error handler
+  }
+});
+
 // GET USER BY ID http://localhost:3000/api/users/:userId
 usersRouter.get("/:userId", async (req, res, next) => {
   const { userId } = req.params; //access userId from req.params
@@ -102,6 +119,8 @@ usersRouter.get("/auth/me", requireUser, async (req, res, next) => {
       next(ex); // Handle error
   }
 });
+
+
 
 // POST USER (CREATE USER) http://localhost:3000/api/users/register
 usersRouter.post("/register", async (req, res, next) => {

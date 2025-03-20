@@ -22,27 +22,27 @@ import {
   deleteMemory,
 } from "../db/index.js";
 
-const dropTables = async () => {
-  try {
-    console.log("Starting to drop tables...");
+// const dropTables = async () => {
+//   try {
+//     console.log("Starting to drop tables...");
 
-    /*
-               DROP TABLE IF EXISTS email_verifications;
-            DROP TABLE IF EXISTS memory_tags;
-            DROP TABLE IF EXISTS tags;
-            DROP TABLE IF EXISTS favorites;
-    */
-    await client.query(`
-            DROP TABLE IF EXISTS memories;
-            DROP TABLE IF EXISTS users; 
-            `);
+//     /*
+//                DROP TABLE IF EXISTS email_verifications;
+//             DROP TABLE IF EXISTS memory_tags;
+//             DROP TABLE IF EXISTS tags;
+//             DROP TABLE IF EXISTS favorites;
+//     */
+//     await client.query(`
+//             DROP TABLE IF EXISTS memories;
+//             DROP TABLE IF EXISTS users; 
+//             `);
 
-    console.log("Finished dropping tables!");
-  } catch (error) {
-    console.error("Error dropping tables!");
-    throw error;
-  }
-};
+//     console.log("Finished dropping tables!");
+//   } catch (error) {
+//     console.error("Error dropping tables!");
+//     throw error;
+//   }
+// };
 
 const createTables = async () => {
   try {
@@ -202,7 +202,7 @@ const createInitialMemories = async (users) => {
       title: "iFixit Repair Business Toolkit",
       imageUrl: "https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/ec3d2ce3-ab4a-4a91-921a-ea05f6dde318/ifixit-repair-business-toolkit.png?content-type=image%2Fpng",
       description:
-        "he was a strong advocate of right to repair, including donating refurbished computers to his alma mater.",
+        "a strong advocate of right to repair, including donating refurbished computers to his alma mater.",
       // display_name: users[2].display_name,
       dimension: users[2].dimension,
       // visibility: "public",
@@ -211,8 +211,20 @@ const createInitialMemories = async (users) => {
 
     await createMemory({
       userId: 2,
-      title: "eagle scout",
+      title: "LAN parties",
       imageUrl:"",
+      description:
+        "at our dorms we went to the computer lab for LAN parties to talk to friends past curfew",
+      // display_name: users[2].display_name,
+      dimension: users[2].dimension,
+      // visibility: "public",
+      // tags: ["#camping", "#technology", "#childhood"],
+    });
+
+    await createMemory({
+      userId: 2,
+      title: "eagle scout",
+      imageUrl:"https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/7e26b7f6-4409-4f56-acfa-f2bf8dbbbf7d/Eagle_Scout_medal_%28Boy_Scouts_of_America%29.png?content-type=image%2Fpng",
       description:
         "his eagle scout training showed in his passion for camping, including setting up guylines.",
       // display_name: users[2].display_name,
@@ -220,7 +232,32 @@ const createInitialMemories = async (users) => {
       // visibility: "public",
       // tags: ["#camping", "#technology", "#childhood"],
     });
+    
+    await createMemory({
+      userId: 2,
+      title: "focaccia",
+      imageUrl:"https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/2d95ed7a-6654-457f-b53c-0d9fde7d627c/focaccia-bread.png?content-type=image%2Fpng",
+      description:
+        "talented and precise at making bread",
+      // display_name: users[2].display_name,
+      dimension: users[2].dimension,
+      // visibility: "public",
+      // tags: ["#camping", "#technology", "#childhood"],
+    });
 
+    await createMemory({
+      userId: 1,
+      title: "movie quotes",
+      imageUrl:"",
+      description:
+        "so good at quipping random movie quotes at both timely and unexpected times",
+      // display_name: users[2].display_name,
+      dimension: users[2].dimension,
+      // visibility: "public",
+      // tags: ["#camping", "#technology", "#childhood"],
+    });
+
+    
     console.log("Finished retrieving initial memories!");
   } catch (error) {
     console.error("Error retrieving memories!", error);
@@ -230,7 +267,7 @@ const createInitialMemories = async (users) => {
 
 const rebuildDB = async () => {
   try {
-    await dropTables();
+   //  await dropTables();
     await createTables();
 
     const users = await createInitialUsers();
