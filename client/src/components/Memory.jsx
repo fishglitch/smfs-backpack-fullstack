@@ -43,16 +43,27 @@ const Memory = () => {
   }
   console.log("Single Memory in Render:", memory);
 
+  // // Function to handle navigation back to "/"
+  const handleBackClick = () => {
+      console.log("handleBackClick!")
+      navigate("/"); // Navigate back to home
+  };
+// className="memories-container"className="memory-item"className="memory-title"className="memory-desc"className="memory-desc"
   return (
-    <div className="memories-container">
+    <div >
       {memory ? ( // Check if singleMemory is not null
-        <div className="memory-item">
-          <div className="memory-title">{memory.memory.title}</div>
-          <div className="memory-desc">"{memory.memory.description}"</div>
+        <div >
+          <div >{memory.memory.title}</div>
+          <div >"{memory.memory.description}"</div>
+          <div >-{memory.memory.dimension}</div>
           <img
             src={memory.image_url || defaultImage}
             alt={`${memory.title} item of memory`}
           />
+          <h2>helloooo
+
+          </h2>
+          <button onClick={handleBackClick} >Back to Memories</button>
         </div>
       ) : (
         <p>Can't remember!</p>
@@ -63,5 +74,5 @@ const Memory = () => {
 export default Memory;
 
 /*
-
+onClick={() => navigate(-1)}
 */

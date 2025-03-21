@@ -16,7 +16,7 @@ const Navigation = ({ token, setToken, getAllUsers, getAllMemories }) => {
       const getUserLogin = async () => {
         const storedToken = localStorage.getItem("token");
         if (!storedToken) {
-          setUserLogin(null);
+          setUserLogin(null); // No token, user is not logged in
           return;
         }
   
@@ -90,7 +90,7 @@ const Navigation = ({ token, setToken, getAllUsers, getAllMemories }) => {
           {userLogin ? ( // userLogin state to conditionally render
             <>
               <Link to="/account">Account</Link>
-              <button onClick={handleLogout}>Logout: [{userLogin?.username}]</button>
+              <button onClick={handleLogout}>Logout: [{userLogin?.user.username}]</button>
             </>
           ) : (
             <>

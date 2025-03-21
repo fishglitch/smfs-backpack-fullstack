@@ -47,7 +47,7 @@ memoriesRouter.get("/:memoryId", async (req, res, next) => {
   }
 });
 
-// NOT FUNCTIONAL RIGHT NOW GET MEMORIES BY USER
+// GET MEMORIES BY USER
 memoriesRouter.get("/users/:userId/memories", async (req, res, next) => {
   const { userId } = req.params;
   console.log("userid", userId);

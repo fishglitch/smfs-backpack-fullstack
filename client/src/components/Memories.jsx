@@ -46,6 +46,7 @@ const Memories = () => {
             />
             <div className="memory-title">{memory.title}</div>
             <div className="memory-desc">"{memory.description}"</div>
+            <div className="memory-desc">-{memory.dimension}</div>
           </div>
         ))
       ) : (
