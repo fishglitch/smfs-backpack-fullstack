@@ -6,6 +6,7 @@ import Memories from "./components/Memories"; // Import the Memories component
 import Memory from "./components/Memory";
 import Navigation from "./components/Navigation";
 import Register from "./components/Register";
+import CreateMemory from "./components/CreateMemory";
 import "./App.css";
 
 /** API Link */
@@ -17,27 +18,84 @@ export const defaultImage =
 
 function App() {
   const [token, setToken] = useState(null);
+  const [isCreating, setIsCreating] = useState(false); // State to control form visibility
+
+  const handleFormSubmit = async (formData) => {
+    try {
+      const response = await fetch(`${API_URL}/memories`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Ensure the token is sent for authorization if required
+        },
+        body: JSON.stringify({
+          ...formData,
+          userId: 1, // For example purposes, replace this with the actual userId based on your auth context
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create memory");
+      }
+
+      const memory = await response.json();
+      console.log("Memory created successfully:", memory);
+      // Optionally update state to reflect new memory, or trigger a refresh of memories here
+    } catch (error) {
+      console.error("Error creating memory:", error);
+      // Handle error appropriately for your UI
+    }
+  };
 
   return (
     <>
       <Navigation token={token} setToken={setToken} />
-      <div className="logo-container"> {/* Center content in this container */}
-      <div className="backpack-prompt">
-        <h1>What's in SMF's backpack?</h1>
-        <img
-          id="logo-image"
-          src="https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/7616a052-17c6-48d3-a6f2-0bf39e65faae/asset-nomatic-backpack.png?content-type=image%2Fpng"
-          alt="Black Backpack"
-        />
-      </div>
-      </div>
-      <div className="container"> {/* Optional: apply overall padding */}
+
+      <div className="container">
+        {" "}
+        {/* Optional: apply overall padding */}
         <Routes>
-          <Route path="/login" element={<Login token={token} setToken={setToken} />} />
-          <Route path="/register" element={<Register token={token} setToken={setToken} />} />
+          <Route
+            path="/login"
+            element={<Login token={token} setToken={setToken} />}
+          />
+          <Route
+            path="/register"
+            element={<Register token={token} setToken={setToken} />}
+          />
           <Route path="/account" element={<Account />} />
-          <Route path="/" element={<Memories />} />
           <Route path="/memory/:id" element={<Memory />} />
+          <Route
+            path="/"
+            element={
+              <>
+                {token ? ( // Only show Memories if the user is logged in
+                  <>
+                    {isCreating ? (
+                      <CreateMemory onSubmit={handleFormSubmit} />
+                    ) : (
+                      <Memories />
+                    )}
+                    <button onClick={() => setIsCreating(!isCreating)}>
+                      {isCreating ? "Back to Memories" : "Add New Memory"}
+                    </button>
+                  </>
+                ) : (
+                  <div className="backpack-prompt">
+                    <h1>What's in SMF's backpack?</h1>
+                    <div className="logo-container">
+                      <img
+                        id="logo-image"
+                        src="https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/7616a052-17c6-48d3-a6f2-0bf39e65faae/asset-nomatic-backpack.png?content-type=image%2Fpng"
+                        alt="Black Backpack"
+                      />
+                      <h2>Please log in to see your memories.</h2>
+                    </div>
+                  </div>
+                )}
+              </>
+            }
+          />
         </Routes>
       </div>
     </>
@@ -55,4 +113,4 @@ export default App;
           setToken={setToken}
  // setFilteredBooks={setFilteredBooks}
         />
-*/       
+*/

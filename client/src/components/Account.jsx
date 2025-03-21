@@ -18,6 +18,10 @@ const Account = () => {
             },
         });
 
+        const {user} = await response.json();
+        console.log(user);
+        setUserLogin(user);
+
         if (!response.ok) {
             throw new Error("Unable to fetch user details");
         }
