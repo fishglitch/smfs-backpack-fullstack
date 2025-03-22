@@ -96,10 +96,8 @@ memoriesRouter.post("/", async (req, res, next) => {
     memoryData.title = title;
     memoryData.imageUrl = imageUrl;
     memoryData.description = description;
-    // memoryData.display_name = display_name;
     memoryData.dimension = dimension;
-    // memoryData.visibility = visibility;
-    // memoryData.tags = tags;
+
 
     console.log("memory data", memoryData);
 

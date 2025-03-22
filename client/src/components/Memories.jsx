@@ -32,27 +32,39 @@ const Memories = () => {
   }
 
   return (
-    <div className="memories-container">
-      {availableMemories.length > 0 ? (
-        availableMemories.map((memory) => (
-          <div
-            key={memory.id}
-            className="memory-item"
-            onClick={() => navigate(`/memory/${memory.id}`)} // Navigate to Memory detail page
-          >
-            <img 
-              src={memory.image_url || defaultImage} // Use default image if no image provided
-              alt={`${memory.title} item of memory`} 
-            />
-            <div className="memory-title">{memory.title}</div>
-            <div className="memory-desc">"{memory.description}"</div>
-            <div className="memory-desc">-{memory.dimension}</div>
-          </div>
-        ))
-      ) : (
-        <p>Can't remember!</p>
-      )}
+    <>
+    <div>
+
     </div>
+    <div className="memories-container">
+    <button 
+          className="add-memory-button" // You can style this button with CSS
+          onClick={() => navigate("/submit-memory")} // Navigate to the submit memory page
+        >
+          Add New Memory
+        </button>
+
+        {availableMemories.length > 0 ? (
+          availableMemories.map((memory) => (
+            <div
+              key={memory.id}
+              className="memory-item"
+              onClick={() => navigate(`/memory/${memory.id}`)} // Navigate to Memory detail page
+            >
+              <img
+                src={memory.image_url || defaultImage} // Use default image if no image provided
+                alt={`${memory.title} item of memory`}
+              />
+              <div className="memory-title">{memory.title}</div>
+              <div className="memory-desc">"{memory.description}"</div>
+              <div className="memory-desc">-{memory.dimension}</div>
+            </div>
+          ))
+        ) : (
+          <p>Can't remember!</p>
+        )}
+    </div>
+    </>
   );
 };
 

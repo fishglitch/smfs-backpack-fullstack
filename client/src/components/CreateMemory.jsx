@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { API_URL } from "../App";
 
-const CreateMemory = ({ onSubmit }) => {
+const CreateMemory = ({ token }) => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",

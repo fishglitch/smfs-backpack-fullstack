@@ -36,7 +36,7 @@ const Register = ({ setToken }) => {
             if (data.token) {
                 setToken(data.token);
                 localStorage.setItem("token", data.token);
-                navigate("/login");
+                navigate("/account");
             } else {
                 throw new Error(data.message || 'Registration failed');
             }

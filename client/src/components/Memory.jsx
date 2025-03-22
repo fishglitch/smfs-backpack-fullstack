@@ -14,12 +14,12 @@ const Memory = () => {
 
   useEffect(() => {
     const getSingleMemory = async () => {
-      try {
+      try { // http://localhost:3000/api/memories/:memoryId
         const response = await fetch(`${API_URL}/memories/${id}`);
         if (!response.ok) {
           throw new Error("Error fetching memory data"); // Handle non-200 responses
         }
-        // http://localhost:3000/api/memories/:memoryId
+        
         const memoryData = await response.json();
         console.log("getOneMemory inspect!", memoryData); // Log fetched memory
         setMemory(memoryData); // Set data to state
@@ -49,7 +49,7 @@ const Memory = () => {
       navigate("/"); // Navigate back to home
   };
 // className="memories-container"className="memory-item"className="memory-title"className="memory-desc"className="memory-desc"
-  return (
+  return ( // http://localhost:3000/api/memories/:memoryId
     <div >
       {memory ? ( // Check if singleMemory is not null
         <div >

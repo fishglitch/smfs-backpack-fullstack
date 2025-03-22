@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Account from "./components/Account";
 import Login from "./components/Login";
 import Memories from "./components/Memories"; // Import the Memories component
@@ -15,15 +15,18 @@ export const API_URL = `http://localhost:3000/api`;
 // Default image URL that will be displayed if no image is provided
 export const defaultImage = "https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/83514450-1942-4e9a-ba36-67754e5c3418/asset-rick-morty-portal-v1.png?content-type=image%2Fpng"; // Change this to your actual default image URL
 
+
+
+function App() {
+  const [token, setToken] = useState(null);
+  console.log("token", token);
+//  const [isCreating, setIsCreating] = useState(false); // Added to manage memory creation
+
 // Component for logged-in users
-const LoggedInView = ({ isCreating, setIsCreating, token, setToken }) => (
+const LoggedInView = ({ token, setToken }) => (
   <>
-    {!isCreating ? (
-      <Memories token={token} setToken={setToken} />
-    ) : null}
-    <button onClick={() => setIsCreating(!isCreating)}>
-      {isCreating ? "Back to Memories" : "Add New Memory"}
-    </button>
+  <Memories token={token} setToken={setToken} />
+
   </>
 );
 
@@ -42,9 +45,12 @@ const LoggedOutView = () => (
   </div>
 );
 
-function App() {
-  const [token, setToken] = useState(null);
-  const [isCreating, setIsCreating] = useState(false); // Added to manage memory creation
+useEffect(() => {
+  const storedToken = localStorage.getItem("token");
+  if (storedToken) {
+    setToken(storedToken); // Set the token if it exists
+  }
+}, []);
 
   return (
     <>
@@ -55,21 +61,24 @@ function App() {
           <Route path="/register" element={<Register token={token} setToken={setToken} />} />
           <Route path="/account" element={<Account token={token} setToken={setToken} />} />
           <Route path="/memory/:id" element={<Memory token={token} setToken={setToken} />} />
-          <Route
+          <Route path="/submit-memory" element={<CreateMemory token={token} setToken={setToken} />} />
+          { token ?
+            <Route path="/" element={<LoggedInView  token={token} setToken={setToken} />}/>
+            : 
+          <Route path="/" element={<LoggedOutView />}/>
+          }
+
+          {/* <Route
             path="/"
             element={token ? (
               <LoggedInView 
-                isCreating={isCreating} 
-                setIsCreating={setIsCreating} 
                 token={token} 
                 setToken={setToken} 
               />
             ) : (
               <LoggedOutView />
             )}
-          />
-          {/* You may add a route for the CreateMemory component if necessary */}
-          <Route path="/submit-memory" element={<CreateMemory token={token} />} />
+          /> */}
         </Routes>
       </div>
     </>
@@ -83,7 +92,19 @@ export default App;
 // was on line 93 above "Pls login to remember":  <CreateMemory onSubmit={handleFormSubmit} />
 // see comments from bookbuddy template
 /*
-
+          <Route
+            path="/"
+            element={token ? (
+              <LoggedInView 
+                isCreating={isCreating} 
+                setIsCreating={setIsCreating} 
+                token={token} 
+                setToken={setToken} 
+              />
+            ) : (
+              <LoggedOutView />
+            )}
+          />
 
           <Route
             path="/"
