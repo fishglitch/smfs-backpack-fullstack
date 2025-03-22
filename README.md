@@ -275,17 +275,27 @@ Thank you Grace Hopper Program!
 ## Debugging:
 
 # Ask at OSH
-1. user_id and userId mismatch
+1. user_id and userId Mismatch in API Payload Structure
 
 seeded data is successfully matched to model functions using "userId", however frontend functions respond to "user_id" for memories submitted on the front end. To be resolved!
 
-"The issue you’re facing with the user_id being null in the database likely stems from your API not recognizing the naming convention you've used in your JSON payload. Here’s a breakdown of the problem and how to fix it:
+# Summary
+Issue Type: Mismatch in API Payload Structure
+**Description:**
+The user_id is being stored as null in the database when creating a new memory record because the data sent from the front end uses the key userId instead of the expected user_id.
 
-Potential Issue: Naming Convention
-It looks like you're sending the userId in your request body as userId, but the backend is expecting it to be named user_id. This is a common mismatch when dealing with databases and APIs, as they often have specific expectations for how data should be structured.
+**Keywords**
+API Mismatch: The frontend and backend are using different naming conventions for the same data field.
+Payload Structure: The structure of the JSON object being sent in the API request does not align with what the server expects.
+Camel Case vs. Snake Case: The frontend uses a camel case (userId) while the backend expects snake case (user_id).
 
-Solution
-You will need to change how you are structuring the payload you send to your API. Update the body in your fetch request to match the expected key user_id. Here's how you can modify your handleSubmit function:"
+**Database Insertion:**
+The API fails to insert the data correctly due to the naming mismatch, leading to null values.
+
+**Error Handling:**
+Ensure that proper checks and error handling are in place to identify such issues.
+Console Logging: Utilize logging to debug values being sent in API requests.
+Key Mapping: Correctly map or transform the keys in your JSON request to match the backend requirements.
 # API testing
 
 # Notes
