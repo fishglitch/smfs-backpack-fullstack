@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { API_URL } from "../App";
 import "../css/Login.css";
 
-const Login = ({ token, setToken, setUser }) => {
+const Login = ({ token, setToken, userId, setUserId }) => {
 
 
     const [username, setUsername] = useState("");
@@ -31,7 +31,12 @@ const Login = ({ token, setToken, setUser }) => {
                 
                 // If login is successful, set the token and navigate
                 setToken(loggedInData.token);
+
+                setUserId(loggedInData.userId);
+                console.log("userId destructured at login?", loggedInData);
                 navigate("/"); // account, previously; testing. 
+
+                
             } else {
                 throw new Error(loggedInData.message || 'Login failed');
             }

@@ -22,6 +22,10 @@ function App() {
   console.log("token", token);
 //  const [isCreating, setIsCreating] = useState(false); // Added to manage memory creation
 
+const [userId, setUserId] = useState();
+
+// userId={userId} setUserId={setUserId}
+
 // Component for logged-in users
 const LoggedInView = ({ token, setToken }) => (
   <>
@@ -57,11 +61,17 @@ useEffect(() => {
       <Navigation token={token} setToken={setToken} />
       <div className="container">
         <Routes>
-          <Route path="/login" element={<Login token={token} setToken={setToken} />} />
+          <Route path="/login" element={<Login 
+          token={token} setToken={setToken} 
+          userId={userId} setUserId={setUserId}
+          />} />
           <Route path="/register" element={<Register token={token} setToken={setToken} />} />
           <Route path="/account" element={<Account token={token} setToken={setToken} />} />
           <Route path="/memory/:id" element={<Memory token={token} setToken={setToken} />} />
-          <Route path="/submit-memory" element={<CreateMemory token={token} setToken={setToken} />} />
+          <Route path="/submit-memory" element={<CreateMemory 
+          token={token} setToken={setToken} 
+          userId={userId} setUserId={setUserId}
+          />} />
           { token ?
             <Route path="/" element={<LoggedInView  token={token} setToken={setToken} />}/>
             : 

@@ -64,7 +64,7 @@ memoriesRouter.get("/users/:userId/memories", async (req, res, next) => {
     next({ ex });
   }
 });
-
+// this is a route function, "memories router"
 // POST MEMORY (CREATE MEMORY) http://localhost:3000/api/memories
 memoriesRouter.post("/", async (req, res, next) => {
   // requireUser,
@@ -75,8 +75,7 @@ memoriesRouter.post("/", async (req, res, next) => {
     imageUrl,
     description,
     dimension,
-    // visibility,
-    // tags,
+    // visibility, tags,
   } = req.body;
 
   // Initialize memoryData object
@@ -84,12 +83,12 @@ memoriesRouter.post("/", async (req, res, next) => {
 
   try {
     // Ensure req.user is defined and contains valid user ID
-    if (!req.user || !req.user.id) {
-      return next({
-        name: "UnauthorizedError",
-        message: "You must be logged in to create a memory",
-      });
-    }
+    // if (!req.user || !req.user.id) {
+    //   return next({
+    //     name: "UnauthorizedError",
+    //     message: "You must be logged in to create a memory",
+    //   });
+    // }
 
     // Populate memoryData object with relevant information
     // memoryData.authorId = req.user.id; // Assuming req.user has been populated by requireUser
@@ -97,8 +96,6 @@ memoriesRouter.post("/", async (req, res, next) => {
     memoryData.imageUrl = imageUrl;
     memoryData.description = description;
     memoryData.dimension = dimension;
-
-
     console.log("memory data", memoryData);
 
     // Create the memory

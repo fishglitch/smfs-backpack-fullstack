@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { API_URL } from "../App";
 
-const CreateMemory = ({ token }) => {
+const CreateMemory = ({ token, userId, setUserId }) => { // removed userId
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -10,12 +10,17 @@ const CreateMemory = ({ token }) => {
     dimension: "", // Gather dimension if it's part of the submission; ensure to collect it from the user if necessary
   });
 
+  
+  
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   // form to submit memories which require usedId
   const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  
     try {
       const response = await fetch(`${API_URL}/memories`, {
         method: "POST",
@@ -25,8 +30,9 @@ const CreateMemory = ({ token }) => {
         },
         body: JSON.stringify({
           ...formData,
-          userId: 1, // For example purposes, replace this with the actual userId based on your auth context
+          userId: userId, // For example purposes, replace this with the actual userId based on your auth context
         }),
+
       });
 
       if (!response.ok) {
@@ -36,6 +42,8 @@ const CreateMemory = ({ token }) => {
       const memory = await response.json();
       console.log("Memory created successfully:", memory);
       // Optionally update state to reflect new memory, or trigger a refresh of memories here
+    
+    
     } catch (error) {
       console.error("Error creating memory:", error);
       // Handle error appropriately for your UI
