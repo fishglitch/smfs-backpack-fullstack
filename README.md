@@ -275,24 +275,18 @@ Thank you Grace Hopper Program!
 ## Debugging:
 
 # Ask at OSH
-1. GET getMemoriesByUser 404 Error:
-   <pre>Cannot GET /api/users/1/memories</pre>
+1. user_id and userId mismatch
 
+seeded data is successfully matched to model functions using "userId", however frontend functions respond to "user_id" for memories submitted on the front end. To be resolved!
 
-2. # RESOLVED POST memories 500 server error:
-   to run this API test, first obtain a token from a loggedIn User at POST users/login.
-   Getting the error even after passing Bearer Token in Auth:
-   {
-   "message": "secret or public key must be provided"
-   }
-   it was related to how JWT_SECRET is undefined, we changed the .env file location to root and path to api routes as "../../.env"
+"The issue you’re facing with the user_id being null in the database likely stems from your API not recognizing the naming convention you've used in your JSON payload. Here’s a breakdown of the problem and how to fix it:
 
-3. frontend TBD
+Potential Issue: Naming Convention
+It looks like you're sending the userId in your request body as userId, but the backend is expecting it to be named user_id. This is a common mismatch when dealing with databases and APIs, as they often have specific expectations for how data should be structured.
 
+Solution
+You will need to change how you are structuring the payload you send to your API. Update the body in your fetch request to match the expected key user_id. Here's how you can modify your handleSubmit function:"
 # API testing
-- GET routes except getMemoriesByUser are functional-- might be an issue with JOINING in db SQL
-- POST users/login provides token for any other routes that requireUser Auth i.e., POST createMemory
 
 # Notes
-- DELETE user and DELETE memory missing
 - Features for TAGS and FAVORITES are disabled for further development and testing
