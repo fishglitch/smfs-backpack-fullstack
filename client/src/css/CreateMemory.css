@@ -1,7 +1,7 @@
-/* Register.css */
+/* CreateMemory.css */
 
-/* Overall styling for the registration form */
-.registration-form {
+/* Overall styling for the memory creation form */
+.create-memory-form {
     width: 100%; /* Full width */
     max-width: 800px; /* Max width for the container */
     margin: 0 auto; /* Center the container */
@@ -12,54 +12,59 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
 
-/* Styling for headings */
-.registration-form h2 {
+/* Form heading styling */
+.create-memory-form h2 {
     text-align: center; /* Center the heading */
-    color: #1f8c29; /* Darker green color for the title */
+    color: #35db44; /* Green color for the heading */
     margin-bottom: 20px; /* Space below the heading */
 }
 
 /* Form styling */
-.registration-form form {
+.create-memory-form form {
     display: flex; /* Use flexbox for alignment */
     flex-direction: column; /* Stack elements vertically */
 }
 
 /* Label styling */
-.registration-form label {
+.create-memory-form label {
     margin-bottom: 10px; /* Space below labels */
     font-weight: bold; /* Make labels bold */
 }
 
 /* Input styling */
-.registration-form input {
+.create-memory-form input,
+.create-memory-form textarea {
     width: 100%; /* Full width for inputs */
-    max-width: 400px; /* Optional: Set a specific max width if needed */
     padding: 10px; /* Padding inside input fields */
     margin: 10px 0; /* Space around input fields */
-    border: 1px solid #1f8c29; /* Darker green border for input fields */
+    border: 1px solid #35db44; /* Green border for input fields */
     border-radius: 4px; /* Rounded corners */
-    background-color: #100e24; /* Darker background for input */
+    background-color: #100e24; /* Darker background for inputs */
     color: #ffffff; /* White text for inputs */
 }
 
+/* Specific styling for textarea */
+.create-memory-form textarea {
+    resize: vertical; /* Allow vertical resizing only */
+}
+
 /* Button styling */
-.registration-form button {
+.create-memory-form button {
     background-color: #1f8c29; /* Darker green background for the button */
     color: #ffffff; /* White text */
     border: none; /* Remove border */
     border-radius: 4px; /* Rounded corners */
-    padding: 10px 15px; /* Padding for the button */
+    padding: 10px 15px; /* Padding for button */
     cursor: pointer; /* Pointer cursor on hover */
     transition: background-color 0.3s ease; /* Smooth transition effect */
 }
 
-.registration-form button:hover {
+.create-memory-form button:hover {
     background-color: #157a1c; /* Even darker green on hover */
 }
 
 /* Error message styling */
-.registration-form p {
+.create-memory-form p {
     color: red; /* Red color for error messages */
     text-align: center; /* Center error messages */
 }

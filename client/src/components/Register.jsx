@@ -85,11 +85,12 @@ const Register = ({ setToken }) => {
                                 type="text"
                                 id="dimension"
                                 autoComplete="off"  // Added autocomplete
+                                placeholder="can be imaginary or literal" // Updated placeholder text
                                 value={dimension}
                                 onChange={(e) => setDimension(e.target.value)}
                             />
                         </label>
-                    </div> s
+                    </div> 
                     <button className="submit-button" type="submit">
                         Submit
                     </button>

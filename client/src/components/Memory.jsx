@@ -48,21 +48,18 @@ const Memory = () => {
       console.log("handleBackClick!")
       navigate("/"); // Navigate back to home
   };
-// className="memories-container"className="memory-item"className="memory-title"className="memory-desc"className="memory-desc"
+
   return ( // http://localhost:3000/api/memories/:memoryId
-    <div >
+    <div className="memory-container" >
       {memory ? ( // Check if singleMemory is not null
         <div >
-          <div >{memory.memory.title}</div>
-          <div >"{memory.memory.description}"</div>
-          <div >-{memory.memory.dimension}</div>
-          <img
+          <div className="memory-title" >{memory.memory.title}</div>
+          <div className="memory-desc">"{memory.memory.description}"</div>
+          <div className="memory-dimension">-{memory.memory.dimension}</div>
+          <img 
             src={memory.image_url || defaultImage}
             alt={`${memory.title} item of memory`}
           />
-          <h2>helloooo
-
-          </h2>
           <button onClick={handleBackClick} >Back to Memories</button>
         </div>
       ) : (
@@ -72,6 +69,7 @@ const Memory = () => {
   );
 };
 export default Memory;
+
 
 /*
 onClick={() => navigate(-1)}

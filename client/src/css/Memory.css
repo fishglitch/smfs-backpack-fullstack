@@ -1,15 +1,81 @@
-/* Memories.css */
-.memories-container {
-    width: 100%; /* Full width */
-    max-width: 800px; /* Max width for the container */
+/* Memory.css */
+
+/* Overall container for the memory view */
+.memory-container {
+    max-width: 800px; /* Maximum width for the container */
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Add padding around the container */
+    background-color: #07061d; /* Dark background for consistency */
+    color: #ffffff; /* White text for contrast */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
 
+/* Title styling */
 .memory-title {
-    font-weight: bold; /* Make title bold */
-    margin-top: 10px; /* Space above title */
+    font-size: 1.5em; /* Slightly larger font for title */
+    color: #35db44; /* Green color for title */
+    margin-bottom: 10px; /* Space below title */
 }
 
+/* Description styling */
 .memory-desc {
-    color: grey; /* Different color for description */
-    font-style: italic; /* Italic style for description */
+    font-size: 1.1em; /* Font size for description */
+    margin: 10px 0; /* Space around description */
+    color: #ffffff; /* White color for description */
+    font-style: italic; /* Italic style for added emphasis */
+}
+
+/* Dimension styling */
+.memory-dimension {
+    margin: 10px 0; /* Space around dimension */
+    color: #ffffff; /* White color for dimension text */
+}
+
+/* Image styling */
+.memory-container img {
+    width: 100%; /* Full width for responsiveness */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 4px; /* Rounded corners for images */
+    margin: 20px 0; /* Space above and below the image */
+}
+
+/* Button styling */
+.memory-container button {
+    background-color: #032f07; /* Dark green background */
+    color: #ffffff; /* White text */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px 15px; /* Padding for button */
+    cursor: pointer; /* Pointer cursor */
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+    position: relative; /* Positioning context for pseudo-element */
+}
+
+/* Glaze effect on hover */
+.memory-container button:hover {
+    background-color: #0b8a14; /* Darker green on hover */
+    transform: scale(1.1); /* Slightly enlarge on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
+}
+
+/* Glaze overlay */
+.memory-container button::after {
+    content: '';
+    position: absolute; /* Position relative to the button */
+    top: 0; left: 0; right: 0; bottom: 0; /* Cover the entire button */
+    background-color: rgba(255, 255, 255, 0.2); /* Light white glaze */
+    opacity: 0; /* Start hidden */
+    border-radius: 4px; /* Match button's border radius */
+    transition: opacity 0.3s ease; /* Smooth transition */
+}
+
+.memory-container button:hover::after {
+    opacity: 1; /* Show the glaze effect on hover */
+}
+
+/* Error message styling */
+.memory-container p {
+    color: red; /* Red color for error messages */
+    text-align: center; /* Center error messages */
 }

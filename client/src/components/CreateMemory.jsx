@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { API_URL } from "../App";
+import "../css/CreateMemory.css";
+
 
 const CreateMemory = ({ token, setToken, userId, setUserId }) => {
   // removed userId
@@ -62,6 +64,7 @@ const CreateMemory = ({ token, setToken, userId, setUserId }) => {
   };
 
   return (
+    <div className="create-memory-form">
     <form onSubmit={handleSubmit}>
       <h2>Add a New Memory</h2>
       <div>
@@ -104,6 +107,7 @@ const CreateMemory = ({ token, setToken, userId, setUserId }) => {
       </div>
       <button type="submit">Submit Memory</button>
     </form>
+    </div>
   );
 };
 

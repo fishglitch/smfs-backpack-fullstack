@@ -20,7 +20,7 @@ h1 {
 }
 
 .container {
-  max-width: 800px; /* Limit the width of the main content */
+  max-width: 100%; /* Limit the width of the main content */
   margin: 0 auto; /* Center the container */
   padding: 20px; /* Add padding */
   display: flex;       /* Enable flexbox layout */

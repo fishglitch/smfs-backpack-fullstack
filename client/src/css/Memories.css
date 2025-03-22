@@ -2,6 +2,7 @@
 
 /* Using grid layout for responsive items */
 .memories-container {
+    max-width: 100%;
     display: grid; /* Use grid layout */
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid with a max width */
     gap: 20px; /* Space between grid items */
@@ -55,4 +56,55 @@
     font-style: italic; /* Make description italic */
     color: #555; /* Dark gray color for text */
     font-size: 1em; /* Set font size for description */
+}
+
+/*THIS IS FOR THE ADD MEMORY BUTTON*/
+
+.add-memory-button {
+    position: relative;
+    padding: 15px;
+    border-radius: 90%; /* Rounded border */
+    background-color: #2cdb3b; /* Background color for contrast */
+    color: #000000; /* Text color */
+    text-align: center; /* Center text within the button */
+    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Increase duration for smoother transition */
+    cursor: pointer; /* Change cursor to pointer */
+    overflow: hidden; /* Hide overflow for the overlay */
+    border: none; /* Remove default border */
+}
+
+
+/* Glaze effect on hover */
+.add-memory-button::after {
+    content: ''; /* Required for the pseudo-element */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(111, 89, 207, 0.3); /* Semi-transparent white glaze */
+    border-radius: 100px; /* Match the button's border radius */
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.4s ease; /* Smooth transition for the glaze effect */
+}
+
+.add-memory-button:hover {
+    transform: scale(1.15); /* Slightly enlarge on hover */
+    box-shadow: 0 10px 10px rgba(35, 219, 69, 0.3); /* Add shadow on hover */
+}
+
+.add-memory-button:hover::after {
+    content: ''; /* Create an empty pseudo-element */
+    position: absolute; /* Position it relative to the parent */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    right: 0; /* Extend to the right */
+    bottom: 0; /* Extend to the bottom */
+    background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent white for the glazed effect */
+    border-radius: 8px; /* Match the rounded corners */
+    transition: opacity 0.3s ease; /* Smooth transition */
+}
+
+.add-memory-button:hover::after {
+    opacity: 1; /* Show the glaze effect on hover */
 }
