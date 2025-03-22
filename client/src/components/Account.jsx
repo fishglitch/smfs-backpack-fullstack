@@ -5,7 +5,7 @@ import "../css/Account.css";
 
 const Account = () => {
   const [userLogin, setUserLogin] = useState(null);
-  const [userMemories, setUserMemories] = useState([]); // State for user's memories
+  const [userMemories, setUserMemories] = useState([]);
   const [loadingUser, setLoadingUser] = useState(true);
   const [loadingMemories, setLoadingMemories] = useState(true);
   const [error, setError] = useState(null);
@@ -22,43 +22,34 @@ const Account = () => {
       if (!response.ok) {
         throw new Error("Unable to fetch user details");
       }
-      return await response.json(); // Return the user data
+      return await response.json();
     } catch (error) {
       console.error("Error fetching user details:", error);
-      throw error; // Rethrow the error
+      throw error;
     }
   };
 
   const fetchUserMemories = async (userId, token) => {
     try {
-      // Log userId and token for debugging
       console.log("Fetching memories for user:", userId);
-
-      const response = await fetch(
-        `${API_URL}/memories/users/${userId}/memories`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      // Log the raw response to check if the status is okay
-      console.log("Response status:", response.status);
+      const response = await fetch(`${API_URL}/memories/users/${userId}/memories`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
 
       if (!response.ok) {
         throw new Error("Unable to fetch user details");
       }
 
-      // Ensure we call response.json() only on a valid response
-      const data = await response.json(); // Now we read the response body
-      console.log("Fetched user memories API call works:", data);
+      const data = await response.json();
+      console.log("Fetched user memories:", data);
 
-      return data.memories; // Return the user's memories
+      return data.memories;
     } catch (error) {
       console.error("Error fetching user memories:", error);
-      throw error; // Rethrow the error
+      throw error;
     }
   };
 
@@ -98,12 +89,11 @@ const Account = () => {
     }
   };
 
-  // effect to fetchUserDetails
   useEffect(() => {
     const getUserLogin = async () => {
       const token = localStorage.getItem("token");
       if (!token) {
-        navigate("/login"); // Redirect if no token
+        navigate("/login");
         return;
       }
 
@@ -113,36 +103,34 @@ const Account = () => {
       } catch (error) {
         console.error("Can't fetch logged in user!", error);
         setError(error);
-        navigate("/login"); // Redirect on error
+        navigate("/login");
       } finally {
-        setLoadingUser(false); // Ensure loading state is updated
+        setLoadingUser(false);
       }
     };
 
-    getUserLogin(); // Call the function to fetch user login details
+    getUserLogin();
   }, [navigate]);
 
-  // Effect to fetch user memories after user login
   useEffect(() => {
     const fetchMemories = async () => {
       if (userLogin) {
-        // Only fetch if userLogin is available
         const token = localStorage.getItem("token");
-        const userId = userLogin.user.id; // Assuming user ID is in user.data
+        const userId = userLogin.user.id;
         try {
           const memories = await fetchUserMemories(userId, token);
-          setUserMemories(memories); // Set user's memories
+          setUserMemories(memories);
         } catch (error) {
           console.error("Error fetching user memories:", error);
           setError(error);
         } finally {
-          setLoadingMemories(false); // Update loading state for memories
+          setLoadingMemories(false);
         }
       }
     };
 
-    fetchMemories(); // Fetch user memories
-  }, [userLogin]); // Trigger this effect when userLogin changes
+    fetchMemories();
+  }, [userLogin]);
 
   if (loadingUser || loadingMemories) {
     return <div>Loading...</div>;
@@ -167,7 +155,7 @@ const Account = () => {
               {memory.image_url ? (
                 <img src={memory.image_url} alt={memory.title} />
               ) : (
-                <div>No Image Available</div> // Or you can leave this blank or provide a placeholder
+                <div>No Image Available</div>
               )}
               <div>{memory.dimension}</div>
               <button onClick={() => handleDeleteClick(memory.id)}>Delete</button> {/* Delete button */}
