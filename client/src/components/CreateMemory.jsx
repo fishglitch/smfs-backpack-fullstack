@@ -2,16 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { API_URL } from "../App";
 
-const CreateMemory = ({ token, userId, setUserId }) => { // removed userId
+const CreateMemory = ({ token, setToken, userId, setUserId }) => {
+  // removed userId
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     imageUrl: "",
     dimension: "", // Gather dimension if it's part of the submission; ensure to collect it from the user if necessary
   });
-
-  
-  
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,8 +18,14 @@ const CreateMemory = ({ token, userId, setUserId }) => { // removed userId
 
   // form to submit memories which require usedId
   const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  
+    e.preventDefault();
+
+  // Log the userId to check its value before making API call
+  console.log("User ID before submission:", userId);
+
+  // Log the formData to check its contents before the submission
+  console.log("Form Data before submission:", formData);
+
     try {
       const response = await fetch(`${API_URL}/memories`, {
         method: "POST",
@@ -30,26 +35,31 @@ const CreateMemory = ({ token, userId, setUserId }) => { // removed userId
         },
         body: JSON.stringify({
           ...formData,
-          userId: userId, // For example purposes, replace this with the actual userId based on your auth context
+          user_id: userId, // changed from userId to user_id to see if that's the issue
         }),
-
       });
+      // This line is potentially problematic as it attempts to read response.json() twice
+      const memory = await response.json(); // This should come after checking if response is ok
 
       if (!response.ok) {
         throw new Error("Failed to create memory");
       }
 
-      const memory = await response.json();
       console.log("Memory created successfully:", memory);
-      // Optionally update state to reflect new memory, or trigger a refresh of memories here
-    
-    
+
+      // Check if userId in returned memory is valid
+      if (!memory.user_id) {
+        console.error("Created memory does not have a valid userId:", memory);
+      }
+
+      // Possibly navigate or update the UI accordingly
+      navigate("/account"); // account, previously; testing. 
     } catch (error) {
       console.error("Error creating memory:", error);
       // Handle error appropriately for your UI
     }
+    console.log("hello?", handleChange);
   };
-
 
   return (
     <form onSubmit={handleSubmit}>

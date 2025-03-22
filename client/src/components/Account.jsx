@@ -53,12 +53,48 @@ const Account = () => {
 
       // Ensure we call response.json() only on a valid response
       const data = await response.json(); // Now we read the response body
-      console.log("Fetched user memories:", data);
+      console.log("Fetched user memories API call works:", data);
 
       return data.memories; // Return the user's memories
     } catch (error) {
       console.error("Error fetching user memories:", error);
       throw error; // Rethrow the error
+    }
+  };
+
+  const deleteMemory = async (id) => {
+    const token = localStorage.getItem("token"); // Get the authentication token
+    try {
+      const response = await fetch(`${API_URL}/memories/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete memory");
+      }
+
+      console.log("Deleted memory ID:", id); // Log the ID of deleted memory
+      return id; // Return the deleted memory's ID
+    } catch (error) {
+      console.error("Error deleting memory:", error);
+      throw error; // Let the caller handle the error
+    }
+  };
+
+  const handleDeleteClick = async (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this memory?"); // Confirmation dialog
+    if (confirmDelete) {
+      try {
+        const deletedId = await deleteMemory(id); // Call delete function
+        setUserMemories((prevMemories) => prevMemories.filter((memory) => memory.id !== deletedId)); // Update state to remove the deleted memory
+        alert("Memory deleted successfully."); // Confirm deletion
+      } catch (error) {
+        console.error("Failed to delete memory:", error);
+      }
     }
   };
 
@@ -86,12 +122,11 @@ const Account = () => {
     getUserLogin(); // Call the function to fetch user login details
   }, [navigate]);
 
-
-
   // Effect to fetch user memories after user login
   useEffect(() => {
     const fetchMemories = async () => {
-      if (userLogin) { // Only fetch if userLogin is available
+      if (userLogin) {
+        // Only fetch if userLogin is available
         const token = localStorage.getItem("token");
         const userId = userLogin.user.id; // Assuming user ID is in user.data
         try {
@@ -124,19 +159,23 @@ const Account = () => {
       </p>
       <h3>{userLogin.user.username}'s Memories of What's in SMF's Backpack:</h3>
       {userMemories.length > 0 ? (
-        // memories/users/${userId}/memories
         <ul>
           {userMemories.map((memory) => (
             <li key={memory.id}>
-                <div>{memory.title}</div>
-                <div>"{memory.description}"</div>
-                <img src={memory.image_url}/>
-                <div>{memory.dimension}</div>
-            </li> // Rendering the title of each memory
+              <div>{memory.title}</div>
+              <div>"{memory.description}"</div>
+              {memory.image_url ? (
+                <img src={memory.image_url} alt={memory.title} />
+              ) : (
+                <div>No Image Available</div> // Or you can leave this blank or provide a placeholder
+              )}
+              <div>{memory.dimension}</div>
+              <button onClick={() => handleDeleteClick(memory.id)}>Delete</button> {/* Delete button */}
+            </li>
           ))}
         </ul>
       ) : (
-        <p>No memories found.</p> // Message if no memories exist
+        <p>No memories found.</p>
       )}
     </div>
   );

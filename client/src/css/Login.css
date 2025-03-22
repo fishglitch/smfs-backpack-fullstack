@@ -1,0 +1,63 @@
+/* Login.css */
+
+/* Overall styling for the login page */
+.login-container {
+    width: 100%; /* Full width */
+    max-width: 800px; /* Max width for the container */
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Add padding around the container */
+    background-color: #07061d; /* Dark background color for consistency */
+    color: #ffffff; /* White text for contrast */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+/* Styling for headings */
+.login-container h2 {
+    text-align: center; /* Center the heading */
+    color: #35db44; /* Green color for the title */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+/* Form styling */
+.login-container form {
+    display: flex; /* Use flexbox for alignment */
+    flex-direction: column; /* Stack elements vertically */
+}
+
+/* Label styling */
+.login-container label {
+    margin-bottom: 10px; /* Space below labels */
+    font-weight: bold; /* Make labels bold */
+}
+
+/* Input styling */
+.login-container input {
+    padding: 10px; /* Padding inside input fields */
+    margin: 10px 0; /* Space around input fields */
+    border: 1px solid #35db44; /* Green border for input fields */
+    border-radius: 4px; /* Rounded corners */
+    background-color: #100e24; /* Darker background for input */
+    color: #ffffff; /* White text for inputs */
+}
+
+/* Button styling */
+.login-container button {
+    background-color: #35db44; /* Green background for the button */
+    color: #ffffff; /* White text */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px 15px; /* Padding for the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition effect */
+}
+
+.login-container button:hover {
+    background-color: #2cae39; /* Darker green on hover */
+}
+
+/* Error message styling */
+.login-container p {
+    color: red;  /* Red color for error messages */
+    text-align: center; /* Center error messages */
+}

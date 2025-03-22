@@ -23,7 +23,7 @@ const Login = ({ token, setToken, userId, setUserId }) => {
                 body: JSON.stringify({ username, password }) // Send username and password
             });
             const loggedInData = await response.json();
-            console.log("POST users/login!", loggedInData);
+            console.log("POST users/login!!!", loggedInData);
 
             if (loggedInData.token) {
                 // Save token to local storage
@@ -57,6 +57,8 @@ const Login = ({ token, setToken, userId, setUserId }) => {
                         <input
                             type="text"
                             id="username"
+                            autoComplete="username"  // Added autocomplete
+                            name="username" // Added name attribute
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             required
@@ -68,6 +70,9 @@ const Login = ({ token, setToken, userId, setUserId }) => {
                         Password:
                         <input
                             type="password"
+                            id="password" // Added id attribute
+                            autocomplete="current-password"  // Added autocomplete
+                            name="password" // Added name attribute
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required

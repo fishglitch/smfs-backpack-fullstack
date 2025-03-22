@@ -1,0 +1,77 @@
+/* Account.css */
+
+/* Overall styling for the account container */
+.account-container {
+    max-width: 800px; /* Limit the width of the account details */
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Add padding around the container */
+    background-color: #07061d; /* Dark background color for consistency */
+    color: #ffffff; /* White text for contrast */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+/* Account title styling */
+.account-container h2 {
+    text-align: center; /* Center the account title */
+    color: #35db44; /* Green color for the title */
+    margin-bottom: 20px; /* Space below the title */
+}
+
+/* Styling for user details */
+.account-container p {
+    font-size: 1.1em; /* Slightly larger text for user details */
+    margin: 10px 0; /* Space around paragraphs */
+    color: #ffffff; /* White color for text */
+}
+
+/* Memories heading styling */
+.account-container h3 {
+    margin-top: 20px; /* Space above the memories section */
+    color: #35db44; /* Green color for consistency */
+}
+
+/* Memory list styling */
+.account-container ul {
+    list-style-type: none; /* Remove default list styles */
+    padding: 0; /* Remove padding */
+}
+
+/* Individual memory item styling */
+.account-container li {
+    background-color: #100e24; /* Darker background for list item */
+    border: 1px solid #35db44; /* Green border around each memory item */
+    border-radius: 8px; /* Rounded corners for memory items */
+    padding: 15px; /* Padding within each item */
+    margin-bottom: 15px; /* Space between items */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transition effect */
+}
+
+.account-container li:hover {
+    transform: translateY(-2px); /* Slight lift on hover */
+    box-shadow: 0 4px 8px rgba(53, 219, 68, 0.5); /* Green shadow on hover */
+}
+
+/* Styling for images in memory items */
+.account-container img {
+    width: 100%; /* Make images fill the width of their container */
+    max-width: 300px; /* Set a maximum width for the images */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensure the image covers the area */
+    border-radius: 4px; /* Rounded corners for the image */
+}
+
+/* Delete button styling */
+.account-container button {
+    background-color: #ff4d4d; /* Red background for delete button */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px 15px; /* Add padding */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+.account-container button:hover {
+    background-color: #e60000; /* Darker red on hover */
+}

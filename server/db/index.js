@@ -176,12 +176,11 @@ const getMemoriesByUser = async (userId) => {
     throw error;
   }
 };
-
+// this is a model function, "memories model"
 // it is redundant to pass 'id' as a prop bc we generate it w/in func using uuid
 const createMemory = async ({
-
   // removed visibility,
-  title, imageUrl, description, dimension, userId
+  title, imageUrl, description, dimension, user_id
 }) => {
   try {
     const id = v4(); // Generate a new UUID for the user
@@ -191,7 +190,7 @@ const createMemory = async ({
             RETURNING *;
         `;
     const response = await client.query(SQL, [
-      id, title, imageUrl, description, dimension, userId
+      id, title, imageUrl, description, dimension, user_id
     ]);
     return response.rows[0];
   } catch (error) {

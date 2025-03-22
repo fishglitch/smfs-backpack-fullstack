@@ -57,6 +57,7 @@ const Register = ({ setToken }) => {
                             <input
                                 type="text"
                                 id="username"
+                                autoComplete="username"  // Added autocomplete
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 required
@@ -70,6 +71,7 @@ const Register = ({ setToken }) => {
                             <input
                                 type="password"
                                 id="password"
+                                autoComplete="new-password"  // Added autocomplete
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
@@ -82,6 +84,7 @@ const Register = ({ setToken }) => {
                             <input
                                 type="text"
                                 id="dimension"
+                                autoComplete="off"  // Added autocomplete
                                 value={dimension}
                                 onChange={(e) => setDimension(e.target.value)}
                             />

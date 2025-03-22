@@ -79,23 +79,23 @@ memoriesRouter.post("/", async (req, res, next) => {
   } = req.body;
 
   // Initialize memoryData object
-  const memoryData = {};
+  const memoryData = {
+    title,
+    imageUrl,
+    description,
+    dimension,
+    user_id: req.user.id
+  };
 
   try {
-    // Ensure req.user is defined and contains valid user ID
-    // if (!req.user || !req.user.id) {
-    //   return next({
-    //     name: "UnauthorizedError",
-    //     message: "You must be logged in to create a memory",
-    //   });
-    // }
 
-    // Populate memoryData object with relevant information
-    // memoryData.authorId = req.user.id; // Assuming req.user has been populated by requireUser
-    memoryData.title = title;
-    memoryData.imageUrl = imageUrl;
-    memoryData.description = description;
-    memoryData.dimension = dimension;
+        // Ensure req.user is defined and contains valid user ID
+    if (!req.user || !req.user.id) {
+      return next({
+        name: "UnauthorizedError",
+        message: "You must be logged in to create a memory",
+      });
+    }
     console.log("memory data", memoryData);
 
     // Create the memory
