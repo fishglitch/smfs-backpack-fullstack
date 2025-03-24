@@ -13,7 +13,7 @@ import {
   getUserById,
   getUserByUsername,
   createUser,
-  // updateUser,
+  updateUser,
   deleteUser,
 } from "../db/index.js"; // Change to ES Module import
 

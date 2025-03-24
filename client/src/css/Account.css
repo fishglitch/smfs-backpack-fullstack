@@ -61,10 +61,17 @@
     border-radius: 4px; /* Rounded corners for the image */
 }
 
-/* Delete button styling */
+.button-container {
+    display: flex;            /* Use flexbox layout */
+    flex-direction: column;  /* Stack buttons vertically */
+    gap: 10px;               /* Add space between buttons */
+    margin-top: 10px;        /* Optional: space above the button container */
+}
+
+/* Style adjustments for buttons (if needed) */
 .account-container button {
-    background-color: #ff4d4d; /* Red background for delete button */
-    color: white; /* White text */
+    background-color: #35db44; /* Green background for general buttons */
+    color: rgb(0, 0, 0); /* White text */
     border: none; /* Remove border */
     border-radius: 4px; /* Rounded corners */
     padding: 10px 15px; /* Add padding */
@@ -73,5 +80,5 @@
 }
 
 .account-container button:hover {
-    background-color: #e60000; /* Darker red on hover */
+    background-color: #2cb339; /* Darker green on hover */
 }
