@@ -12,13 +12,13 @@ import {
   getUserById,
   getUserByUsername,
   createUser,
-  // updateUser,
+  updateUser,
   deleteUser,
   getAllMemories,
   getMemoryById,
   getMemoriesByUser,
   createMemory,
-  // updateMemory,
+  updateMemory,
   deleteMemory,
 } from "../db/index.js";
 
@@ -303,14 +303,14 @@ async function testDB() {
 
     // createUser already used in createInitialUsers()
 
-    /* test db update User
-    console.log("Calling updateUser on users[0]");
-    const updateUserResult = await updateUser(users[0].id, {
-      name: "Schrodinger's Cat",
+    // test db update User
+    console.log("Calling updateUser on users[2]");
+    const updateUserResult = await updateUser(users[2].id, {
+      username: "Schrodinger's Cat",
       dimension: "fifth dimension",
     });
     console.log("Result:", updateUserResult);
-    */
+  
 
     // MEMORY METHODS
 
@@ -334,15 +334,15 @@ async function testDB() {
 
     // createMemory already used in createInitialMemories()
 
-    /* test db update Memory
+    // test db update Memory
     console.log("Calling updateMemory on memories[0]");
-    const updateMemoryResult = await updateMemory(memories[0].id, {
+    const updateMemoryResult = await updateMemory(memories[3].id, {
       title: "New Title",
       description: "Updated Content",
       dimension: "Updated dimension",
     });
     console.log("Result:", updateMemoryResult);
-    */
+   
 
     /* test db  update memory tags
     console.log("Calling updateMemory on memories[1], only updating tags");

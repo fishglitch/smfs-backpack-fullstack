@@ -8,7 +8,7 @@ import {
   getMemoryById,
   getMemoriesByUser,
   createMemory,
-  // updateMemory,
+  updateMemory,
   deleteMemory,
 } from "../db/index.js"; // Change to ES Module import
 
@@ -47,7 +47,7 @@ memoriesRouter.get("/:memoryId", async (req, res, next) => {
   }
 });
 
-// GET MEMORIES BY USER
+// GET MEMORIES BY USER ${API_URL}/memories/users/${userId}/memories
 memoriesRouter.get("/users/:userId/memories", async (req, res, next) => {
   const { userId } = req.params;
   console.log("userid", userId);
@@ -115,6 +115,28 @@ memoriesRouter.post("/", async (req, res, next) => {
     next({
       name: "InternalServerError",
       message: "An unexpected error occurred while creating memory",
+    });
+  }
+});
+
+// PATCH MEMORY (PARTIALLY UPDATE MEMORY)
+memoriesRouter.patch("/:memoryId", async (req, res, next) => {
+  const { memoryId } = req.params;
+  const updates = req.body; // Get any properties provided in the request body
+
+  try {
+    const updatedMemory = await updateMemory(memoryId, updates);
+
+    if (updatedMemory) {
+      res.send(updatedMemory); // Send back the updated memory object
+    } else {
+      res.status(404).send({ message: "Memory not found for this ID" });
+    }
+  } catch (error) {
+    console.error("Error updating memory:", error);
+    next({ 
+      name: "InternalServerError", 
+      message: "An unexpected error occurred while updating the memory" 
     });
   }
 });

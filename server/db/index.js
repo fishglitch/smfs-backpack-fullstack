@@ -95,7 +95,7 @@ const createUser = async ({ username, password, dimension }) => {
   }
 };
 
-/* update User
+// update User
 const updateUser = async (id, fields) => {
   const setString = Object.keys(fields)
     .map((key, index) => {
@@ -117,7 +117,7 @@ const updateUser = async (id, fields) => {
 
   return user;
 };
-*/
+
 
 // Delete User: Removes a user from the database and returns the number of deleted rows.
 const deleteUser = async (id) => {
@@ -204,12 +204,12 @@ const createMemory = async ({
 modifies fields based on CREATE TABLE memories
 - memoryId, a unique idenitfier/ db row where update will take place
 - updates, an obj containing new values updated from CREATE TABLE memories
+*/
 
-
-const updateMemory = async (memoryId, updates) => {
+const updateMemory = async (memoryId, updates) => { // do i need to also pass user_id?
   try {
     const {
-      title, imageUrl, description, dimension, visibility, author_nickname, tags,
+      title, imageUrl, description, dimension,
     } = updates;
     const fields = [];
     const values = [memoryId];
@@ -220,30 +220,22 @@ const updateMemory = async (memoryId, updates) => {
       fields.push(`title = $${++index}`);
       values.push(title);
     }
-    if (imageUrl) {
-      fields.push(`image_url = $${++index}`);
-      values.push(imageUrl);
-    }
     if (description) {
       fields.push(`description = $${++index}`);
       values.push(description);
+    }
+    if (imageUrl) {
+      fields.push(`image_url = $${++index}`);
+      values.push(imageUrl);
     }
     if (dimension) {
       fields.push(`dimension = $${++index}`);
       values.push(dimension);
     }
-    if (visibility) {
-      fields.push(`visibility = $${++index}`);
-      values.push(visibility);
-    }
-    if (author_nickname) {
-      fields.push(`author_nickname = $${++index}`);
-      values.push(author_nickname);
-    }
-    if (tags) {
-      fields.push(`tags = $${++index}`);
-      values.push(tags);
-    }
+    // if (user_id) {
+    //   fields.push(`user_id = $${++index}`);
+    //   values.push(user_id);
+    // }
 
     // check if fields are up to date
     if (fields.length === 0) {
@@ -264,7 +256,7 @@ const updateMemory = async (memoryId, updates) => {
     throw error("Could not update memory");
   }
 };
-*/
+
 
 // Delete Memory: Removes a memory from the database.
 const deleteMemory = async (id) => {
@@ -292,13 +284,13 @@ export {
   getUserById,
   getUserByUsername,
   createUser,
-  // updateUser,
+  updateUser,
   deleteUser,
 
   getAllMemories,
   getMemoryById,
   getMemoriesByUser,
   createMemory,
-  // updateMemory,
+  updateMemory,
   deleteMemory
 };

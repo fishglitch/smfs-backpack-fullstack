@@ -1,11 +1,9 @@
-import express from "express"; 
-import { config } from 'dotenv'; // Ensure environment variables are loaded
-config({ path: '../../.env' }); // Load environment variables
-
-import requireUser from "./utils.js"; 
-
+import express from "express";
+import { config } from "dotenv"; // Ensure environment variables are loaded
+config({ path: "../../.env" }); // Load environment variables
+import requireUser from "./utils.js";
 import jwt from "jsonwebtoken"; // Change to ES Module import
-import bcrypt from 'bcrypt';
+import bcrypt from "bcrypt";
 
 const usersRouter = express.Router();
 usersRouter.use(express.json());
@@ -18,6 +16,8 @@ import {
   // updateUser,
   deleteUser,
 } from "../db/index.js"; // Change to ES Module import
+
+/* ROUTE FUNCTIONS */
 
 // GET ALL USERS http://localhost:3000/api/users/
 usersRouter.get("/", async (req, res, next) => {
@@ -64,72 +64,63 @@ usersRouter.get("/:userId", async (req, res, next) => {
   }
 });
 
-// POST http://localhost:3000/api/users/login tested using {"username": "albert","password": "bertie99"}
+// POST LOGIN USER http://localhost:3000/api/users/login tested using {"username": "albert","password": "bertie99"}
 usersRouter.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
-      return res.status(400).json({
-          name: "MissingCredentialsError",
-          message: "Please supply both a username and password",
-      });
+    return res.status(400).json({
+      name: "MissingCredentialsError",
+      message: "Please supply both a username and password",
+    });
   }
 
   try {
-      const user = await getUserByUsername(username);
+    const user = await getUserByUsername(username);
 
-      if (user && (await bcrypt.compare(password, user.password))) {
-          // Check if JWT_SECRET is defined
-          // if (!process.env.JWT_SECRET) {
-          //     return res.status(500).json({ message: 'Server configuration error: Missing JWT_SECRET.' });
-          // }
-          
-          const token = jwt.sign(
-              { id: user.id, username },
-              process.env.JWT_SECRET || "secret",
-              { expiresIn: '1w' }
-          );
+    if (user && (await bcrypt.compare(password, user.password))) {
+      // Check if JWT_SECRET is defined
+      const token = jwt.sign(
+        { id: user.id, username },
+        process.env.JWT_SECRET || "secret",
+        { expiresIn: "1w" }
+      );
 
-          res.json({
-              message: "You're logged in!",
-              token, 
-              userId: user.id
-          });
-      } else {
-          return res.status(401).json({
-              name: "IncorrectCredentialsError",
-              message: "Username or password is incorrect",
-          });
-      }
+      res.json({
+        message: "You're logged in!",
+        token,
+        userId: user.id,
+      });
+    } else {
+      return res.status(401).json({
+        name: "IncorrectCredentialsError",
+        message: "Username or password is incorrect",
+      });
+    }
   } catch (error) {
-      console.log(error);
-      next(error);
+    console.log(error);
+    next(error);
   }
 });
 
-
-// functional!! yay!! GET USER via auth (through token)
+// GET USER VIA AUTH (through token)
 usersRouter.get("/auth/me", requireUser, async (req, res, next) => {
   try {
-      const user = await getUserById(req.user.id); // Use the user ID from the decoded token
-      if (!user) {
-          return res.status(404).send({ message: "User not found" });
-      }
-      res.send({ user }); // Send user data back
+    const user = await getUserById(req.user.id); // Use the user ID from the decoded token
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+    res.send({ user }); // Send user data back
   } catch (ex) {
-      next(ex); // Handle error
+    next(ex); // Handle error
   }
 });
 
-
-
 // POST USER (CREATE USER) http://localhost:3000/api/users/register
-// removed display_name,email
 usersRouter.post("/register", async (req, res, next) => {
-  const { username, password,  dimension,  } = req.body;
+  const { username, password, dimension } = req.body;
 
-  // Validate user input
-  if (!username || !password || !dimension) {
+  if (!username || !password || !dimension) { // Validate user input
     return res.status(400).json({
       // changed send to json to see if server can return JSON response, not HTML content type
       name: "Missing Fields Error",
@@ -138,8 +129,7 @@ usersRouter.post("/register", async (req, res, next) => {
     });
   }
 
-  try {
-    // check if user already exists
+  try { // check if user already exists
     const existingUser = await getUserByUsername(username);
 
     if (existingUser) {
@@ -149,14 +139,11 @@ usersRouter.post("/register", async (req, res, next) => {
       });
     }
 
-    // create new user
-    //removed display_name, email
-    const user = await createUser(
-      {
+    // create new user; removed display_name, email
+    const user = await createUser({
       username,
       password, // check if hased the pw in createUser
-      dimension
-
+      dimension,
     });
 
     // generate token
@@ -164,7 +151,7 @@ usersRouter.post("/register", async (req, res, next) => {
       {
         id: user.id,
         username,
-        dimension
+        dimension,
       },
       process.env.JWT_SECRET || "shhh",
       {
@@ -178,18 +165,42 @@ usersRouter.post("/register", async (req, res, next) => {
     });
   } catch (error) {
     console.error(error); // logging error for debugging
-    res.status(500).json({
-      // Ensure any error returns JSON
+    res.status(500).json({ // Ensure any error returns JSON
       name: error.name || "Internal Error",
       message: error.message || "An unexpected error occurred",
     }); // improve error handling
   }
 });
 
-/*Route to delete a user by ID using DELETE HTTP method
-To include a return body for the deleteUser function, you can modify it so that it checks whether any rows were actually affected by the deletion operation. In PostgreSQL (which your SQL syntax suggests you're using), the DELETE command will not return information about the deleted user directly, but it will return a count of how many rows were deleted.
+// PATCH USER (UPDATE USER) http://localhost:3000/api/users/:userId
+usersRouter.patch("/:userId", requireUser, async (req, res, next) => {
+  const { userId } = req.params; 
+  const updates = req.body; 
 
+  // Only permit the authenticated user to update their own record
+  if (req.user.id !== userId) {
+    return res.status(403).send({ message: "You do not have permission to update this user." });
+  }
 
+  try {
+    const updatedUser = await updateUser(userId, updates); 
+
+    if (!updatedUser) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    res.send({ user: updatedUser });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    next(error); 
+  }
+});
+
+/* DELETE USER
+To include a return body for the deleteUser function, 
+modify it to check whether any rows were actually affected by the deletion operation
+In SQL the DELETE command will not return information about the deleted user directly, 
+but will return a count of how many rows were deleted.
 */
 usersRouter.delete("/:userId", requireUser, async (req, res, next) => {
   const { userId } = req.params;
@@ -201,18 +212,16 @@ usersRouter.delete("/:userId", requireUser, async (req, res, next) => {
     // }
 
     const deletionCount = await deleteUser(userId);
-    
+
     if (deletionCount === 0) {
-      return res.status(404).send({ error: 'User not found' });
+      return res.status(404).send({ error: "User not found" });
     }
 
     // User deleted successfully
     res.status(204).send(); // No Content - Successfully deleted
   } catch (error) {
-    console.error('Error deleting user:', error);
-    // You might want to handle specific error messages here,
-    // but generally, the error should be logged and a generic message sent back.
-    res.status(500).send({ error: 'Failed to delete user' });
+    console.error("Error deleting user:", error);
+    res.status(500).send({ error: "Failed to delete user" });
   }
 });
 
