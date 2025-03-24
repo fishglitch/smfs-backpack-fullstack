@@ -171,8 +171,8 @@ const createInitialMemories = async (users) => {
   try {
     console.log("Starting to retrieve memories...");
 
-    await createMemory({
-      userId: 1,
+    await createMemory({ // granny 
+      user_id: 1,
       title: "laptop stand",
       imageUrl:
         "https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/9e9962e8-db12-4dd5-ac2b-cdf408dc6bf1/roost-laptop-stand.png?content-type=image%2Fpng",
@@ -184,8 +184,8 @@ const createInitialMemories = async (users) => {
       // tags: ["#gadget", "#technology"],
     });
 
-    await createMemory({
-      userId: 1,
+    await createMemory({ // granny 
+      user_id: 1,
       title: '17" Macbook Pro Mid 2012',
       imageUrl:
         "https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/96bf2e18-67a5-4372-849c-ea912cc80f11/macbook-pro-mid-2012.png?content-type=image%2Fpng",
@@ -197,7 +197,7 @@ const createInitialMemories = async (users) => {
     });
 
     await createMemory({
-      userId: 2,
+      user_id: 2,
       title: "iFixit Repair Business Toolkit",
       imageUrl: "https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/ec3d2ce3-ab4a-4a91-921a-ea05f6dde318/ifixit-repair-business-toolkit.png?content-type=image%2Fpng",
       description:
@@ -209,7 +209,7 @@ const createInitialMemories = async (users) => {
     });
 
     await createMemory({
-      userId: 2,
+      user_id: 2,
       title: "LAN parties",
       imageUrl:"",
       description:
@@ -221,7 +221,7 @@ const createInitialMemories = async (users) => {
     });
 
     await createMemory({
-      userId: 2,
+      user_id: 2,
       title: "eagle scout",
       imageUrl:"https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/7e26b7f6-4409-4f56-acfa-f2bf8dbbbf7d/Eagle_Scout_medal_%28Boy_Scouts_of_America%29.png?content-type=image%2Fpng",
       description:
@@ -232,20 +232,20 @@ const createInitialMemories = async (users) => {
       // tags: ["#camping", "#technology", "#childhood"],
     });
     
-    await createMemory({
-      userId: 2,
+    await createMemory({ // granny 
+      user_id: 1,
       title: "focaccia",
       imageUrl:"https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/2d95ed7a-6654-457f-b53c-0d9fde7d627c/focaccia-bread.png?content-type=image%2Fpng",
       description:
         "talented and precise at making bread",
       // display_name: users[2].display_name,
-      dimension: users[2].dimension,
+      dimension: users[1].dimension,
       // visibility: "public",
       // tags: ["#camping", "#technology", "#childhood"],
     });
 
-    await createMemory({
-      userId: 1,
+    await createMemory({ // granny 
+      user_id: 1,
       title: "movie quotes",
       imageUrl:"",
       description:

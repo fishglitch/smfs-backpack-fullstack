@@ -57,8 +57,8 @@ const Memory = () => {
           <div className="memory-desc">"{memory.memory.description}"</div>
           <div className="memory-dimension">-{memory.memory.dimension}</div>
           <img 
-            src={memory.image_url || defaultImage}
-            alt={`${memory.title} item of memory`}
+            src={memory.memory.image_url || defaultImage}
+            alt={`${memory.memory.title} item of memory`}
           />
           <button onClick={handleBackClick} >Back to Memories</button>
         </div>
