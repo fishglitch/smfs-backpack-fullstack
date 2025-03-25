@@ -174,11 +174,13 @@ usersRouter.post("/register", async (req, res, next) => {
 
 // PATCH USER (UPDATE USER) http://localhost:3000/api/users/:userId
 usersRouter.patch("/:userId", requireUser, async (req, res, next) => {
-  const { userId } = req.params; 
+  const { userId } = req.params;  // this will always be a string value, reqUser will return an integer
   const updates = req.body; 
 
+  console.log("***testing***", typeof userId, "//", typeof req.user.id); // testing strict comparisons of number vs string
+
   // Only permit the authenticated user to update their own record
-  if (req.user.id !== userId) {
+  if (req.user.id !== +userId) { // !== === strict comparisons will always compare type and value
     return res.status(403).send({ message: "You do not have permission to update this user." });
   }
 
