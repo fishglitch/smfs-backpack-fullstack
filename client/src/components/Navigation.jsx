@@ -49,7 +49,7 @@ const Navigation = ({ token, setToken, getAllUsers, getAllMemories }) => {
   
     return (
       <nav className="navigation">
-        <div>
+        <div className="nav-links">
           <Link to="/">Home</Link>
           {/* Ternary operator below means: 
           "If there is a token (indicating the user is logged in), 

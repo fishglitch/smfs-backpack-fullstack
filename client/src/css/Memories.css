@@ -1,17 +1,20 @@
 /* Memories.css */
 
-/* Using grid layout for responsive items */
+/* Overall container for the memories section */
 .memories-container {
-    max-width: 100%;
+    width: 100%; /* Full width */
+    max-width: 100%; /* Ensure it spans the viewport */
     display: grid; /* Use grid layout */
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid with a max width */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid with flexible sizes */
     gap: 20px; /* Space between grid items */
     padding: 20px; /* Padding around the container */
+    margin: 0 auto; /* Center the container */
 }
 
+/* Memory item styling */
 .memory-item {
     position: relative; /* Positioning for the overlay */
-    border: 1px solid #011f14;  /* Border around each memory item */
+    border: 1px solid #35db44; /* Green border around each memory item */
     border-radius: 8px; /* Rounded corners */
     padding: 15px; /* Padding inside each memory item */
     text-align: center; /* Center text within memory item */
@@ -22,57 +25,47 @@
 }
 
 .memory-item:hover {
-    transform: scale(1.15); /* Slightly enlarge on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
     box-shadow: 0 10px 10px rgba(35, 219, 69, 0.3); /* Add shadow on hover */
 }
 
-.memory-item:hover::after {
-    content: ''; /* Create an empty pseudo-element */
-    position: absolute; /* Position it relative to the parent */
-    top: 0; /* Align to the top */
-    left: 0; /* Align to the left */
-    right: 0; /* Extend to the right */
-    bottom: 0; /* Extend to the bottom */
-    background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent white for the glazed effect */
-    border-radius: 8px; /* Match the rounded corners */
-    transition: opacity 0.3s ease; /* Smooth transition */
-}
-
+/* Image settings inside memory items */
 .memory-item img {
-    width: 70%; /* Make image responsive to parent width */
+    width: 100%; /* Make image responsive to parent width */
     height: auto; /* Maintain aspect ratio */
-    max-height: 200px; /* Optional: set a maximum height */
+    max-height: 200px; /* Set maximum height */
     object-fit: cover; /* Ensure the image covers the area */
     border-radius: 4px; /* Rounded corners for the image */
 }
 
+/* Memory title styling */
 .memory-title {
     font-weight: bold; /* Bold title text */
-    font-size: 1.2em; /* Slightly larger font for title */
+    font-size: 1.5em; /* Font size for title text */
     margin: 10px 0; /* Space around title */
+    color: #35db44; /* Match the title color with the theme */
 }
 
+/* Memory description styling */
 .memory-desc {
-    font-style: italic; /* Make description italic */
-    color: #555; /* Dark gray color for text */
+    font-style: italic; /* Italics for description */
+    color: #aaaaaa; /* Gray color for text */
     font-size: 1em; /* Set font size for description */
 }
 
-/*THIS IS FOR THE ADD MEMORY BUTTON*/
-
+/* Styling for the Add Memory button */
 .add-memory-button {
     position: relative;
     padding: 15px;
     border-radius: 90%; /* Rounded border */
-    background-color: #2cdb3b; /* Background color for contrast */
-    color: #000000; /* Text color */
+    background-color: #35db44; /* Green background color for contrast */
+    color: #000000; /* Black text */
     text-align: center; /* Center text within the button */
-    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Increase duration for smoother transition */
+    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smooth transition for hover effects */
     cursor: pointer; /* Change cursor to pointer */
     overflow: hidden; /* Hide overflow for the overlay */
     border: none; /* Remove default border */
 }
-
 
 /* Glaze effect on hover */
 .add-memory-button::after {
@@ -94,17 +87,21 @@
 }
 
 .add-memory-button:hover::after {
-    content: ''; /* Create an empty pseudo-element */
-    position: absolute; /* Position it relative to the parent */
-    top: 0; /* Align to the top */
-    left: 0; /* Align to the left */
-    right: 0; /* Extend to the right */
-    bottom: 0; /* Extend to the bottom */
-    background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent white for the glazed effect */
-    border-radius: 8px; /* Match the rounded corners */
-    transition: opacity 0.3s ease; /* Smooth transition */
+    opacity: 1; /* Show glaze effect on hover */
 }
 
-.add-memory-button:hover::after {
-    opacity: 1; /* Show the glaze effect on hover */
+/* Media Query for Responsiveness */
+@media (max-width: 768px) {
+    .memories-container {
+        padding: 10px; /* Less padding on smaller screens */
+    }
+
+    /* Memory item styling adjustments if needed... */
+    .memory-title {
+        font-size: 1.2em; /* Adjust title font size for smaller screens */
+    }
+
+    .memory-desc {
+        font-size: 0.9em; /* Adjust description font size */
+    }
 }

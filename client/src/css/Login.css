@@ -4,12 +4,13 @@
 .login-container {
     width: 100%; /* Full width */
     max-width: 800px; /* Max width for the container */
-    margin: 0 auto; /* Center the container */
+    margin: 10% auto; /* Center the container */
     padding: 40px; /* Increased padding around the container for more space */
     background-color: #07061d; /* Dark background color for consistency */
     color: #ffffff; /* White text for contrast */
-    border-radius: 8px; /* Rounded corners */
+    border-radius: 15px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+
   }
   
   /* Styling for headings */

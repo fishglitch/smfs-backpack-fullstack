@@ -264,7 +264,7 @@ const createInitialMemories = async (users) => {
 
     await createMemory({
       user_id: 2,
-      title: "Workshap Knife Sharpener Kit",
+      title: "Workshape Knife Sharpener Kit",
       imageUrl: "https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/88d2089e-11e3-4bac-89e0-5fcfb1b994fb/worksharp-knife-sharpener-kit.png?content-type=image%2Fpng",
       description: "he used and favored this sharpening set because of its ergonimic design, and also still kept an eye out for and researched other models",
       dimension: users[1].dimension

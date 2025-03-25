@@ -1,15 +1,21 @@
 /* Navigation.css */
 .navigation {
     display: flex; /* Use flexbox for layout */
-    justify-content: center; /* Center children horizontally */
+    justify-content: space-between; /* Spread items across the nav */
     align-items: center; /* Center children vertically */
-    background-color: rgb(2, 10, 3); /* Set background to black */
-    width: 100%; /* Make sure the navigation bar takes the full width */
-    padding: 10px 0; /* Adjust padding to fit your design */
+    background-color: rgb(2, 10, 3); /* Set background color */
+    width: 100%; /* Full width */
+    padding: 10px 20px; /* Padding for top/bottom and a bit more horizontal space */
     position: fixed; /* Stick to the top */
     top: 0; /* Position it at the top of the viewport */
     left: 0; /* Align to the left of the viewport */
-    z-index: 1000; /* High z-index to keep it above other content */
+    z-index: 1000; /* Ensure it stays above other content */
+}
+
+.nav-links {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-evenly; /* Space links evenly */
+    flex-grow: 1; /* Allow the links div to flex and grow */
 }
 
 .navigation a,
@@ -17,7 +23,7 @@
     text-decoration: none; /* Remove underline from links */
     color: rgb(255, 255, 255); /* White text color */
     margin: 0 15px; /* Horizontal space between items */
-    padding: 10px 15px; /* Padding inside the buttons */
+    padding: 10px; /* Padding inside the buttons */
     border: none; /* Remove border for buttons */
     border-radius: 5px; /* Rounded corners */
     cursor: pointer; /* Change cursor to pointer */
@@ -28,8 +34,9 @@
 
 .navigation a:hover,
 .navigation button:hover {
-    background-color: rgba(16, 194, 55, 0.2); /* Light background on hover */
-    transform: scale(1.05); /* Slightly enlarge on hover */
+    background-color: #05340a; /* Darker green on hover */
+    color: #35db44; /* Change text color to green on hover */
+    transform: scale(1.2); /* Enlarge the button slightly on hover */
 }
 
 /* Media Query for Responsiveness */
@@ -37,10 +44,14 @@
     .navigation {
         flex-direction: column; /* Stack items vertically on smaller screens */
     }
-    
+
+    .nav-links {
+        justify-content: center; /* Center links on smaller screens */
+    }
+
     .navigation a,
     .navigation button {
         margin: 10px 0; /* Increase margin for spacing on small screens */
-        font-size: 1.8em; /* Slightly smaller font size on smaller screens, adjust as needed */
+        font-size: 1.8em; /* Slightly smaller font size on smaller screens */
     }
 }

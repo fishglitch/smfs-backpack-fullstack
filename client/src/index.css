@@ -13,13 +13,20 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 body {
+
+  /* Set the background image */
+  background-image: url('https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/6655d8b2-b216-43c3-a4d6-c7555a67957d/korok+forest+wallpaper+Medium.png?content-type=image%2Fpng');
+
+  /* Make the image cover the entire viewport */
+  background-size: cover;
+  background-position: center center; 
+  background-repeat: no-repeat;
+  background-color: #061700;
+  height: 100vh; /* Ensure the height fills the viewport */
   margin: 0;
   display: flex; /* Use flexbox for layout */
   flex-direction: column; /* Stack from top to bottom */
-  justify-content: center; /* Center items vertically */
-  align-items: center; /* Center items horizontally */
   min-width: 320px;
   min-height: 100vh; /* Fill 100% of the viewport height */
 }

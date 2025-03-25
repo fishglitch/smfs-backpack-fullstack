@@ -14,6 +14,20 @@ body {
   margin: 0;
 }
 
+.backpack-prompt {
+  display: flex;
+  height: 100%; /* Make it take full height of the screen */
+  justify-content: center; /* Center content horizontally */
+  margin: 8% 0; /* Margin above and below */
+}
+
+.logo-container {
+  display: flex; /* Enable flexbox for logo and music player */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  margin: 30px 0; /* Margin above and below */
+}
+
 h1 {
   text-align: center; /* Center the main heading */
   margin-bottom: 20px; /* Add a bit of spacing below the title */
@@ -24,21 +38,6 @@ h1 {
   max-width: 40%; /* Set a maximum width for the backpack */
   max-height: 100%; /* Max height to maintain proportions */
 }
-
-.backpack-prompt {
-  display: flex;
-  align-items: center; /* Center children horizontally */
-  justify-content: center; /* Center children vertically */
-  height: 100%; /* Make it take full height of the screen */
-}
-
-.logo-container {
-  display: flex; /* Enable flexbox for logo and music player */
-  justify-content: center; /* Center content horizontally */
-  align-items: center; /* Center content vertically */
-  margin: 30px 0; /* Margin above and below */
-}
-
 /* Style for the music player */
 .music-player {
   display: flex; /* Use flexbox for layout */
@@ -52,12 +51,6 @@ h1 {
   height: 100px; /* Fixed height for the iframe */
 }
 
-.container {
-  margin: 0 auto; /* Center the container */
-  padding: 20px; /* Add padding */
-  display: flex; /* Maintain flex layout */
-}
-
 /* Optional: Add a media query for smaller screens */
 @media (max-width: 768px) {
   #logo-image {
@@ -68,7 +61,4 @@ h1 {
       margin-left: 10px; /* Reduce margin for smaller screens */
   }
 }
-.rounded-iframe {
-  border-radius: 25%; /* Adjust the value to control roundness */
-  overflow: hidden; /* This is optional but helps with some browsers */
-}
+
