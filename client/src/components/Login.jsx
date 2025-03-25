@@ -49,7 +49,7 @@ const Login = ({ token, setToken, userId, setUserId }) => {
 
     return (
         <div className="login-container">
-            <h2>Login</h2>
+            <h1>Login</h1>
             <form onSubmit={handleLogin}>
                 <div>
                     <label>

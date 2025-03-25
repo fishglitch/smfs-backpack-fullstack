@@ -3,33 +3,44 @@
     display: flex; /* Use flexbox for layout */
     justify-content: center; /* Center children horizontally */
     align-items: center; /* Center children vertically */
-    background-color: black; /* Set background to black */
-    padding: 10px 20px; /* Padding around the nav items */
+    background-color: rgb(2, 10, 3); /* Set background to black */
+    width: 100%; /* Make sure the navigation bar takes the full width */
+    padding: 10px 0; /* Adjust padding to fit your design */
+    position: fixed; /* Stick to the top */
+    top: 0; /* Position it at the top of the viewport */
+    left: 0; /* Align to the left of the viewport */
+    z-index: 1000; /* High z-index to keep it above other content */
 }
 
 .navigation a,
 .navigation button {
     text-decoration: none; /* Remove underline from links */
-    color: white; /* White text color */
+    color: rgb(255, 255, 255); /* White text color */
     margin: 0 15px; /* Horizontal space between items */
     padding: 10px 15px; /* Padding inside the buttons */
     border: none; /* Remove border for buttons */
     border-radius: 5px; /* Rounded corners */
     cursor: pointer; /* Change cursor to pointer */
     transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for hover effects */
+    font-family: 'IM Fell Great Primer', serif; /* Use the Google Font for links/buttons */
+    font-size: 2em; /* Match the font size to h2 globally */
 }
 
 .navigation a:hover,
 .navigation button:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Light background on hover */
+    background-color: rgba(16, 194, 55, 0.2); /* Light background on hover */
     transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
-/* Optional Styles */
-.navigation button {
-    background-color: transparent; /* Make button background transparent */
-}
-
-.navigation button:hover {
-    background-color: rgba(255, 255, 255, 0.2); /* Same hover effect for buttons */
+/* Media Query for Responsiveness */
+@media (max-width: 768px) {
+    .navigation {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+    }
+    
+    .navigation a,
+    .navigation button {
+        margin: 10px 0; /* Increase margin for spacing on small screens */
+        font-size: 1.8em; /* Slightly smaller font size on smaller screens, adjust as needed */
+    }
 }

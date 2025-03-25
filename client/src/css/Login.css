@@ -5,59 +5,95 @@
     width: 100%; /* Full width */
     max-width: 800px; /* Max width for the container */
     margin: 0 auto; /* Center the container */
-    padding: 20px; /* Add padding around the container */
+    padding: 40px; /* Increased padding around the container for more space */
     background-color: #07061d; /* Dark background color for consistency */
     color: #ffffff; /* White text for contrast */
     border-radius: 8px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-}
-
-/* Styling for headings */
-.login-container h2 {
+  }
+  
+  /* Styling for headings */
+  .login-container h1 {
     text-align: center; /* Center the heading */
     color: #35db44; /* Green color for the title */
     margin-bottom: 20px; /* Space below the heading */
-}
-
-/* Form styling */
-.login-container form {
+    font-size: 4.5em; /* Increase heading size for visibility */
+  }
+  
+  /* Form styling */
+  .login-container form {
     display: flex; /* Use flexbox for alignment */
     flex-direction: column; /* Stack elements vertically */
-}
-
-/* Label styling */
-.login-container label {
+    align-items: stretch; /* Stretch items to full width */
+  }
+  
+  /* Label styling */
+  .login-container label {
     margin-bottom: 10px; /* Space below labels */
     font-weight: bold; /* Make labels bold */
-}
-
-/* Input styling */
-.login-container input {
-    padding: 10px; /* Padding inside input fields */
+    font-size: 2.2em; /* Increased label font size */
+    color: #35db44; /* Match label color to theme */
+  }
+  
+  /* Input styling */
+  .login-container input {
+    padding: 15px; /* Increased padding inside input fields */
     margin: 10px 0; /* Space around input fields */
     border: 1px solid #35db44; /* Green border for input fields */
     border-radius: 4px; /* Rounded corners */
     background-color: #100e24; /* Darker background for input */
     color: #ffffff; /* White text for inputs */
-}
-
-/* Button styling */
-.login-container button {
+    font-size: 1.2em; /* Increase text size for inputs */
+    width: 100%; /* Make input fields full width for better alignment */
+    font-family: 'IM Fell Great Primer', serif; /* Use the Google Font */
+  }
+  
+  /* Button styling */
+  .login-container button {
     background-color: #35db44; /* Green background for the button */
-    color: #ffffff; /* White text */
+    color: #000000; /* Black text */
     border: none; /* Remove border */
     border-radius: 4px; /* Rounded corners */
-    padding: 10px 15px; /* Padding for the button */
+    padding: 15px 20px; /* Increased padding for the button */
     cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s ease; /* Smooth transition effect */
-}
-
-.login-container button:hover {
-    background-color: #2cae39; /* Darker green on hover */
-}
-
-/* Error message styling */
-.login-container p {
-    color: red;  /* Red color for error messages */
+    transition: all 0.3s ease; /* Smooth transition for all properties */
+    font-size: 3.2em; /* Increase button font size for visibility */
+    margin-top: 20px; /* Added margin to provide space from the input above */
+    align-self: center; /* Center the button horizontally */
+    font-weight: bold; /* Make the button text bold */
+  }
+  
+  /* Button hover effect */
+  .login-container button:hover {
+    background-color: #05340a; /* Darker green on hover */
+    color: #35db44; /* Change text color to green on hover */
+    transform: scale(1.2); /* Enlarge the button slightly on hover */
+  }
+  
+  /* Error message styling */
+  .login-container p {
+    color: rgb(185, 13, 13); /* Red color for error messages */
     text-align: center; /* Center error messages */
-}
+  }
+  
+  /* Media Query for Responsiveness */
+  @media (max-width: 768px) {
+    .login-container {
+      padding: 20px; /* Less padding on smaller screens */
+      max-width: 90%; /* Use more width on mobile */
+    }
+  
+    .login-container h1 {
+      font-size: 2em; /* Adjust font size for headers on small screens */
+    }
+  
+    .login-container label {
+      font-size: 1em; /* Adjust font size for labels */
+    }
+  
+    .login-container input {
+      font-size: 1em; /* Adjust input font size */
+    }
+  
+    .login-container button {
+      font-size: 1

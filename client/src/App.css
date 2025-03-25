@@ -1,46 +1,74 @@
 /* App.css */
 
 body {
-  font-family: Arial, sans-serif; /* Global font for the app */
 
   /* Set the background image */
   background-image: url('https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/6655d8b2-b216-43c3-a4d6-c7555a67957d/korok+forest+wallpaper+Medium.png?content-type=image%2Fpng');
-  
+
   /* Make the image cover the entire viewport */
   background-size: cover;
-
-  /* Position the background image (optional) */
   background-position: center center; 
-
-  /* Prevent the background from repeating */
   background-repeat: no-repeat;
-
-  /* Set a fallback background color (optional) */
   background-color: #061700;
-
-  /* Set height to 100% to cover entire page */
-  height: 100vh;
+  height: 100vh; /* Ensure the height fills the viewport */
   margin: 0;
 }
 
 h1 {
   text-align: center; /* Center the main heading */
+  margin-bottom: 20px; /* Add a bit of spacing below the title */
 }
 
 #logo-image {
-  max-width: 50%; /* Make the logo responsive */
-  height: auto; /* Maintain aspect ratio */
+  width: auto; /* Maintain aspect ratio */
+  max-width: 40%; /* Set a maximum width for the backpack */
+  max-height: 100%; /* Max height to maintain proportions */
+}
+
+.backpack-prompt {
+  display: flex;
+  align-items: center; /* Center children horizontally */
+  justify-content: center; /* Center children vertically */
+  height: 100%; /* Make it take full height of the screen */
 }
 
 .logo-container {
-  display: flex;       /* Enable flexbox layout */
+  display: flex; /* Enable flexbox for logo and music player */
   justify-content: center; /* Center content horizontally */
-  margin: 20px 0;     /* Optionally add some vertical margin */
+  align-items: center; /* Center content vertically */
+  margin: 30px 0; /* Margin above and below */
+}
+
+/* Style for the music player */
+.music-player {
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center children */
+  margin-left: 20px; /* Space between backpack and music player */
+}
+
+.music-iframe {
+  width: 200px; /* Fixed width for the iframe */
+  height: 100px; /* Fixed height for the iframe */
 }
 
 .container {
-  max-width: 100%; /* Limit the width of the main content */
   margin: 0 auto; /* Center the container */
   padding: 20px; /* Add padding */
-  display: flex;       /* Enable flexbox layout */
+  display: flex; /* Maintain flex layout */
+}
+
+/* Optional: Add a media query for smaller screens */
+@media (max-width: 768px) {
+  #logo-image {
+      max-width: 80%; /* Adjust max-width for smaller screens */
+  }
+
+  .music-player {
+      margin-left: 10px; /* Reduce margin for smaller screens */
+  }
+}
+.rounded-iframe {
+  border-radius: 25%; /* Adjust the value to control roundness */
+  overflow: hidden; /* This is optional but helps with some browsers */
 }

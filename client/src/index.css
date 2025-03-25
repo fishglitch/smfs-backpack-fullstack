@@ -1,7 +1,6 @@
-/* css of parent component App.jsx here */
-
+/* index.css */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "IM Fell Great Primer", serif; /* Use Google Font globally */
   line-height: 1.5;
   font-weight: 400;
 
@@ -15,25 +14,34 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack from top to bottom */
+  justify-content: center; /* Center items vertically */
+  align-items: center; /* Center items horizontally */
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 100vh; /* Fill 100% of the viewport height */
 }
 
 h1 {
+  font-size: 4.2em;
+  line-height: 1.1;
+}
+
+h2 {
   font-size: 3.2em;
+  line-height: 1.1;
+}
+
+h1,
+h2,
+p {
+  text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5); /* Dark shadow for better contrast */
+}
+
+p {
+  font-size: 2em;
   line-height: 1.1;
 }
 
@@ -43,14 +51,12 @@ button {
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
-  font-family: inherit;
+  font-family: inherit; /* Inherit from the root font */
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
-}
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -61,9 +67,11 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
-    color: #747bff;
+    color: #033d29;
   }
+
   button {
     background-color: #f9f9f9;
   }

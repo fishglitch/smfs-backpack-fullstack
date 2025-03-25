@@ -13,95 +13,110 @@ import "./App.css";
 export const API_URL = `http://localhost:3000/api`;
 
 // Default image URL that will be displayed if no image is provided
-export const defaultImage = "https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/83514450-1942-4e9a-ba36-67754e5c3418/asset-rick-morty-portal-v1.png?content-type=image%2Fpng"; // Change this to your actual default image URL
-
-
+export const defaultImage =
+  "https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/83514450-1942-4e9a-ba36-67754e5c3418/asset-rick-morty-portal-v1.png?content-type=image%2Fpng"; // Change this to your actual default image URL
 
 function App() {
   const [token, setToken] = useState(null);
   console.log("token", token);
-//  const [isCreating, setIsCreating] = useState(false); // Added to manage memory creation
+  //  const [isCreating, setIsCreating] = useState(false); // Added to manage memory creation
 
-const [userId, setUserId] = useState();
+  const [userId, setUserId] = useState();
 
-// userId={userId} setUserId={setUserId}
+  // userId={userId} setUserId={setUserId}
 
-// Component for logged-in users
-const LoggedInView = ({ token, setToken }) => (
-  <>
-  <Memories token={token} setToken={setToken} />
+  // Component for logged-in users
+  const LoggedInView = ({ token, setToken }) => (
+    <>
+      <Memories token={token} setToken={setToken} />
+    </>
+  );
 
-  </>
-);
+  // Component for logged-out users
+  const LoggedOutView = () => (
+    <div className="backpack-prompt">
+      <div className="logo-container">
+        <img
+          id="logo-image"
+          src="https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/0ff75922-3cc9-487d-b4f2-767f72be03c8/asset-nomatic-backpack-darker.png?content-type=image%2Fpng"
+          alt="Black Backpack"
+        />
 
-// Component for logged-out users
-const LoggedOutView = () => (
-  <div className="backpack-prompt">
-    <h1>What's in SMF's backpack?</h1>
-    <div className="logo-container">
-      <img
-        id="logo-image"
-        src="https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/7616a052-17c6-48d3-a6f2-0bf39e65faae/asset-nomatic-backpack.png?content-type=image%2Fpng"
-        alt="Black Backpack"
-      />
-      <div>
-      <h2>Please log in to remember.</h2>
-
-      <h1>Welcome to My Music Player</h1>
-
-<audio controls>
-    <source src="https://dl.dropboxusercontent.com/scl/fi/xw4iouxgw08bep35flxas/EAGLEBABEL-Oasis-Effect-Demo-Disc-Vol.-1-01-Opalescence-I.mp3" type="audio/mpeg"/>
-    Your browser does not support the audio element.
-</audio>
-
-<p>Click the play button to listen to the track!</p>
+        <div className="music-player">
+          <h1>What's in SMF's Backpack?</h1>
+          <h2>
+            <i>Please log in to remember.</i>
+          </h2>
+          <iframe
+            width="300"
+            height="100"
+            src="https://www.youtube.com/embed/lB2ykjWTnsg?si=tP6pOrPbIo3FiT2M"
+            title="Opalescence I"
+            frameBorder="0"
+            style={{ borderRadius: '45px', overflow: 'hidden' }}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+          ></iframe>
+          <p>Music credit: "Opalescence I" by Eaglebabel</p>
         </div>
+      </div>
     </div>
+  );
 
-
-  </div>
-);
-
-useEffect(() => {
-  const storedToken = localStorage.getItem("token");
-  if (storedToken) {
-    setToken(storedToken); // Set the token if it exists
-  }
-}, []);
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setToken(storedToken); // Set the token if it exists
+    }
+  }, []);
 
   return (
     <>
       <Navigation token={token} setToken={setToken} />
       <div className="container">
         <Routes>
-          <Route path="/login" element={<Login 
-          token={token} setToken={setToken} 
-          userId={userId} setUserId={setUserId}
-          />} />
-          <Route path="/register" element={<Register token={token} setToken={setToken} />} />
-          <Route path="/account" element={<Account token={token} setToken={setToken} />} />
-          <Route path="/memory/:id" element={<Memory token={token} setToken={setToken} />} />
-          <Route path="/submit-memory" element={<CreateMemory 
-          token={token} setToken={setToken} 
-          userId={userId} setUserId={setUserId}
-          />} />
-          { token ?
-            <Route path="/" element={<LoggedInView  token={token} setToken={setToken} />}/>
-            : 
-          <Route path="/" element={<LoggedOutView />}/>
-          }
-
-          {/* <Route
-            path="/"
-            element={token ? (
-              <LoggedInView 
-                token={token} 
-                setToken={setToken} 
+          <Route
+            path="/login"
+            element={
+              <Login
+                token={token}
+                setToken={setToken}
+                userId={userId}
+                setUserId={setUserId}
               />
-            ) : (
-              <LoggedOutView />
-            )}
-          /> */}
+            }
+          />
+          <Route
+            path="/register"
+            element={<Register token={token} setToken={setToken} />}
+          />
+          <Route
+            path="/account"
+            element={<Account token={token} setToken={setToken} />}
+          />
+          <Route
+            path="/memory/:id"
+            element={<Memory token={token} setToken={setToken} />}
+          />
+          <Route
+            path="/submit-memory"
+            element={
+              <CreateMemory
+                token={token}
+                setToken={setToken}
+                userId={userId}
+                setUserId={setUserId}
+              />
+            }
+          />
+          {token ? (
+            <Route
+              path="/"
+              element={<LoggedInView token={token} setToken={setToken} />}
+            />
+          ) : (
+            <Route path="/" element={<LoggedOutView />} />
+          )}
         </Routes>
       </div>
     </>
@@ -109,67 +124,3 @@ useEffect(() => {
 }
 
 export default App;
-
-//    
-
-// was on line 93 above "Pls login to remember":  <CreateMemory onSubmit={handleFormSubmit} />
-// see comments from bookbuddy template
-/*
-          <Route
-            path="/"
-            element={token ? (
-              <LoggedInView 
-                isCreating={isCreating} 
-                setIsCreating={setIsCreating} 
-                token={token} 
-                setToken={setToken} 
-              />
-            ) : (
-              <LoggedOutView />
-            )}
-          />
-
-          <Route
-            path="/"
-            element={
-              // clean up nested ternary 
-              <>
-                {token ? ( // Only show Memories if the user is logged in
-                  <>
-                    {isCreating ? (null
-                    ) : (
-                      <Memories token={token} setToken={setToken}/>
-                    )}
-                    <button onClick={() => setIsCreating(!isCreating)}>
-                      {isCreating ? "Back to Memories" : "Add New Memory"}
-                    </button>
-                  </>
-                ) : (
-                  <div className="backpack-prompt">
-                    <h1>What's in SMF's backpack?</h1>
-                    <div className="logo-container">
-                      <img
-                        id="logo-image"
-                        src="https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/7616a052-17c6-48d3-a6f2-0bf39e65faae/asset-nomatic-backpack.png?content-type=image%2Fpng"
-                        alt="Black Backpack"
-                      />
-                      <CreateMemory onSubmit={handleFormSubmit} />
-                      <h2>Please log in to remember.</h2>
-                    </div>
-                  </div>
-                )}
-              </>
-            }
-          />
-
-
-
-commented beneath Routh path Memories: The Memories component now handles its own fetching */
-
-/*  this was included within Navigation 
-        <Navigation
-          token={token}
-          setToken={setToken}
- // setFilteredBooks={setFilteredBooks}
-        />
-*/
