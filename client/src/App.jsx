@@ -44,8 +44,21 @@ const LoggedOutView = () => (
         src="https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/7616a052-17c6-48d3-a6f2-0bf39e65faae/asset-nomatic-backpack.png?content-type=image%2Fpng"
         alt="Black Backpack"
       />
+      <div>
       <h2>Please log in to remember.</h2>
+
+      <h1>Welcome to My Music Player</h1>
+
+<audio controls>
+    <source src="https://dl.dropboxusercontent.com/scl/fi/xw4iouxgw08bep35flxas/EAGLEBABEL-Oasis-Effect-Demo-Disc-Vol.-1-01-Opalescence-I.mp3" type="audio/mpeg"/>
+    Your browser does not support the audio element.
+</audio>
+
+<p>Click the play button to listen to the track!</p>
+        </div>
     </div>
+
+
   </div>
 );
 

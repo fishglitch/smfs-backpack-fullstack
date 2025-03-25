@@ -2,6 +2,25 @@
 
 body {
   font-family: Arial, sans-serif; /* Global font for the app */
+
+  /* Set the background image */
+  background-image: url('https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/6655d8b2-b216-43c3-a4d6-c7555a67957d/korok+forest+wallpaper+Medium.png?content-type=image%2Fpng');
+  
+  /* Make the image cover the entire viewport */
+  background-size: cover;
+
+  /* Position the background image (optional) */
+  background-position: center center; 
+
+  /* Prevent the background from repeating */
+  background-repeat: no-repeat;
+
+  /* Set a fallback background color (optional) */
+  background-color: #061700;
+
+  /* Set height to 100% to cover entire page */
+  height: 100vh;
+  margin: 0;
 }
 
 h1 {
