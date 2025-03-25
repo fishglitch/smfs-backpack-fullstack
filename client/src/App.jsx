@@ -18,17 +18,18 @@ export const defaultImage =
 
 function App() {
   const [token, setToken] = useState(null);
+  const [userId, setUserId] = useState();
   console.log("token", token);
   //  const [isCreating, setIsCreating] = useState(false); // Added to manage memory creation
 
-  const [userId, setUserId] = useState();
+  
 
   // userId={userId} setUserId={setUserId}
 
   // Component for logged-in users
-  const LoggedInView = ({ token, setToken }) => (
+  const LoggedInView = ({ token, setToken, userId, setUserId}) => (
     <>
-      <Memories token={token} setToken={setToken} />
+      <Memories token={token} setToken={setToken} userId={userId} setUserId={setUserId} />
     </>
   );
 
@@ -47,17 +48,8 @@ function App() {
           <h2>
             <i>Please log in to remember.</i>
           </h2>
-          <iframe
-            width="300"
-            height="100"
-            src="https://www.youtube.com/embed/lB2ykjWTnsg?si=tP6pOrPbIo3FiT2M"
-            title="Opalescence I"
-            frameBorder="0"
-            style={{ borderRadius: '45px', overflow: 'hidden' }}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-          ></iframe>
-          <p>Music credit: "Opalescence I" by Eaglebabel</p>
+
+          <p>Music: “Opalescence I" by EAGLEBABEL, 2024</p>
         </div>
       </div>
     </div>
@@ -112,7 +104,7 @@ function App() {
           {token ? (
             <Route
               path="/"
-              element={<LoggedInView token={token} setToken={setToken} />}
+              element={<LoggedInView token={token} setToken={setToken} userId={userId} setUserId={setUserId}/>}
             />
           ) : (
             <Route path="/" element={<LoggedOutView />} />

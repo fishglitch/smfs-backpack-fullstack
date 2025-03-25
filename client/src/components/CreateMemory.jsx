@@ -95,16 +95,6 @@ const CreateMemory = ({ token, setToken, userId, setUserId }) => {
           onChange={handleChange}
         />
       </div>
-      <div>
-        <label>Dimension:</label>
-        <input
-          type="text"
-          name="dimension"
-          value={formData.dimension}
-          onChange={handleChange}
-          required
-        />
-      </div>
       <button type="submit">Submit Memory</button>
     </form>
     </div>

@@ -66,7 +66,18 @@ const Navigation = ({ token, setToken, getAllUsers, getAllMemories }) => {
               <Link to="/register">Create an Account</Link>
             </>
           )}
+                  <iframe className="music-player"
+            width="300"
+            height="100"
+            src="https://www.youtube.com/embed/lB2ykjWTnsg?si=tP6pOrPbIo3FiT2M"
+            title="Opalescence I"
+            frameBorder="0"
+            style={{ borderRadius: '45px', overflow: 'hidden' }}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+          ></iframe>
         </div>
+
       </nav>
     );
   };

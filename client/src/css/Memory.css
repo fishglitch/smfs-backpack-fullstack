@@ -1,35 +1,48 @@
 /* Memory.css */
 
+
+/* Overall container for the memories section */
+.memories-page {
+    height: 100vh; /* Full viewport height */
+    overflow-y: auto; /* Allow vertical scrolling */
+    position: relative; /* Positioning context for children */
+    background-image: url('https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/6655d8b2-b216-43c3-a4d6-c7555a67957d/korok+forest+wallpaper+Medium.png?content-type=image%2Fpng'); /* Background Image */
+    background-size: cover; /* Cover the whole area with the image */
+    background-position: center; /* Centering the background image */
+    background-repeat: no-repeat; /* Don't repeat the image */
+}
+
 /* Overall container for the memory view */
 .memory-container {
     max-width: 800px; /* Maximum width for the container */
     margin: 0 auto; /* Center the container */
     padding: 20px; /* Add padding around the container */
     background-color: #07061d; /* Dark background for consistency */
-    color: #ffffff; /* White text for contrast */
     border-radius: 8px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    margin: 10% auto; /* Center the container */
+    text-align: center; /* Center all text inside this container */
 }
 
 /* Title styling */
 .memory-title {
-    font-size: 1.5em; /* Slightly larger font for title */
+    font-size: 2.5em; /* Slightly larger font for title */
     color: #35db44; /* Green color for title */
     margin-bottom: 10px; /* Space below title */
 }
 
 /* Description styling */
 .memory-desc {
-    font-size: 1.1em; /* Font size for description */
+    font-size: 1.8em; /* Font size for description */
     margin: 10px 0; /* Space around description */
-    color: #ffffff; /* White color for description */
-    font-style: italic; /* Italic style for added emphasis */
+    color: #aaaaaa; /* White color for description */
 }
 
 /* Dimension styling */
 .memory-dimension {
     margin: 10px 0; /* Space around dimension */
-    color: #ffffff; /* White color for dimension text */
+    color: #aaaaaa; /* White color for dimension text */
+    font-size: 1.8em; /* Font size for description */
 }
 
 /* Image styling */
@@ -42,37 +55,23 @@
 
 /* Button styling */
 .memory-container button {
-    background-color: #032f07; /* Dark green background */
-    color: #ffffff; /* White text */
-    border: none; /* Remove border */
+    background-color: #35db44; /* Green background for the button */
+    color: #000000; /* Black text */
     border-radius: 4px; /* Rounded corners */
     padding: 10px 15px; /* Padding for button */
     cursor: pointer; /* Pointer cursor */
     transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
-    position: relative; /* Positioning context for pseudo-element */
+    font-size: 2.2em; /* Increase button font size for visibility */
+    margin-top: 20px; /* Added margin to provide space from the input above */
+    font-weight: bold; /* Make the button text bold */
+    margin: 5% 0; /* Space above and below the image */
 }
-
-/* Glaze effect on hover */
-.memory-container button:hover {
-    background-color: #0b8a14; /* Darker green on hover */
-    transform: scale(1.1); /* Slightly enlarge on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
-}
-
-/* Glaze overlay */
-.memory-container button::after {
-    content: '';
-    position: absolute; /* Position relative to the button */
-    top: 0; left: 0; right: 0; bottom: 0; /* Cover the entire button */
-    background-color: rgba(255, 255, 255, 0.2); /* Light white glaze */
-    opacity: 0; /* Start hidden */
-    border-radius: 4px; /* Match button's border radius */
-    transition: opacity 0.3s ease; /* Smooth transition */
-}
-
-.memory-container button:hover::after {
-    opacity: 1; /* Show the glaze effect on hover */
-}
+  /* Button hover effect */
+  .memory-container button:hover {
+    background-color: #05340a; /* Darker green on hover */
+    color: #35db44; /* Change text color to green on hover */
+    transform: scale(1.2); /* Enlarge the button slightly on hover */
+  }
 
 /* Error message styling */
 .memory-container p {

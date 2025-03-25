@@ -1,15 +1,17 @@
 // components/Memories.jsx
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CreateMemory from "./CreateMemory"; // Import CreateMemory component
 import "../css/Memories.css"; // Import CSS for the Memories component
 
 // API Link
 import { API_URL, defaultImage } from "../App";
 
-const Memories = () => {
+const Memories = ({ token, setToken, userId, setUserId }) => {
   const navigate = useNavigate();
   const [availableMemories, setAvailableMemories] = useState([]);
   const [error, setError] = useState(null);
+  const [fillOutForm, setFillOutForm] = useState(false); // false sets form visibility to off
 
   const getAllMemories = async () => {
     try {
@@ -33,37 +35,49 @@ const Memories = () => {
 
   return (
     <>
-    <div>
+      <div className="memories-page" /* css for the bg image to repeat */>
+        <div className="backpack-prompt">
+          <div className="logo-container">
+            <img
+              id="logo-image"
+              src="https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/0ff75922-3cc9-487d-b4f2-767f72be03c8/asset-nomatic-backpack-darker.png?content-type=image%2Fpng"
+              alt="Black Backpack"
+            />
 
-    </div>
-    <div className="memories-container">
-    <button 
-          className="add-memory-button" // You can style this button with CSS
-          onClick={() => navigate("/submit-memory")} // Navigate to the submit memory page
-        >
-          Add New Memory
-        </button>
-
-        {availableMemories.length > 0 ? (
-          availableMemories.map((memory) => (
-            <div
-              key={memory.id}
-              className="memory-item"
-              onClick={() => navigate(`/memory/${memory.id}`)} // Navigate to Memory detail page
-            >
-              <img
-                src={memory.image_url || defaultImage} // Use default image if no image provided
-                alt={`${memory.title} item of memory`}
+            <div className="music-player">
+              <h1>What's in SMF's Backpack?</h1>
+              <h2>Scroll down to contribute and view memories!</h2>
+              <CreateMemory
+                token={token}
+                setToken={setToken}
+                userId={userId}
+                setUserId={setUserId}
               />
-              <div className="memory-title">{memory.title}</div>
-              <div className="memory-desc">"{memory.description}"</div>
-              <div className="memory-desc">-{memory.dimension}</div>
+              <p>Music: “Opalescence I" by EAGLEBABEL, 2024</p>
             </div>
-          ))
-        ) : (
-          <p>Can't remember!</p>
-        )}
-    </div>
+          </div>
+        </div>
+
+        <div className="memories-container">
+          {availableMemories.length > 0 ? (
+            availableMemories.map((memory) => (
+              <div
+                key={memory.id}
+                className="memory-item"
+                onClick={() => navigate(`/memory/${memory.id}`)} // Navigate to Memory detail page
+              >
+                <img
+                  src={memory.image_url || defaultImage} // Use default image if no image provided
+                  alt={`${memory.title} item of memory`}
+                />
+                <div className="memory-title">{memory.title}</div>
+              </div>
+            ))
+          ) : (
+            <p>Can't remember!</p>
+          )}
+        </div>
+      </div>
     </>
   );
 };

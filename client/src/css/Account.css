@@ -1,34 +1,48 @@
 /* Account.css */
 
+/* Overall container for the memories section */
+.account-page {
+    height: 100vh; /* Full viewport height */
+    overflow-y: auto; /* Allow vertical scrolling */
+    position: relative; /* Positioning context for children */
+    background-image: url('https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/6655d8b2-b216-43c3-a4d6-c7555a67957d/korok+forest+wallpaper+Medium.png?content-type=image%2Fpng'); /* Background Image */
+    background-size: cover; /* Cover the whole area with the image */
+    background-position: center; /* Centering the background image */
+    background-repeat: no-repeat; /* Don't repeat the image */
+}
+
 /* Overall styling for the account container */
 .account-container {
+    width: 100%; /* Full width */
     max-width: 800px; /* Limit the width of the account details */
-    margin: 0 auto; /* Center the container */
-    padding: 20px; /* Add padding around the container */
+    margin: 10% auto; /* Center the container */
+    padding: 40px; /* Increased padding around the container for consistency */
     background-color: #07061d; /* Dark background color for consistency */
     color: #ffffff; /* White text for contrast */
     border-radius: 8px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    text-align: center; /* Center all text inside this container */
 }
 
 /* Account title styling */
 .account-container h2 {
-    text-align: center; /* Center the account title */
     color: #35db44; /* Green color for the title */
     margin-bottom: 20px; /* Space below the title */
+    font-size: 2em; /* Match font size used in Memories and Login */
 }
 
 /* Styling for user details */
 .account-container p {
-    font-size: 1.1em; /* Slightly larger text for user details */
+    font-size: 2.8em; /* Larger text for user details to match the style in Memories */
     margin: 10px 0; /* Space around paragraphs */
     color: #ffffff; /* White color for text */
 }
 
-/* Memories heading styling */
+/* Individual memories heading styling */
 .account-container h3 {
     margin-top: 20px; /* Space above the memories section */
     color: #35db44; /* Green color for consistency */
+    font-size: 2em; /* Size consistent with titles in Memories */
 }
 
 /* Memory list styling */
@@ -44,12 +58,15 @@
     border-radius: 8px; /* Rounded corners for memory items */
     padding: 15px; /* Padding within each item */
     margin-bottom: 15px; /* Space between items */
+    font-size: 1.5em; /* Set font size for memory items to 1.5em */
+    color: #ffffff; /* White color for text */
     transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transition effect */
+    font-size: 2em; /* Size consistent with titles in Memories */
 }
 
 .account-container li:hover {
     transform: translateY(-2px); /* Slight lift on hover */
-    box-shadow: 0 4px 8px rgba(53, 219, 68, 0.5); /* Green shadow on hover */
+    box-shadow: 0 4px 8px rgba(35, 219, 69, 0.3); /* Green shadow on hover */
 }
 
 /* Styling for images in memory items */
@@ -61,22 +78,25 @@
     border-radius: 4px; /* Rounded corners for the image */
 }
 
+/* Button container styling */
 .button-container {
     display: flex;            /* Use flexbox layout */
     flex-direction: column;  /* Stack buttons vertically */
-    gap: 10px;               /* Add space between buttons */
-    margin-top: 10px;        /* Optional: space above the button container */
+    gap: 15px;               /* Space between buttons */
+    margin-top: 20px;        /* Space above the button container */
 }
 
 /* Style adjustments for buttons (if needed) */
 .account-container button {
     background-color: #35db44; /* Green background for general buttons */
-    color: rgb(0, 0, 0); /* White text */
+    color: rgb(0, 0, 0); /* Black text */
     border: none; /* Remove border */
     border-radius: 4px; /* Rounded corners */
-    padding: 10px 15px; /* Add padding */
+    padding: 15px 20px; /* Increased padding */
     cursor: pointer; /* Pointer cursor on hover */
     transition: background-color 0.3s ease; /* Smooth background transition */
+    font-size: 1.2em; /* Increase button font size for visibility */
+    align-self: center; /* Center the button horizontally */
 }
 
 .account-container button:hover {

@@ -50,12 +50,12 @@ const Memory = () => {
   };
 
   return ( // http://localhost:3000/api/memories/:memoryId
+    <div className="memories-page">
     <div className="memory-container" >
       {memory ? ( // Check if singleMemory is not null
         <div >
           <div className="memory-title" >{memory.memory.title}</div>
-          <div className="memory-desc">"{memory.memory.description}"</div>
-          <div className="memory-dimension">-{memory.memory.dimension}</div>
+          <div className="memory-desc">“{memory.memory.description}"</div>
           <img 
             src={memory.memory.image_url || defaultImage}
             alt={`${memory.memory.title} item of memory`}
@@ -66,6 +66,8 @@ const Memory = () => {
         <p>Can't remember!</p>
       )}
     </div>
+    </div>
+
   );
 };
 export default Memory;

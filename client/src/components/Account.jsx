@@ -200,10 +200,10 @@ const Account = () => {
   }
 
   return (
-    <div className="account-container">
+    <div className="account-page">
+  <div className="account-container">
       <h2>Account Details</h2>
       <p>
-        {" "}
         <strong>Username:</strong> {userLogin.user.username}
       </p>
       <p>
@@ -260,7 +260,7 @@ const Account = () => {
           {userMemories.map((memory) => (
             <li key={memory.id}>
               <div>{memory.title}</div>
-              <div>"{memory.description}"</div>
+              <div>“{memory.description}"</div>
               {memory.image_url ? (
                 <img src={memory.image_url} alt={memory.title} />
               ) : (
@@ -281,6 +281,8 @@ const Account = () => {
       )}
       
     </div>
+    </div>
+  
   );
 };
 
