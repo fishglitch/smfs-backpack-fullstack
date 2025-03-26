@@ -39,7 +39,8 @@ Schrodinger's Backpack is a full-stack application designed to allow users to su
 
 ## Project Directory Structure
 
-_Separation of concerns is observed through this structure_
+_Project uses ES6 module syntax for modular code organization and is organized to facilitate clear separation of concerns_
+
 
 ```plaintext
 schrodingers_backpack_fullstack/
