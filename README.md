@@ -43,28 +43,28 @@ _Separation of concerns is observed through this structure_
 
 ```plaintext
 schrodingers_backpack_fullstack/
-npm run start:dev --prefix server
-npm run dev --prefix client
+
 ├── client/         # Frontend code (React, Vite, etc.)
 |                   # npm run dev
 │   ├── public/     # Static files for the client
 │   ├── src/        # Source code for the client
 │   │   ├── assets/        # Images and other assets
 │   │   ├── components/    # Child components
-│   │   ├── css/          # Styling for the child components
-│   │   └── App.jsx       # Main/parent application file
-│   └── package.json      # Client-side dependencies and scripts
+│   │   ├── css/           # Styling for the child components
+│   │   └── App.jsx        # Parent application file
+│   └── package.json       # Client-side dependencies and scripts
 │
 └── server/         # Backend code (Express, Node.js, etc.)
- |                # npm run start:dev
- ├── api/        # Define your API routes and handlers
- ├── config/     # Configuration files like DB connections
- ├── controllers/ # Logic for handling requests
- ├── models/     # Database models (if using a DB)
- ├── middleware/  # Any middleware functions
- ├── routes/      # Route definitions
- ├── server.js    # Main server file to start the application
- └── package.json  # Server-side dependencies and scripts
+ |                  # npm rn seed:dev, npm run start:dev
+ ├── api/                  # Defined API route functions and handlers per table
+ |    └── utils.js         # Utility functions, incl. auth middleware
+ ├── db/                  
+ |    └── index.js         # Database model functions using CRUD operations
+ |    └── seed.js          # Database connection management and 
+                              seeding script to populate initial data
+ ├── .env                  # Environment variables for configuration
+ ├── server.js             # Main server file to start the application
+ └── package.json          # Server-side dependencies and scripts
 ```
 
 ## Installation

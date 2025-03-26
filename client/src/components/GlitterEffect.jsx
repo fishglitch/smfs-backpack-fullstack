@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import '../css/GlitterEffect.css'; // Ensure you have this CSS file
 
+
 const GlitterEffect = () => {
   
   useEffect(() => {
-    let timeoutId;
-    const delay = 100; // Delay in milliseconds before creating a glitter particle
-
     const createGlitter = (x, y) => {
       const glitter = document.createElement('div');
       glitter.className = 'glitter';
@@ -20,21 +18,14 @@ const GlitterEffect = () => {
     };
 
     const handleMouseMove = (event) => {
-      // Clear the previous timeout if it exists
-      clearTimeout(timeoutId);
-
-      // Create a new timeout to delay the glitter creation
-      timeoutId = setTimeout(() => {
-        createGlitter(event.pageX, event.pageY);
-      }, delay);
+      createGlitter(event.pageX, event.pageY);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
 
-    // Clean up event listener and timeout on component unmount
+    // Clean up event listener on component unmount
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      clearTimeout(timeoutId);
     };
   }, []);
 
