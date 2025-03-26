@@ -14,7 +14,7 @@ import {
   getMemoryById,
   getMemoriesByUser,
   createMemory,
-  updateMemory,
+  // updateMemory,
   deleteMemory,
 } from "../db/index.js";
 
@@ -101,9 +101,9 @@ const createInitialUsers = async () => {
 
     const users = await Promise.all([
       await createUser({
-        username: "granny",
-        password: "soup143",
-        dimension: "UTC-7",
+        username: "korok",
+        password: "1111",
+        dimension: "korok forest",
       }),
 
       await createUser({
@@ -257,7 +257,7 @@ const createInitialMemories = async (users) => {
       user_id: 2,
       title: "Raspberry Pi",
       imageUrl: "https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/61fdf363-c308-4ea1-91de-502cdd801079/respberry-pi5-16gb.png?content-type=image%2Fpng",
-      description: "would have several of these on hand for various projects, including am=n unrealized CD player that became more complicated than the boombox he wanted to replace!",
+      description: "would have several of these on hand for various projects, including an unrealized CD player that became more complicated than the boombox he wanted to replace!",
       dimension: users[1].dimension
     });
 
