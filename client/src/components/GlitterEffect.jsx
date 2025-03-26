@@ -1,46 +1,44 @@
 import React, { useEffect } from "react";
-import '../css/GlitterEffect.css'; // make sure to create this CSS file
+import '../css/GlitterEffect.css'; // Ensure you have this CSS file
 
 const GlitterEffect = () => {
   
-    useEffect(() => {
-      const createGlitter = (x, y) => {
-        const glitter = document.createElement('div');
-        glitter.className = 'glitter';
-  
-        // Randomize size for a more natural effect
-        const size = Math.random() * (15 - 5) + 5; // Between 5px and 15px
-        glitter.style.width = `${size}px`;
-        glitter.style.height = `${size}px`;
-  
-        // Randomize position with a slight offset
-        glitter.style.left = `${x + (Math.random() * 20 - 10)}px`;
-        glitter.style.top = `${y + (Math.random() * 20 - 10)}px`;
-  
-        // Randomize color slightly for variety (gold to light yellowish)
-        const goldHue = Math.random() * 10; // Small random value
-        glitter.style.backgroundColor = `rgba(255, 223, 0, 0.8)`;
-  
-        document.body.appendChild(glitter);
-        
-        glitter.addEventListener('animationend', () => {
-          glitter.remove(); // Remove glitter after the animation ends
-        });
-      };
-  
-      const handleMouseMove = (event) => {
+  useEffect(() => {
+    let timeoutId;
+    const delay = 100; // Delay in milliseconds before creating a glitter particle
+
+    const createGlitter = (x, y) => {
+      const glitter = document.createElement('div');
+      glitter.className = 'glitter';
+      glitter.style.left = `${x}px`;
+      glitter.style.top = `${y}px`;
+      document.body.appendChild(glitter);
+      
+      glitter.addEventListener('animationend', () => {
+        glitter.remove();
+      });
+    };
+
+    const handleMouseMove = (event) => {
+      // Clear the previous timeout if it exists
+      clearTimeout(timeoutId);
+
+      // Create a new timeout to delay the glitter creation
+      timeoutId = setTimeout(() => {
         createGlitter(event.pageX, event.pageY);
-      };
-  
-      window.addEventListener('mousemove', handleMouseMove);
-  
-      // Clean up event listener on component unmount
-      return () => {
-        window.removeEventListener('mousemove', handleMouseMove);
-      };
-    }, []);
-  
-    return null; // No JSX to render
-  };
-  
-  export default GlitterEffect;
+      }, delay);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    // Clean up event listener and timeout on component unmount
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
+  return null; // No JSX to render
+};
+
+export default GlitterEffect;
