@@ -58,21 +58,23 @@
 .account-container h2 {
     color: #35db44; /* Green color for the title */
     margin-bottom: 20px; /* Space below the title */
-    font-size: 2em; /* Match font size used in Memories and Login */
+   
+    
 }
 
 /* Styling for user details */
 .account-container p {
-    font-size: 2.8em; /* Larger text for user details to match the style in Memories */
+    font-size: 2em; /* Larger text for user details to match the style in Memories */
     margin: 10px 0; /* Space around paragraphs */
     color: #ffffff; /* White color for text */
+ 
 }
 
 /* Individual memories heading styling */
 .account-container h3 {
     margin-top: 20px; /* Space above the memories section */
     color: #35db44; /* Green color for consistency */
-    font-size: 2em; /* Size consistent with titles in Memories */
+  
 }
 
 /* Memory list styling */
@@ -88,9 +90,9 @@
     border-radius: 8px; /* Rounded corners for memory items */
     padding: 15px; /* Padding within each item */
     margin-bottom: 15px; /* Space between items */
-    font-size: 1.5em; /* Set font size for memory items to 1.5em */
+   
     color: #ffffff; /* White color for text */
-    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transition effect */
+    transition: all 0.3s ease; /* Transition effect */
     font-size: 2em; /* Size consistent with titles in Memories */
 }
 
@@ -111,9 +113,11 @@
 /* Button container styling */
 .button-container {
     display: flex;            /* Use flexbox layout */
-    flex-direction: column;  /* Stack buttons vertically */
-    gap: 15px;               /* Space between buttons */
-    margin-top: 20px;        /* Space above the button container */
+    justify-content:center; /* Space links evenly */
+    font-weight: bold; /* Make labels bold */
+    gap: 25px;               /* Space between buttons */
+    margin-top: 10px;        /* Space above the button container */
+    
 }
 
 /* Style adjustments for buttons (if needed) */
@@ -124,12 +128,13 @@
     border-radius: 4px; /* Rounded corners */
     padding: 15px 20px; /* Increased padding */
     cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s ease; /* Smooth background transition */
-    font-size: 1.2em; /* Increase button font size for visibility */
+    transition: all 0.3s ease; /* Smooth background transition */
+    font-size: 1em; /* Increase button font size for visibility */
     align-self: center; /* Center the button horizontally */
 }
 
 .account-container button:hover {
-    background-color: #2cb339; /* Darker green on hover */
+    background-color: #05340a; /* Darker green on hover */
+    color: #35db44; /* Change the text color to green on hover */
+    transform: scale(1.2); /* Enlarge the button slightly on hover */
 }
-

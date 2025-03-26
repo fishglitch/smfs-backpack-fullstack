@@ -14,12 +14,13 @@ const Memory = () => {
 
   useEffect(() => {
     const getSingleMemory = async () => {
-      try { // http://localhost:3000/api/memories/:memoryId
+      try {
+        // http://localhost:3000/api/memories/:memoryId
         const response = await fetch(`${API_URL}/memories/${id}`);
         if (!response.ok) {
           throw new Error("Error fetching memory data"); // Handle non-200 responses
         }
-        
+
         const memoryData = await response.json();
         console.log("getOneMemory inspect!", memoryData); // Log fetched memory
         setMemory(memoryData); // Set data to state
@@ -45,33 +46,34 @@ const Memory = () => {
 
   // // Function to handle navigation back to "/"
   const handleBackClick = () => {
-      console.log("handleBackClick!")
-      navigate("/"); // Navigate back to home
+    console.log("handleBackClick!");
+    navigate("/"); // Navigate back to home
   };
 
-  return ( // http://localhost:3000/api/memories/:memoryId
+  return (
+    // http://localhost:3000/api/memories/:memoryId
     <div className="memories-page">
-    <div className="memory-container" >
-      {memory ? ( // Check if singleMemory is not null
-        <div >
-          <div className="memory-title" >{memory.memory.title}</div>
-          <div className="memory-desc">“{memory.memory.description}"</div>
-          <img 
-            src={memory.memory.image_url || defaultImage}
-            alt={`${memory.memory.title} item of memory`}
-          />
-          <button onClick={handleBackClick} >Back to Memories</button>
-        </div>
-      ) : (
-        <p>Can't remember!</p>
-      )}
+      <div className="memory-container">
+        {memory ? ( // Check if singleMemory is not null
+          <div className="text-img-btn">
+            <div className="memory-title">{memory.memory.title}</div>
+            <div className="memory-desc">“{memory.memory.description}"</div>
+            <div className="img-button">
+              <img
+                src={memory.memory.image_url || defaultImage}
+                alt={`${memory.memory.title} item of memory`}
+              />
+              <button onClick={handleBackClick}>Back to Memories</button>
+            </div>
+          </div>
+        ) : (
+          <p>Can't remember!</p>
+        )}
+      </div>
     </div>
-    </div>
-
   );
 };
 export default Memory;
-
 
 /*
 onClick={() => navigate(-1)}

@@ -3,7 +3,7 @@
     display: flex; /* Use flexbox for layout */
     justify-content: space-between; /* Spread items across the nav */
     align-items: center; /* Center children vertically */
-    background-color: rgb(2, 10, 3); /* Set background color */
+    background-color: rgb(1, 11, 3); /* Set background color */
     width: 100%; /* Full width */
     padding: 10px 20px; /* Padding for top/bottom and a bit more horizontal space */
     position: fixed; /* Stick to the top */
@@ -16,6 +16,10 @@
     display: flex; /* Use flexbox for layout */
     justify-content: space-evenly; /* Space links evenly */
     flex-grow: 1; /* Allow the links div to flex and grow */
+}
+
+.logout-button {
+    background-color: #1e6424; /* Green background color */
 }
 
 .navigation a,

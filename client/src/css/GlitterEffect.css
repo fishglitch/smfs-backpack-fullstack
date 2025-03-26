@@ -1,0 +1,42 @@
+/* GlitterEffect.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent scrollbars */
+    height: 100vh; /* Full viewport height */
+    background-color: #061700; /* Dark background to enhance the glitter effect */
+}
+
+.glitter {
+    position: absolute;
+    width: 10px; /* Adjust size */
+    height: 10px; /* Adjust size */
+    background-color: rgba(255, 255, 255, 0.8); /* Gold color for glitter */
+    border-radius: 60%; /* Circular shape */
+    pointer-events: none; /* Ignore mouse events */
+    animation: glitter-fade 0.8s forwards, glitter-sparkle 0.8s forwards; /* Fade out and sparkle effects */
+}
+
+@keyframes glitter-fade {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2); /* Grow larger */
+        opacity: 0; /* Fade out */
+    }
+}
+
+@keyframes glitter-sparkle {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-10px) scale(1.2); /* Move up slightly and grow */
+    }
+    100% {
+        transform: translateY(0) scale(1); /* Return to original position */
+    }
+}

@@ -55,13 +55,14 @@
 
 /* Button styling */
 .create-memory-form button {
+    margin-top: 20px; /* Margin to provide space above */
     background-color: #35db44; /* Darker green background for the button */
     color: #000000; /* Black text */
     border: none; /* Remove border */
     border-radius: 4px; /* Rounded corners */
     padding: 10px 15px; /* Padding for button */
     cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s ease; /* Smooth transition effect */
+    transition: all 0.3s ease; /* Smooth transition effect */
     align-self: center; /* Center the button horizontally */
     font-weight: bold; /* Bold text for the button */
     font-size: 1.8em; /* Increase button font size for visibility */
@@ -71,8 +72,11 @@
 .create-memory-form button:hover {
     background-color: #05340a; /* Darker green on hover */
     color: #35db44; /* Change the text color to green on hover */
-    transform: scale(1.2); /* Enlarge the button slightly on hover */
+    transform: scale(1.05); /* Enlarge the button slightly on hover */
+    
 }
+
+
 /* Error message styling */
 .create-memory-form p {
     color: red; /* Red color for error messages */

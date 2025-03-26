@@ -3,9 +3,9 @@
 /* Overall styling for the login page */
 .login-container {
     width: 100%; /* Full width */
-    max-width: 800px; /* Max width for the container */
+    max-width: 500px; /* Max width for the container */
     margin: 10% auto; /* Center the container */
-    padding: 40px; /* Increased padding around the container for more space */
+    padding: 20px; /* Increased padding around the container for more space */
     background-color: #07061d; /* Dark background color for consistency */
     color: #ffffff; /* White text for contrast */
     border-radius: 15px; /* Rounded corners */
@@ -18,21 +18,21 @@
     text-align: center; /* Center the heading */
     color: #35db44; /* Green color for the title */
     margin-bottom: 20px; /* Space below the heading */
-    font-size: 4.5em; /* Increase heading size for visibility */
+    font-size: 2.5em; /* Increase heading size for visibility */
   }
   
   /* Form styling */
   .login-container form {
     display: flex; /* Use flexbox for alignment */
     flex-direction: column; /* Stack elements vertically */
-    align-items: stretch; /* Stretch items to full width */
+    align-items: center; /* Stretch items to full width */
   }
   
   /* Label styling */
   .login-container label {
     margin-bottom: 10px; /* Space below labels */
     font-weight: bold; /* Make labels bold */
-    font-size: 2.2em; /* Increased label font size */
+    font-size: 1.5em; /* Increased label font size */
     color: #35db44; /* Match label color to theme */
   }
   
@@ -51,6 +51,7 @@
   
   /* Button styling */
   .login-container button {
+    
     background-color: #35db44; /* Green background for the button */
     color: #000000; /* Black text */
     border: none; /* Remove border */
@@ -58,10 +59,11 @@
     padding: 15px 20px; /* Increased padding for the button */
     cursor: pointer; /* Pointer cursor on hover */
     transition: all 0.3s ease; /* Smooth transition for all properties */
-    font-size: 3.2em; /* Increase button font size for visibility */
+    font-size: 2.2em; /* Increase button font size for visibility */
     margin-top: 20px; /* Added margin to provide space from the input above */
     align-self: center; /* Center the button horizontally */
     font-weight: bold; /* Make the button text bold */
+
   }
   
   /* Button hover effect */
@@ -97,4 +99,6 @@
     }
   
     .login-container button {
-      font-size: 1
+      font-size: 1;
+    }
+  }

@@ -17,13 +17,6 @@ body {
 }
 
 
-.backpack-prompt {
-  display: flex;
-  height: 100%; /* Make it take full height of the screen */
-  justify-content: center; /* Center content horizontally */
-  margin: 8% 0; /* Margin above and below */
-}
-
 .logo-container {
   display: flex; /* Enable flexbox for logo and music player */
   justify-content: center; /* Center content horizontally */
@@ -37,21 +30,39 @@ h1 {
 }
 
 #logo-image {
-  width: auto; /* Maintain aspect ratio */
-  max-width: 40%; /* Set a maximum width for the backpack */
-  max-height: 100%; /* Max height to maintain proportions */
+  max-width: 100%; /* Set a maximum width for the backpack */
+  height: auto;
+  width: 30%; /* Maintain aspect ratio */
+  margin-top: 10%;
+  animation: float 10s ease-in-out infinite; /* Add floating animation */
 }
-/* Style for the music player */
-.music-player {
+
+
+
+.text {
   display: flex; /* Use flexbox for layout */
   flex-direction: column; /* Stack items vertically */
   align-items: center; /* Center children */
   margin-left: 20px; /* Space between backpack and music player */
+  
+  color: rgba(255, 255, 255, 0.8); /* Light color with some transparency */
+  font-size: 1rem; /* Adjust font size for effect */
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Slight glow effect for foggy appearance */
 }
 
-.music-iframe {
-  width: 200px; /* Fixed width for the iframe */
-  height: 100px; /* Fixed height for the iframe */
+@keyframes float {
+  0% {
+    transform: translateY(0);
+    opacity: 0.8; /* Starting opacity */
+  }
+  50% {
+    transform: translateY(-10px); /* Move text up */
+    opacity: 1; /* Fully opaque */
+  }
+  100% {
+    transform: translateY(0); /* Reset position */
+    opacity: 0.8; /* Return to original opacity */
+  }
 }
 
 /* Optional: Add a media query for smaller screens */
@@ -60,7 +71,7 @@ h1 {
       max-width: 80%; /* Adjust max-width for smaller screens */
   }
 
-  .music-player {
+  .text {
       margin-left: 10px; /* Reduce margin for smaller screens */
   }
 }

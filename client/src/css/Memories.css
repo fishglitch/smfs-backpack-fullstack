@@ -1,134 +1,110 @@
 /* Memories.css */
 
-
 /* Overall container for the memories section */
 .memories-page {
-    height: 100vh; /* Full viewport height */
-    overflow-y: auto; /* Allow vertical scrolling */
-    position: relative; /* Positioning context for children */
-    background-image: url('https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/6655d8b2-b216-43c3-a4d6-c7555a67957d/korok+forest+wallpaper+Medium.png?content-type=image%2Fpng'); /* Background Image */
-    background-size: cover; /* Cover the whole area with the image */
-    background-position: center; /* Centering the background image */
-    background-repeat: no-repeat; /* Don't repeat the image */
-    
+  height: 100vh; /* Full viewport height */
+  overflow-y: auto; /* Allow vertical scrolling */
+  position: relative; /* Positioning context for children */
+  background-image: url("https://images.squarespace-cdn.com/content/567b33680ab37790ca47a564/6655d8b2-b216-43c3-a4d6-c7555a67957d/korok+forest+wallpaper+Medium.png?content-type=image%2Fpng"); /* Background Image */
+  background-size: cover; /* Cover the whole area with the image */
+  background-position: center; /* Centering the background image */
+  background-repeat: no-repeat; /* Don't repeat the image */
 }
 
-
 .backpack-prompt {
-    height: 50%; /* Make it take full height of the screen */
-    justify-content: center; /* Center content horizontally */
-    padding-top: 10%;
-    padding-bottom: 5%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
 
+h1,
+h2,
+p {
+  text-align: center; /* Center the main heading */
+  text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.5); /* Dark shadow for better contrast */
 }
 
 /* Overall container for the memories section */
 .memories-container {
-    max-width: 100%; /* Ensure it spans the viewport */
-    display: grid; /* Use grid layout */
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid with flexible sizes */
-    gap: 20px; /* Space between grid items */
-    margin: 10% auto; /* Center the container */
-    padding-left: 5%;
-    padding-right: 5%;
+  max-width: 100%; /* Ensure it spans the viewport */
+  display: grid; /* Use grid layout */
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(200px, 1fr)
+  ); /* Responsive grid with flexible sizes */
+  gap: 20px; /* Space between grid items */
+  margin: 10% auto; /* Center the container */
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 /* Memory item styling */
 .memory-item {
-    position: relative; /* Positioning for the overlay */
-    border: 1px solid #35db44; /* Green border around each memory item */
-    border-radius: 20px; /* Rounded corners */
-    padding: 15px; /* Padding inside each memory item */
-    text-align: center; /* Center text within memory item */
-    background-color: #07061d; /* Background color for contrast */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition for hover effects */
-    cursor: pointer; /* Change cursor to pointer */
-    overflow: hidden; /* Hide overflow for the overlay */
+  position: relative; /* Positioning for the overlay */
+  border: 1px solid #35db44; /* Green border around each memory item */
+  border-radius: 20px; /* Rounded corners */
+  padding: 15px; /* Padding inside each memory item */
+  text-align: center; /* Center text within memory item */
+  background-color: #07061d; /* Background color for contrast */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition for hover effects */
+  cursor: pointer; /* Change cursor to pointer */
+  overflow: hidden; /* Hide overflow for the overlay */
 }
 
 .memory-item:hover {
-    transform: scale(1.05); /* Slightly enlarge on hover */
-    box-shadow: 0 10px 10px rgba(35, 219, 69, 0.3); /* Add shadow on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+  box-shadow: 0 10px 10px rgba(35, 219, 69, 0.3); /* Add shadow on hover */
 }
 
 .memory-item:hover::after {
-    content: ''; /* Create an empty pseudo-element */
-    position: absolute; /* Position it relative to the parent */
-    top: 0; /* Align to the top */
-    left: 0; /* Align to the left */
-    right: 0; /* Extend to the right */
-    bottom: 0; /* Extend to the bottom */
-    background-color: rgba(98, 221, 133, 0.3); /* Semi-transparent white for the glazed effect */
+  content: ""; /* Create an empty pseudo-element */
+  position: absolute; /* Position it relative to the parent */
+  top: 0; /* Align to the top */
+  left: 0; /* Align to the left */
+  right: 0; /* Extend to the right */
+  bottom: 0; /* Extend to the bottom */
+  background-color: rgba(
+    98,
+    221,
+    133,
+    0.3
+  ); /* Semi-transparent white for the glazed effect */
 }
 /* Image settings inside memory items */
 .memory-item img {
-    width: 100%; /* Make image responsive to parent width */
-    height: auto; /* Maintain aspect ratio */
-    max-height: 200px; /* Set maximum height */
-    object-fit: cover; /* Ensure the image covers the area */
-    border-radius: 4px; /* Rounded corners for the image */
+  width: 100%; /* Make image responsive to parent width */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 200px; /* Set maximum height */
+  object-fit: cover; /* Ensure the image covers the area */
+  border-radius: 4px; /* Rounded corners for the image */
+  animation: float 7s ease-in-out infinite; /* Add floating animation */
 }
+
+@keyframes float {
+    0% {
+      transform: translateY(0);
+      opacity: 0.8; /* Starting opacity */
+    }
+    50% {
+      transform: translateY(-10px); /* Move text up */
+      opacity: 1; /* Fully opaque */
+    }
+    100% {
+      transform: translateY(0); /* Reset position */
+      opacity: 0.8; /* Return to original opacity */
+    }
+  }
 
 /* Memory title styling */
 .memory-title {
-    font-weight: bold; /* Bold title text */
-    margin: 10px 0; /* Space around title */
-    color: #35db44; /* Match the title color with the theme */
+  font-weight: bold; /* Bold title text */
+  margin: 10px 0; /* Space around title */
+  color: #35db44; /* Match the title color with the theme */
 }
-
-/* Memory description styling */
-.memory-desc {
-    color: #aaaaaa; /* Gray color for text */
-}
-
-/* Styling for the Add Memory button */
-.add-memory-button {
-    position: relative;
-    padding: 15px;
-    border-radius: 90%; /* Rounded border */
-    background-color: #35db44; /* Green background color for contrast */
-    color: #000000; /* Black text */
-    text-align: center; /* Center text within the button */
-    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smooth transition for hover effects */
-    cursor: pointer; /* Change cursor to pointer */
-    overflow: hidden; /* Hide overflow for the overlay */
-    border: none; /* Remove default border */
-    font-size: 2.5em; /* Slightly larger font for title */
-}
-
-/* Glaze effect on hover */
-.add-memory-button::after {
-    content: ''; /* Required for the pseudo-element */
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(92, 151, 76, 0.3); /* Semi-transparent white glaze */
-    border-radius: 100px; /* Match the button's border radius */
-    opacity: 0; /* Start hidden */
-    transition: opacity 0.4s ease; /* Smooth transition for the glaze effect */
-    
-}
-
-.add-memory-button:hover {
-    transform: scale(1.15); /* Slightly enlarge on hover */
-    color: #35db44; /* Change text color to green on hover */
-    box-shadow: 0 10px 10px rgba(35, 219, 69, 0.3); /* Add shadow on hover */
-}
-
-.add-memory-button:hover::after {
-    opacity: 1; /* Show glaze effect on hover */
-    /* background-color: #05340a; Darker green on hover */
-    transform: scale(1.2); /* Enlarge the button slightly on hover */
-}
-
 
 
 /* Media Query for Responsiveness */
 @media (max-width: 768px) {
-    .memories-container {
-        padding: 10px; /* Less padding on smaller screens */
-    }
-
+  .memories-container {
+    padding: 10px; /* Less padding on smaller screens */
+  }
 }

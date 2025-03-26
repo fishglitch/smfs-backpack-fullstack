@@ -7,6 +7,7 @@ import Memory from "./components/Memory";
 import Navigation from "./components/Navigation";
 import Register from "./components/Register";
 import CreateMemory from "./components/CreateMemory";
+import GlitterEffect from "./components/GlitterEffect"; 
 import "./App.css";
 
 /** API Link */
@@ -35,7 +36,7 @@ function App() {
 
   // Component for logged-out users
   const LoggedOutView = () => (
-    <div className="backpack-prompt">
+    
       <div className="logo-container">
         <img
           id="logo-image"
@@ -43,7 +44,7 @@ function App() {
           alt="Black Backpack"
         />
 
-        <div className="music-player">
+        <div className="text">
           <h1>What's in SMF's Backpack?</h1>
           <h2>
             <i>Please log in to remember.</i>
@@ -51,7 +52,7 @@ function App() {
 
           <p>Music: “Opalescence I" by EAGLEBABEL, 2024</p>
         </div>
-      </div>
+
     </div>
   );
 
@@ -64,6 +65,7 @@ function App() {
 
   return (
     <>
+    <GlitterEffect />
       <Navigation token={token} setToken={setToken} />
       <div className="container">
         <Routes>

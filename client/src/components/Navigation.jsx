@@ -58,7 +58,7 @@ const Navigation = ({ token, setToken, getAllUsers, getAllMemories }) => {
           {userLogin ? ( // userLogin state to conditionally render
             <>
               <Link to="/account">Account</Link>
-              <button onClick={handleLogout}>Logout: [{userLogin?.user.username}]</button>
+              <button className="logout-button" onClick={handleLogout}>Logout: [{userLogin?.user.username}]</button>
             </>
           ) : (
             <>

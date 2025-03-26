@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { API_URL } from "../App";
+import { API_URL, defaultImage  } from "../App";
 import "../css/Account.css";
 
 const Account = () => {
@@ -262,7 +262,7 @@ const Account = () => {
               <div>{memory.title}</div>
               <div>“{memory.description}"</div>
               {memory.image_url ? (
-                <img src={memory.image_url} alt={memory.title} />
+                <img src={memory.image_url || defaultImage} alt={memory.title} />
               ) : (
                 <div>No Image Available</div>
               )}

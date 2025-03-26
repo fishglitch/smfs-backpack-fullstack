@@ -14,9 +14,9 @@
 
 /* Overall container for the memory view */
 .memory-container {
-    max-width: 800px; /* Maximum width for the container */
+    max-width: 70%; /* Maximum width for the container */
     margin: 0 auto; /* Center the container */
-    padding: 20px; /* Add padding around the container */
+    padding: 10px; /* Add padding around the container */
     background-color: #07061d; /* Dark background for consistency */
     border-radius: 8px; /* Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
@@ -26,16 +26,16 @@
 
 /* Title styling */
 .memory-title {
-    font-size: 2.5em; /* Slightly larger font for title */
+    font-size: 2em; /* Slightly larger font for title */
     color: #35db44; /* Green color for title */
     margin-bottom: 10px; /* Space below title */
 }
 
 /* Description styling */
 .memory-desc {
-    font-size: 1.8em; /* Font size for description */
+    font-size: 1.5em; /* Font size for description */
     margin: 10px 0; /* Space around description */
-    color: #aaaaaa; /* White color for description */
+    color: #e3e2e2; /* White color for description */
 }
 
 /* Dimension styling */
@@ -45,24 +45,49 @@
     font-size: 1.8em; /* Font size for description */
 }
 
+/* CSS for the image and button container */
+.img-button {
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    margin-top: 20px; /* Add spacing above this container */
+}
+
 /* Image styling */
 .memory-container img {
-    width: 100%; /* Full width for responsiveness */
+    width: 50%; /* Full width for responsiveness */
     height: auto; /* Maintain aspect ratio */
     border-radius: 4px; /* Rounded corners for images */
     margin: 20px 0; /* Space above and below the image */
+    animation: float 7s ease-in-out infinite; /* Add floating animation */
 }
+
+@keyframes float {
+    0% {
+      transform: translateY(0);
+      opacity: 0.8; /* Starting opacity */
+    }
+    50% {
+      transform: translateY(-10px); /* Move text up */
+      opacity: 1; /* Fully opaque */
+    }
+    100% {
+      transform: translateY(0); /* Reset position */
+      opacity: 0.8; /* Return to original opacity */
+    }
+  }
 
 /* Button styling */
 .memory-container button {
     background-color: #35db44; /* Green background for the button */
     color: #000000; /* Black text */
+    border: none; /* Remove border */
     border-radius: 4px; /* Rounded corners */
-    padding: 10px 15px; /* Padding for button */
+    padding: 5px  5px; /* Padding for button */
     cursor: pointer; /* Pointer cursor */
-    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
-    font-size: 2.2em; /* Increase button font size for visibility */
-    margin-top: 20px; /* Added margin to provide space from the input above */
+    transition: all 0.3s ease; /* Smooth transitions */
+    font-size: 1.8em; /* Increase button font size for visibility */
+    margin-top: 10px; /* Added margin to provide space from the input above */
     font-weight: bold; /* Make the button text bold */
     margin: 5% 0; /* Space above and below the image */
 }
@@ -77,4 +102,9 @@
 .memory-container p {
     color: red; /* Red color for error messages */
     text-align: center; /* Center error messages */
+}
+
+.default-image {
+    width: 30%;
+    height: auto;
 }
