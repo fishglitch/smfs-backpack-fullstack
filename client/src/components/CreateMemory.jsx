@@ -68,7 +68,7 @@ const CreateMemory = ({ token, setToken, userId, setUserId }) => {
     <form onSubmit={handleSubmit}>
       <h2>Add a New Memory</h2>
       <div>
-        <label>Title:</label>
+        <label>Title:<span style={{ color: "red" }}>*</span></label>
         <input
           type="text"
           name="title"
@@ -78,7 +78,7 @@ const CreateMemory = ({ token, setToken, userId, setUserId }) => {
         />
       </div>
       <div>
-        <label>Description:</label>
+        <label>Description:<span style={{ color: "red" }}>*</span></label>
         <textarea
           name="description"
           value={formData.description}
@@ -91,6 +91,7 @@ const CreateMemory = ({ token, setToken, userId, setUserId }) => {
         <input
           type="text"
           name="imageUrl"
+          placeholder="optional, but encouraged!"
           value={formData.imageUrl}
           onChange={handleChange}
         />

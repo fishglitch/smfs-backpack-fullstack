@@ -10,6 +10,16 @@
     background-size: cover; /* Cover the whole area with the image */
     background-position: center; /* Centering the background image */
     background-repeat: no-repeat; /* Don't repeat the image */
+    
+}
+
+
+.backpack-prompt {
+    height: 50%; /* Make it take full height of the screen */
+    justify-content: center; /* Center content horizontally */
+    padding-top: 10%;
+    padding-bottom: 5%;
+
 }
 
 /* Overall container for the memories section */
@@ -112,6 +122,8 @@
     /* background-color: #05340a; Darker green on hover */
     transform: scale(1.2); /* Enlarge the button slightly on hover */
 }
+
+
 
 /* Media Query for Responsiveness */
 @media (max-width: 768px) {

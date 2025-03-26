@@ -67,8 +67,8 @@ const Navigation = ({ token, setToken, getAllUsers, getAllMemories }) => {
             </>
           )}
                   <iframe className="music-player"
-            width="300"
-            height="100"
+            width="200"
+            height="50"
             src="https://www.youtube.com/embed/lB2ykjWTnsg?si=tP6pOrPbIo3FiT2M"
             title="Opalescence I"
             frameBorder="0"

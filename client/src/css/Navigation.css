@@ -29,7 +29,7 @@
     cursor: pointer; /* Change cursor to pointer */
     transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for hover effects */
     font-family: 'IM Fell Great Primer', serif; /* Use the Google Font for links/buttons */
-    font-size: 2em; /* Match the font size to h2 globally */
+    font-size: 1.5em; /* Match the font size to h2 globally */
 }
 
 .navigation a:hover,

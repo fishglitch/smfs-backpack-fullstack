@@ -11,6 +11,36 @@
     background-repeat: no-repeat; /* Don't repeat the image */
 }
 
+.submit-form {
+    font-size: 1.2em; /* Larger text for user details to match the style in Memories */
+    display: flex; /* Use flexbox for alignment */
+    flex-direction: column; /* Stack elements vertically */
+    align-items: stretch; /* Stretch items to full width */
+}
+
+/* Label styling */
+.submit-form label {
+    margin-bottom: 10px; /* Space below labels */
+    font-weight: bold; /* Make labels bold */
+    font-size: 1.2em; /* Match label font size to login */
+    color: #35db44; /* Match label color to theme */
+}
+
+/* Input styling */
+.submit-form input {
+    font-style:normal;
+    padding: 15px; /* Increased padding inside input fields */
+    margin: 10px 0; /* Space around input fields */
+    border: 1px solid #35db44; /* Green border for input fields */
+    border-radius: 4px; /* Rounded corners */
+    background-color: #100e24; /* Darker background for input */
+    color: #d3d3d3; /* White text for inputs */
+    font-size: 1em; /* Increase text size for inputs */
+    width: 100%; /* Make input fields full width for better alignment */
+    font-family: 'IM Fell Great Primer', serif; /* Use the Google Font */
+    
+}
+
 /* Overall styling for the account container */
 .account-container {
     width: 100%; /* Full width */
@@ -102,3 +132,4 @@
 .account-container button:hover {
     background-color: #2cb339; /* Darker green on hover */
 }
+

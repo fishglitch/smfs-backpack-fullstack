@@ -7,12 +7,15 @@ body {
 
   /* Make the image cover the entire viewport */
   background-size: cover;
-  background-position: center center; 
+  background-position: center; 
   background-repeat: no-repeat;
   background-color: #061700;
   height: 100vh; /* Ensure the height fills the viewport */
   margin: 0;
+  overflow-y: auto; /* Allow vertical scrolling */
+  position: relative; /* Positioning context for children */
 }
+
 
 .backpack-prompt {
   display: flex;

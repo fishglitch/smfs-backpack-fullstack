@@ -11,7 +11,6 @@ const Memories = ({ token, setToken, userId, setUserId }) => {
   const navigate = useNavigate();
   const [availableMemories, setAvailableMemories] = useState([]);
   const [error, setError] = useState(null);
-  const [fillOutForm, setFillOutForm] = useState(false); // false sets form visibility to off
 
   const getAllMemories = async () => {
     try {
@@ -44,7 +43,7 @@ const Memories = ({ token, setToken, userId, setUserId }) => {
               alt="Black Backpack"
             />
 
-            <div className="music-player">
+            <div className="prompt-all-memories">
               <h1>What's in SMF's Backpack?</h1>
               <h2>Scroll down to contribute and view memories!</h2>
               <CreateMemory

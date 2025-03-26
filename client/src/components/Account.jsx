@@ -211,7 +211,7 @@ const Account = () => {
       </p>
       <h3>{userLogin.user.username}'s Memories of What's in SMF's Backpack:</h3>
       {isEditing && (
-        <form onSubmit={handleUpdateSubmit}>
+        <form className="submit-form" onSubmit={handleUpdateSubmit}>
           <h3>Updating: {currentMemory.title}</h3>
           <label>
             Title:

@@ -90,7 +90,7 @@ function App() {
             path="/memory/:id"
             element={<Memory token={token} setToken={setToken} />}
           />
-          <Route
+          {/* <Route
             path="/submit-memory"
             element={
               <CreateMemory
@@ -100,7 +100,7 @@ function App() {
                 setUserId={setUserId}
               />
             }
-          />
+          /> */}
           {token ? (
             <Route
               path="/"
