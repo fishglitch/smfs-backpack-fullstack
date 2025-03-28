@@ -1,14 +1,13 @@
-# Schrodinger's Backpack: A Memory Archive
+# SMF's Backpack: A Memory Archive
 
 ## Overview
 
-Schrodinger's Backpack is a full-stack application designed to allow users to submit, store, and reflect upon memories of a deceased loved one through items they might carry in this ancestor's backpack. Inspired by the concept of "what's in my backpack," and the thought experiment "Schrodinger's Cat", this app provides a sentimental space for users to reflect on how those memories exist in a state of uncertainty until actively acknowledged and celebrated.
+SMF's Backpack is a full-stack app for authenticated users to perform CRUD operations on memories of a deceased loved one, including physical items and significant life events. Inspired by the concept of "what's in my backpack," and the thought experiment "Schrodinger's Cat", this app provides a sentimental space for users to reflect on how those memories exist in a state of uncertainty until actively acknowledged and celebrated.
 
 ## Table of Contents
 
 - [Technologies](#technologies)
 - [Features](#features)
-- [Purpose](#purpose)
 - [Project Directory Structure](#project-directory-structure)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -32,10 +31,6 @@ Schrodinger's Backpack is a full-stack application designed to allow users to su
 - Submit memories with titles, descriptions, images, and context
 - CRUD operations for managing users and memories
 - Intuitive interface for memory browsing
-
-## Purpose
-
-**As of March 2025: a Minimum Viable Product** This app serves as a digital memory box to collectively celebrate the life of a loved one. Inspired by the concept of Schrodinger's Cat, the app prompts users to consider, "What would [this person] carry in their backpack?". In physicist Erwin Schrodinger's famous 1935 thought experiment, a hypothetical cat in a sealed box exists in a mysterious state of being both alive and dead living and death until the box is opened and examined. Just like the cat, or, tiny particles in quantum physics that can be in two states at once until observed, our memories of this late ancestor can feel uncertain until we bring them to light. By sharing and reflecting on these memories through the app, users transform this uncertainty into meaningful, lasting memories that celebrate this transitioned loved one's well-lived life.
 
 ## Project Directory Structure
 
@@ -274,31 +269,7 @@ If you have any questions or suggestions, or have submitted pull requests, feel 
 
 Thank you Grace Hopper Program!
 
-## Debugging:
-
-# Ask at OSH
-1. user_id and userId Mismatch in API Payload Structure
-
-seeded data is successfully matched to model functions using "userId", however frontend functions respond to "user_id" for memories submitted on the front end. To be resolved!
-
-# Summary
-Issue Type: Mismatch in API Payload Structure
-**Description:**
-The user_id is being stored as null in the database when creating a new memory record because the data sent from the front end uses the key userId instead of the expected user_id.
-
-**Keywords**
-API Mismatch: The frontend and backend are using different naming conventions for the same data field.
-Payload Structure: The structure of the JSON object being sent in the API request does not align with what the server expects.
-Camel Case vs. Snake Case: The frontend uses a camel case (userId) while the backend expects snake case (user_id).
-
-**Database Insertion:**
-The API fails to insert the data correctly due to the naming mismatch, leading to null values.
-
-**Error Handling:**
-Ensure that proper checks and error handling are in place to identify such issues.
-Console Logging: Utilize logging to debug values being sent in API requests.
-Key Mapping: Correctly map or transform the keys in your JSON request to match the backend requirements.
-# API testing
+## Debugging
 
 # Notes
 - Features for TAGS and FAVORITES are disabled for further development and testing
