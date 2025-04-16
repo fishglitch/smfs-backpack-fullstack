@@ -52,7 +52,7 @@ schrodingers_backpack_fullstack/
 │   └── package.json       # Client-side dependencies and scripts
 │
 └── server/         # Backend code (Express, Node.js, etc.)
- |                  # npm rn seed:dev, npm run start:dev
+ |                  # npm run seed:dev, npm run start:dev
  ├── api/                  # Defined API route functions and handlers per table
  |    └── utils.js         # Utility functions, incl. auth middleware
  ├── db/                  
