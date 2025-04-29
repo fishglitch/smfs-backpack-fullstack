@@ -11,7 +11,7 @@ import GlitterEffect from "./components/GlitterEffect";
 import "./App.css";
 
 /** API Link */
-export const API_URL = `http://localhost:3000/api`;
+export const API_URL = import.meta.env.VITE_API_URL;
 
 // Default image URL that will be displayed if no image is provided
 export const defaultImage =

@@ -14,7 +14,7 @@ import {
   getMemoryById,
   getMemoriesByUser,
   createMemory,
-  // updateMemory,
+  updateMemory,
   deleteMemory,
 } from "../db/index.js";
 
