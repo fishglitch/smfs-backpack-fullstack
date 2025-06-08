@@ -14,6 +14,7 @@ services:
       - "5432:5432"
 
   ui:
+    image: registry.home:80/smf-ui:latest
     build:
       context: client
       dockerfile: Dockerfile
@@ -26,6 +27,7 @@ services:
       VITE_API_URL: "http://localhost:3000/api"
 
   api:
+    image: registry.home:80/smf-api
     build:
       context: .
       dockerfile: Dockerfile
